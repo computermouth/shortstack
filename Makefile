@@ -4,7 +4,7 @@ SOURCES_H := $(shell find $(SOURCEDIR) -name '*.h')
 SOURCES_O := $(shell find $(SOURCEDIR) -name '*.o')
 SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 
-MAIN_NAME = newstack
+MAIN_NAME = shortstack
 
 LIBS = -lSDL2 -lSDL2_gfx
 
@@ -17,7 +17,7 @@ clean:
 	rm $(MAIN_NAME) $(SOURCES_O) $(SOURCES_GCH)
 
 run:
-	./newstack
+	./shortstack
 
 re: clean all run
 
