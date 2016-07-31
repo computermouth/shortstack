@@ -1,8 +1,7 @@
 
 #include <stdio.h>
-#include "gfx/gfx_structs.h"
+#include "actors/actors.h"
 
-#include "gfx/actors/actors.h"
 
 int main(){
 	
