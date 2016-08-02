@@ -13,6 +13,8 @@ typedef struct Shape shape;
 
 struct Frame{
 	shape shapes[100];
+	short top;
+	short z;
 	short real;
 };
 typedef struct Frame frame;
