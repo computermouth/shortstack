@@ -1,3 +1,4 @@
+#include <string.h>
 
 #include "keys.h"
 #include "idle/idle.h"
@@ -11,5 +12,5 @@ void init_keys(){
 	keys.anims[0] = idle;
 	keys.anims[1] = pressed;
 	keys.real = 2;
-	
+		
 }

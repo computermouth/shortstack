@@ -21,8 +21,7 @@ int main(){
 		
 		parse_event(&g_swindow.e, &g_swindow, &g_state);
 	
-		//~ g_stack = push_stack(g_stack, keys.anims[1].frames[1]);
-		//~ printf("%d\n", keys.anims[1].frames[1].shapes[1].points );
+		g_stack = push_stack(g_stack, keys.anims[1].frames[1]);
 		
 		g_swindow.renderer = draw_stack(g_stack, g_swindow.renderer, g_swindow.r);
 		

@@ -16,6 +16,7 @@ struct Frame{
 	short top;
 	short z;
 	short real;
+	float r;
 };
 typedef struct Frame frame;
 
