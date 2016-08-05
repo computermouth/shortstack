@@ -1,8 +1,11 @@
 /* 
 
-SDL2_gfxPrimitives.h: graphics primitives for SDL
+nano_poly.h: A fork of Andres Schiffler's graphics primitives for SDL
 
-Copyright (C) 2012  Andreas Schiffler
+	-- SDL2_gfxPrimitives.h: graphics primitives for SDL
+	-- Copyright (C) 2012  Andreas Schiffler-- aschiffler@ferzkopp.net
+
+Copyright (C) 2016 Ben Young
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -23,12 +26,12 @@ misrepresented as being the original software.
 3. This notice may not be removed or altered from any source
 distribution.
 
-Andreas Schiffler -- aschiffler at ferzkopp dot net
+Ben Young -- computermouth@crunchbangplusplus.org
 
 */
 
-#ifndef _SDL2_gfxPrimitives_h
-#define _SDL2_gfxPrimitives_h
+#ifndef _NANO_POLY_H_
+#define _NANO_POLY_H_
 
 #include <math.h>
 
@@ -41,22 +44,22 @@ extern "C" {
 
 	/* ----- Versioning */
 
-#define SDL2_GFXPRIMITIVES_MAJOR	1
-#define SDL2_GFXPRIMITIVES_MINOR	0
-#define SDL2_GFXPRIMITIVES_MICRO	1
+#define _NANO_POLY_H_MAJOR	1
+#define _NANO_POLY_H_MINOR	0
+#define _NANO_POLY_H_MICRO	1
 
 
 	/* ---- Function Prototypes */
 
-#ifndef SDL2_GFXPRIMITIVES_SCOPE
-#  define SDL2_GFXPRIMITIVES_SCOPE extern
+#ifndef _NANO_POLY_H_SCOPE
+#  define _NANO_POLY_H_SCOPE extern
 #endif
 
 	/* Note: all ___Color routines expect the color to be in format 0xRRGGBBAA */
 
 	/* Filled Polygon */
 
-	SDL2_GFXPRIMITIVES_SCOPE int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx,
+	_NANO_POLY_H_SCOPE int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx,
 		const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Ends C function definitions when using C++ */
@@ -64,4 +67,4 @@ extern "C" {
 }
 #endif
 
-#endif				/* _SDL2_gfxPrimitives_h */
+#endif				/* _NANO_POLY_H_ */

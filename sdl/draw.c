@@ -1,6 +1,6 @@
 
 #include <SDL2/SDL.h>
-#include "SDL2_gfxPrimitives.h"
+#include "nano_poly.h"
 
 #include "draw.h"
 #include "../actors/actors.h"

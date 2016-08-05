@@ -32,12 +32,7 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 #include <math.h>
 #include <string.h>
 
-#include "SDL2_gfxPrimitives.h"
-
-//~ int hline(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y)
-//~ {
-	//~ return SDL_RenderDrawLine(renderer, x1, y, x2, y);;
-//~ }
+#include "nano_poly.h"
 
 int _gfxPrimitivesCompareInt(const void *a, const void *b)
 {
@@ -80,7 +75,6 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 	* Draw, scanning y 
 	*/
 	result = 0;
-	//~ int iterate = 0;
 	for (y = miny; (y <= maxy); y++) {
 		ints = 0;
 		for (i = 0; (i < n); i++) {
@@ -124,13 +118,8 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 			xb = gfxPrimitivesPolyInts[i+1] - 1;
 			xb = (xb >> 16) + ((xb & 32768) >> 15);
 			result |= SDL_RenderDrawLine(renderer, xa, y, xb, y);
-			//~ iterate++;
 		}
 	}
 
-	//~ printf("%d\n", iterate);
-
 	return (result);
-	
-	//~ return 0;
 }
