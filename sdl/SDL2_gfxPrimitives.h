@@ -31,9 +31,6 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 #define _SDL2_gfxPrimitives_h
 
 #include <math.h>
-#ifndef M_PI
-#define M_PI	3.1415926535897932384626433832795
-#endif
 
 #include <SDL2/SDL.h>
 
@@ -51,15 +48,6 @@ extern "C" {
 
 	/* ---- Function Prototypes */
 
-#ifdef _MSC_VER
-#  if defined(DLL_EXPORT) && !defined(LIBSDL2_GFX_DLL_IMPORT)
-#    define SDL2_GFXPRIMITIVES_SCOPE __declspec(dllexport)
-#  else
-#    ifdef LIBSDL2_GFX_DLL_IMPORT
-#      define SDL2_GFXPRIMITIVES_SCOPE __declspec(dllimport)
-#    endif
-#  endif
-#endif
 #ifndef SDL2_GFXPRIMITIVES_SCOPE
 #  define SDL2_GFXPRIMITIVES_SCOPE extern
 #endif

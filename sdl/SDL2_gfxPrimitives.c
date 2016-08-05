@@ -34,10 +34,10 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 #include "SDL2_gfxPrimitives.h"
 
-int hline(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y)
-{
-	return SDL_RenderDrawLine(renderer, x1, y, x2, y);;
-}
+//~ int hline(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y)
+//~ {
+	//~ return SDL_RenderDrawLine(renderer, x1, y, x2, y);;
+//~ }
 
 int _gfxPrimitivesCompareInt(const void *a, const void *b)
 {
@@ -123,7 +123,7 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 			xa = (xa >> 16) + ((xa & 32768) >> 15);
 			xb = gfxPrimitivesPolyInts[i+1] - 1;
 			xb = (xb >> 16) + ((xb & 32768) >> 15);
-			result |= hline(renderer, xa, xb, y);
+			result |= SDL_RenderDrawLine(renderer, xa, y, xb, y);
 			//~ iterate++;
 		}
 	}
