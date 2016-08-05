@@ -2,7 +2,16 @@
 #ifndef _GFX_STRUCTS_
 #define _GFX_STRUCTS_
 
+struct Line{
+	short x1;
+	short x2;
+	short y;
+};
+typedef struct Line line;
+
 struct Shape{
+	line *lines;
+	float lastr;
 	short x[50];
 	short y[50];
 	short points;
