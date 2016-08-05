@@ -1,8 +1,11 @@
 /* 
 
-SDL2_gfxPrimitives.c: graphics primitives for SDL2 renderers
+nano_poly.h: A fork of Andres Schiffler's graphics primitives for SDL
 
-Copyright (C) 2012  Andreas Schiffler
+	-- SDL2_gfxPrimitives.h: graphics primitives for SDL
+	-- Copyright (C) 2012  Andreas Schiffler-- aschiffler@ferzkopp.net
+
+Copyright (C) 2016 Ben Young
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -23,7 +26,7 @@ misrepresented as being the original software.
 3. This notice may not be removed or altered from any source
 distribution.
 
-Andreas Schiffler -- aschiffler at ferzkopp dot net
+Ben Young -- computermouth@crunchbangplusplus.org
 
 */
 
