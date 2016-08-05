@@ -78,6 +78,8 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 	* Draw, scanning y 
 	*/
 	result = 0;
+	int iter = 0;
+	int guess = maxy - miny + 1;
 	for (y = miny; (y <= maxy); y++) {
 		ints = 0;
 		for (i = 0; (i < n); i++) {
@@ -105,7 +107,7 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 				gfxPrimitivesPolyInts[ints++] = ((65536 * (y - y1)) / (y2 - y1)) * (x2 - x1) + (65536 * x1);
 			} 	    
 		}
-
+		iter++;
 		qsort(gfxPrimitivesPolyInts, ints, sizeof(int), _gfxPrimitivesCompareInt);
 
 		/*
@@ -123,6 +125,6 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 			result |= SDL_RenderDrawLine(renderer, xa, y, xb, y);
 		}
 	}
-
+			printf("%d/%d draw\n", iter, guess);
 	return (result);
 }
