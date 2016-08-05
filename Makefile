@@ -6,7 +6,7 @@ SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 
 MAIN_NAME = shortstack
 
-LIBS = -lSDL2 -lSDL2_gfx
+LIBS = -lSDL2
 
 .PHONY: all clean lint
 
