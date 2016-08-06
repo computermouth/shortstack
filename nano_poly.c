@@ -36,6 +36,7 @@ Ben Young -- computermouth@crunchbangplusplus.org
 #include <string.h>
 
 #include "nano_poly.h"
+#include "structs.h"
 
 int _gfxPrimitivesCompareInt(const void *a, const void *b)
 {
@@ -53,6 +54,8 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 	int ind1, ind2;
 	int ints;
 	int *gfxPrimitivesPolyInts = (int *) malloc(sizeof(int) * n);
+
+
 
 	/*
 	* sanity check 
@@ -78,8 +81,38 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 	* Draw, scanning y 
 	*/
 	result = 0;
-	int iter = 0;
-	int guess = maxy - miny + 1;
+	
+	int diff = 0;
+
+	//wastefully get number of lines
+	for (y = miny; (y <= maxy); y++) {
+		ints = 0;
+		for (i = 0; (i < n); i++) {
+			if (!i) {
+				ind1 = n - 1;
+				ind2 = 0;
+			} else {
+				ind1 = i - 1;
+				ind2 = i;
+			}
+			y1 = vy[ind1];
+			y2 = vy[ind2];
+			if (y1 < y2) {
+			} else if (y1 > y2) {
+				y2 = vy[ind1];
+				y1 = vy[ind2];
+			} else {
+				continue;
+			}
+			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
+				diff++;
+			}
+		}
+	}
+	
+	liner *lines = calloc((diff/2), sizeof(liner));
+	diff = 0;
+	
 	for (y = miny; (y <= maxy); y++) {
 		ints = 0;
 		for (i = 0; (i < n); i++) {
@@ -105,9 +138,9 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 			}
 			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
 				gfxPrimitivesPolyInts[ints++] = ((65536 * (y - y1)) / (y2 - y1)) * (x2 - x1) + (65536 * x1);
-			} 	    
+			}
 		}
-		iter++;
+		
 		qsort(gfxPrimitivesPolyInts, ints, sizeof(int), _gfxPrimitivesCompareInt);
 
 		/*
@@ -119,14 +152,23 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 
 		for (i = 0; (i < ints); i += 2) {
 			xa = gfxPrimitivesPolyInts[i] + 1;
-			xa = (xa >> 16) + ((xa & 32768) >> 15);
 			xb = gfxPrimitivesPolyInts[i+1] - 1;
-			xb = (xb >> 16) + ((xb & 32768) >> 15);
-			result |= SDL_RenderDrawLine(renderer, xa, y, xb, y);
+			
+			lines[diff].xa = (xa >> 16) + ((xa & 32768) >> 15);
+			lines[diff].xb = (xb >> 16) + ((xb & 32768) >> 15);
+			lines[diff].y = y;
+			
+			diff++;
 		}
 	}
 	
+	
+	for(i = 0; i < diff; i++){
+		SDL_RenderDrawLine(renderer, lines[i].xa, lines[i].y, lines[i].xb, lines[i].y);
+		printf("%d\n", lines[i].xa);
+	}
+	
+	free(lines);
 	free(gfxPrimitivesPolyInts);
-			printf("%d/%d draw\n", iter, guess);
 	return (result);
 }

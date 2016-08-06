@@ -9,12 +9,13 @@
 
 SDL_Renderer* draw_shape(shape drsh, SDL_Renderer* renderer, float r){
 	
-	if (r != 1.0){
+	if (r != drsh.lastr){
 		int i;
 		for(i = 0; i < drsh.points; i++){
 			drsh.x[i] = (float)drsh.x[i] * r;
 			drsh.y[i] = (float)drsh.y[i] * r;
 		}
+		drsh.lastr = r;
 	}
 	
 	filledPolygonRGBA(renderer, 

@@ -3,14 +3,15 @@
 #define _GFX_STRUCTS_
 
 struct Line{
-	short x1;
-	short x2;
-	short y;
+	int xa;
+	int xb;
+	int y;
 };
 typedef struct Line liner;
 
 struct Shape{
 	liner *lines;
+	short numlines;
 	float lastr;
 	short x[50];
 	short y[50];
