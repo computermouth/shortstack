@@ -5,5 +5,6 @@
 #include "keys/keys.h"
 
 void init_actors();
+void del_actors();
 
 #endif

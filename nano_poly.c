@@ -43,8 +43,9 @@ int _gfxPrimitivesCompareInt(const void *a, const void *b)
 	return (*(const int *) a) - (*(const int *) b);
 }
 
-int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+int filledPolygonRGBA(liner **lines, short *diff, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
+	
 	int result;
 	int i;
 	int y, xa, xb;
@@ -82,7 +83,7 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 	*/
 	result = 0;
 	
-	int diff = 0;
+	(*diff) = 0;
 
 	//wastefully get number of lines
 	for (y = miny; (y <= maxy); y++) {
@@ -105,13 +106,17 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 				continue;
 			}
 			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
-				diff++;
+				(*diff)++;
 			}
 		}
 	}
 	
-	liner *lines = calloc((diff/2), sizeof(liner));
-	diff = 0;
+	free(*lines);
+	
+	(*diff) /= 2;
+	
+	*lines = calloc((*diff), sizeof(liner));
+	(*diff) = 0;
 	
 	for (y = miny; (y <= maxy); y++) {
 		ints = 0;
@@ -147,28 +152,18 @@ int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 *
 		* Set color 
 		*/
 		result = 0;
-	    result |= SDL_SetRenderDrawBlendMode(renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
-		result |= SDL_SetRenderDrawColor(renderer, r, g, b, a);	
-
-		for (i = 0; (i < ints); i += 2) {
+	    for (i = 0; (i < ints); i += 2) {
 			xa = gfxPrimitivesPolyInts[i] + 1;
 			xb = gfxPrimitivesPolyInts[i+1] - 1;
 			
-			lines[diff].xa = (xa >> 16) + ((xa & 32768) >> 15);
-			lines[diff].xb = (xb >> 16) + ((xb & 32768) >> 15);
-			lines[diff].y = y;
+			(*lines)[(*diff)].xa = (xa >> 16) + ((xa & 32768) >> 15);
+			(*lines)[(*diff)].xb = (xb >> 16) + ((xb & 32768) >> 15);
+			(*lines)[(*diff)].y = y;
 			
-			diff++;
+			(*diff)++;
 		}
 	}
 	
-	
-	for(i = 0; i < diff; i++){
-		SDL_RenderDrawLine(renderer, lines[i].xa, lines[i].y, lines[i].xb, lines[i].y);
-		printf("%d\n", lines[i].xa);
-	}
-	
-	free(lines);
 	free(gfxPrimitivesPolyInts);
 	return (result);
 }

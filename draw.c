@@ -1,31 +1,40 @@
 
 #include <SDL2/SDL.h>
 #include "nano_poly.h"
-//~ #include "SDL2_gfxPrimitives.h"
-
 #include "draw.h"
-//~ #include "actors.h"
 #include "stack.h"
 
 SDL_Renderer* draw_shape(shape drsh, SDL_Renderer* renderer, float r){
 	
+	int i;
+	
 	if (r != drsh.lastr){
-		int i;
 		for(i = 0; i < drsh.points; i++){
 			drsh.x[i] = (float)drsh.x[i] * r;
 			drsh.y[i] = (float)drsh.y[i] * r;
 		}
 		drsh.lastr = r;
+		
+		filledPolygonRGBA(&drsh.lines,
+			&drsh.real,
+			drsh.x, 
+			drsh.y,
+			drsh.points,
+			drsh.color[0], 
+			drsh.color[1], 
+			drsh.color[2], 
+			drsh.color[3]);
 	}
 	
-	filledPolygonRGBA(renderer, 
-		drsh.x, 
-		drsh.y,
-		drsh.points,
-		drsh.color[0], 
-		drsh.color[1], 
-		drsh.color[2], 
-		drsh.color[3]);
+	SDL_SetRenderDrawBlendMode(renderer, (drsh.color[3] == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, drsh.color[0], drsh.color[1], drsh.color[2], drsh.color[3]);	
+	
+	for(i = 0; i < drsh.real; i++){
+		SDL_RenderDrawLine(renderer, drsh.lines[i].xa, 
+			drsh.lines[i].y, drsh.lines[i].xb, drsh.lines[i].y);
+	}
+	
+	//~ free(drsh.lines);
 	
 	return renderer;
 }

@@ -1,3 +1,5 @@
+
+#include <stdlib.h>
 #include "keys.h"
 #include "../../structs.h"
 
@@ -130,6 +132,43 @@ void init_idle_2(){
 	idle_2.shapes[9] = right_idle_2;
 	idle_2.real = 10;
 	
+}
+
+void del_idle(){
+	
+	free(idle_0.shapes[0].lines);
+	free(idle_0.shapes[1].lines);
+	free(idle_0.shapes[2].lines);
+	free(idle_0.shapes[3].lines);
+	free(idle_0.shapes[4].lines);
+	free(idle_0.shapes[5].lines);
+	free(idle_0.shapes[6].lines);
+	free(idle_0.shapes[7].lines);
+	free(idle_0.shapes[8].lines);
+	free(idle_0.shapes[9].lines);
+	
+	free(idle_1.shapes[0].lines);
+	free(idle_1.shapes[1].lines);
+	free(idle_1.shapes[2].lines);
+	free(idle_1.shapes[3].lines);
+	free(idle_1.shapes[4].lines);
+	free(idle_1.shapes[5].lines);
+	free(idle_1.shapes[6].lines);
+	free(idle_1.shapes[7].lines);
+	free(idle_1.shapes[8].lines);
+	free(idle_1.shapes[9].lines);
+	
+	free(idle_2.shapes[0].lines);
+	free(idle_2.shapes[1].lines);
+	free(idle_2.shapes[2].lines);
+	free(idle_2.shapes[3].lines);
+	free(idle_2.shapes[4].lines);
+	free(idle_2.shapes[5].lines);
+	free(idle_2.shapes[6].lines);
+	free(idle_2.shapes[7].lines);
+	free(idle_2.shapes[8].lines);
+	free(idle_2.shapes[9].lines);
+
 }
 
 void init_esc_idle_0(){

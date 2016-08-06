@@ -144,8 +144,12 @@ actor keys;
 			shape right_pressed_2;
 
 void init_keys();
+void del_keys();
 
 void init_idle();
 void init_pressed();
+
+void del_idle();
+void del_pressed();
 
 #endif

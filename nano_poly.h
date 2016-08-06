@@ -34,8 +34,8 @@ Ben Young -- computermouth@crunchbangplusplus.org
 #define _NANO_POLY_H_
 
 #include <math.h>
-
 #include <SDL2/SDL.h>
+#include "structs.h"
 
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
@@ -59,8 +59,8 @@ extern "C" {
 
 	/* Filled Polygon */
 
-	_NANO_POLY_H_SCOPE int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx,
-		const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+	_NANO_POLY_H_SCOPE int filledPolygonRGBA(liner **lines, short *diff, 
+		const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Ends C function definitions when using C++ */
 #ifdef __cplusplus

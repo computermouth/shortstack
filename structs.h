@@ -11,7 +11,7 @@ typedef struct Line liner;
 
 struct Shape{
 	liner *lines;
-	short numlines;
+	short real;
 	float lastr;
 	short x[50];
 	short y[50];

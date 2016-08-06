@@ -28,8 +28,10 @@ int main(){
 		del_stack(g_stack);
 		
 		SDL_RenderPresent( g_swindow.renderer );
-		//~ g_swindow.quit = 1;
+		g_swindow.quit = 1;
 	}
+	
+	del_actors();
 	
 	SDL_DestroyWindow(g_swindow.window);
 	SDL_DestroyRenderer(g_swindow.renderer);

@@ -1,3 +1,6 @@
+
+
+#include <stdlib.h>
 #include "keys.h"
 #include "../../structs.h"
 
@@ -130,6 +133,43 @@ void init_pressed_2(){
 	pressed_2.shapes[9] = right_pressed_2;
 	pressed_2.real = 10;
 	
+}
+
+void del_pressed(){
+	
+	free(pressed_0.shapes[0].lines);
+	free(pressed_0.shapes[1].lines);
+	free(pressed_0.shapes[2].lines);
+	free(pressed_0.shapes[3].lines);
+	free(pressed_0.shapes[4].lines);
+	free(pressed_0.shapes[5].lines);
+	free(pressed_0.shapes[6].lines);
+	free(pressed_0.shapes[7].lines);
+	free(pressed_0.shapes[8].lines);
+	free(pressed_0.shapes[9].lines);
+	
+	free(pressed_1.shapes[0].lines);
+	free(pressed_1.shapes[1].lines);
+	free(pressed_1.shapes[2].lines);
+	free(pressed_1.shapes[3].lines);
+	free(pressed_1.shapes[4].lines);
+	free(pressed_1.shapes[5].lines);
+	free(pressed_1.shapes[6].lines);
+	free(pressed_1.shapes[7].lines);
+	free(pressed_1.shapes[8].lines);
+	free(pressed_1.shapes[9].lines);
+	
+	free(pressed_2.shapes[0].lines);
+	free(pressed_2.shapes[1].lines);
+	free(pressed_2.shapes[2].lines);
+	free(pressed_2.shapes[3].lines);
+	free(pressed_2.shapes[4].lines);
+	free(pressed_2.shapes[5].lines);
+	free(pressed_2.shapes[6].lines);
+	free(pressed_2.shapes[7].lines);
+	free(pressed_2.shapes[8].lines);
+	free(pressed_2.shapes[9].lines);
+
 }
 
 void init_esc_pressed_0(){

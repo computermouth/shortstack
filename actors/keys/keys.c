@@ -11,3 +11,8 @@ void init_keys(){
 	keys.real = 2;
 		
 }
+
+void del_keys(){
+	del_idle();
+	del_pressed();
+}
