@@ -1,5 +1,6 @@
-SOURCES := $(shell find $(SOURCEDIR) -name '*.c')
-SOURCES_H := $(shell find $(SOURCEDIR) -name '*.h')
+
+MAIN_SRC = draw.c main.c nano_poly.c stack.c state.c structs.c window.c
+ACT_SRC := $(shell find $(SOURCEDIR)actors -name '*.c')
 
 SOURCES_O := $(shell find $(SOURCEDIR) -name '*.o')
 SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
@@ -11,7 +12,7 @@ LIBS = -lSDL2
 .PHONY: all clean lint
 
 all: $(MAIN)
-	gcc $(SOURCES) -Wall -o $(MAIN_NAME) $(LIBS)
+	gcc $(MAIN_SRC) $(ACT_SRC) -Wall -o $(MAIN_NAME) $(LIBS)
 
 clean:
 	rm $(MAIN_NAME) $(SOURCES_O) $(SOURCES_GCH)

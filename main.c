@@ -1,10 +1,10 @@
 
 #include <stdio.h>
 #include "actors/actors.h"
-#include "stack/stack.h"
-#include "state/state.h"
-#include "sdl/draw.h"
-#include "sdl/swindow.h"
+#include "stack.h"
+#include "state.h"
+#include "draw.h"
+#include "window.h"
 
 int main(){
 	
@@ -28,6 +28,7 @@ int main(){
 		del_stack(g_stack);
 		
 		SDL_RenderPresent( g_swindow.renderer );
+		//~ g_swindow.quit = 1;
 	}
 	
 	SDL_DestroyWindow(g_swindow.window);

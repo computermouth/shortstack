@@ -1,8 +1,5 @@
-#include <string.h>
-
 #include "keys.h"
-#include "idle/idle.h"
-#include "pressed/pressed.h"
+#include "../../structs.h"
 
 void init_keys(){
 	
