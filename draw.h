@@ -10,6 +10,6 @@
 
 void cache_shape(shape *, float, int, int);
 SDL_Renderer* draw_shape(shape *, SDL_Renderer*);
-SDL_Renderer* draw_stack(stack, SDL_Renderer*, float);
+SDL_Renderer* draw_stack(stack *, SDL_Renderer*);
 
 #endif

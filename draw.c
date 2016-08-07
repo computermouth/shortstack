@@ -42,18 +42,18 @@ SDL_Renderer* draw_shape(shape *drsh, SDL_Renderer* renderer){
 	return renderer;
 }
 
-SDL_Renderer* draw_stack(stack g_stack, SDL_Renderer* renderer, float r){
+SDL_Renderer* draw_stack(stack *g_stack, SDL_Renderer* renderer){
 	
-	//~ SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0x00 );
-	//~ SDL_RenderClear( renderer );
+	SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0x00 );
+	SDL_RenderClear( renderer );
 	
-	//~ while(g_stack.top >= 0){
-		//~ int i;
-		//~ for(i = g_stack.stk[g_stack.top].real; i >= 0; i--){
-			//~ draw_shape(g_stack.stk[g_stack.top].shapes[i], renderer, r);
-		//~ }
-		//~ g_stack = pop_stack(g_stack);
-	//~ }
+	while(g_stack->top >= 0){
+		int i;
+		for(i = g_stack->stk[g_stack->top].real; i >= 0; i--){
+			draw_shape(&g_stack->stk[g_stack->top].shapes[i], renderer);
+		}
+		pop_stack(g_stack);
+	}
 	
 	return renderer;
 }

@@ -47,10 +47,12 @@ stack push_stack(stack g_stack, frame g_frame){
 	return g_stack;
 }
 
-stack pop_stack(stack g_stack){
-	g_stack.top--;
+void pop_stack(stack *g_stack){
+	g_stack->top--;
+	if(g_stack->top == 0)
+		g_stack->real = 0;
 	
-	return g_stack;
+	//~ return g_stack;
 }
 
 void del_stack(stack g_stack){

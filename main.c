@@ -15,9 +15,9 @@ int main(){
 	
 	state g_state = init_state();
 	init_actors();
+	stack g_stack = init_stack();
 		
 	while( !g_swindow.quit ){
-		//~ stack g_stack = init_stack();
 		
 		parse_event(&g_swindow.e, &g_swindow, &g_state);
 		
@@ -26,35 +26,15 @@ int main(){
 			g_swindow.r_changed = 0;
 		}
 				
-		//~ g_stack = push_stack(g_stack, keys.anims[1].frames[1]);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[0], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[1], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[2], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[3], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[4], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[5], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[6], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[7], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[8], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[9], g_swindow.renderer);
+		g_stack = push_stack(g_stack, keys.anims[0].frames[0]);
 		
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[0], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[1], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[2], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[3], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[4], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[5], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[6], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[7], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[8], g_swindow.renderer);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[9], g_swindow.renderer);
-		
-		//~ del_stack(g_stack);
+		g_swindow.renderer = draw_stack(&g_stack, g_swindow.renderer);
 		
 		SDL_RenderPresent( g_swindow.renderer );
-		//~ g_swindow.quit = 1;
 	}
 	
+	
+	del_stack(g_stack);
 	del_actors();
 	
 	SDL_DestroyWindow(g_swindow.window);

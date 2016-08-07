@@ -14,7 +14,7 @@ typedef struct Stack stack;
 
 stack init_stack();
 stack push_stack(stack, frame);
-stack pop_stack(stack);
+void pop_stack(stack *);
 void del_stack(stack);
 
 #endif
