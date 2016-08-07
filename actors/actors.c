@@ -8,9 +8,9 @@ void init_actors(){
 	
 }
 
-void cache_actors(float r){
+void cache_actors(float r, int p_x, int p_y){
 	
-	cache_keys(r);
+	cache_keys(r, p_x, p_y);
 	
 }
 

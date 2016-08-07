@@ -51,14 +51,16 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 				g_swindow->n_h = e->window.data2;
 				g_swindow->r_changed = 1;
 				if(((float)g_swindow->n_w / (float)g_swindow->d_w) >= 
-					((float)g_swindow->n_w / (float)g_swindow->d_w)){
-					g_swindow->r = ((float)g_swindow->n_w / (float)g_swindow->d_w);
-					g_swindow->p_x	= 0;
+					((float)g_swindow->n_h / (float)g_swindow->d_h)){
+					//larger width ratio
+					g_swindow->r = ((float)g_swindow->n_h / (float)g_swindow->d_h);
+					g_swindow->p_x = ((g_swindow->n_w - (g_swindow->d_w* g_swindow->r)) / 2);
 					g_swindow->p_y	= 0;
 				}else{
-					g_swindow->r = ((float)g_swindow->n_h / (float)g_swindow->d_h);
+					//larger height ratio
+					g_swindow->r = ((float)g_swindow->n_w / (float)g_swindow->d_w);
 					g_swindow->p_x	= 0;
-					g_swindow->p_y	= 0;
+					g_swindow->p_y	= ((g_swindow->n_h - (g_swindow->d_h* g_swindow->r)) / 2);
 				}
 				
 				SDL_RenderPresent( g_swindow->renderer );

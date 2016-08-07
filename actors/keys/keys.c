@@ -12,9 +12,9 @@ void init_keys(){
 		
 }
 
-void cache_keys(float r){
-	cache_idle(r);
-	cache_pressed(r);
+void cache_keys(float r, int p_x, int p_y){
+	cache_idle(r, p_x, p_y);
+	cache_pressed(r, p_x, p_y);
 }
 
 void del_keys(){

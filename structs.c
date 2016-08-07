@@ -16,7 +16,6 @@ void init_shape(shape *rec, short x[50], short y[50], short points, short color[
 	rec->points = points;
 	rec->z = z;
 	
-	rec->lines = 0;
 	rec->lastr = 0;
 	
 }

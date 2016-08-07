@@ -22,16 +22,32 @@ int main(){
 		parse_event(&g_swindow.e, &g_swindow, &g_state);
 		
 		if(g_swindow.r_changed){
-			cache_actors(g_swindow.r);
+			cache_actors(g_swindow.r, g_swindow.p_x, g_swindow.p_y);
 			g_swindow.r_changed = 0;
 		}
-		
+				
 		//~ g_stack = push_stack(g_stack, keys.anims[1].frames[1]);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[0], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[1], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[2], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[3], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[4], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[5], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[6], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[7], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[8], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[0].frames[0].shapes[9], g_swindow.renderer);
 		
-		//~ cache_shape(&keys.anims[1].frames[1].shapes[1], g_swindow.r);
-		g_swindow.renderer = draw_shape(&keys.anims[1].frames[1].shapes[1], g_swindow.renderer);
-		
-		//~ g_swindow.renderer = draw_stack(g_stack, g_swindow.renderer, g_swindow.r);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[0], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[1], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[2], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[3], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[4], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[5], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[6], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[7], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[8], g_swindow.renderer);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[0].shapes[9], g_swindow.renderer);
 		
 		//~ del_stack(g_stack);
 		

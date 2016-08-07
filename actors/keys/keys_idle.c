@@ -135,40 +135,40 @@ void init_idle_2(){
 	
 }
 
-void cache_idle(float r){
+void cache_idle(float r, int p_x, int p_y){
 	
-	cache_shape(&idle_0.shapes[0], r);
-	cache_shape(&idle_0.shapes[1], r);
-	cache_shape(&idle_0.shapes[2], r);
-	cache_shape(&idle_0.shapes[3], r);
-	cache_shape(&idle_0.shapes[4], r);
-	cache_shape(&idle_0.shapes[5], r);
-	cache_shape(&idle_0.shapes[6], r);
-	cache_shape(&idle_0.shapes[7], r);
-	cache_shape(&idle_0.shapes[8], r);
-	cache_shape(&idle_0.shapes[9], r);
-	
-	cache_shape(&idle_1.shapes[0], r);
-	cache_shape(&idle_1.shapes[1], r);
-	cache_shape(&idle_1.shapes[2], r);
-	cache_shape(&idle_1.shapes[3], r);
-	cache_shape(&idle_1.shapes[4], r);
-	cache_shape(&idle_1.shapes[5], r);
-	cache_shape(&idle_1.shapes[6], r);
-	cache_shape(&idle_1.shapes[7], r);
-	cache_shape(&idle_1.shapes[8], r);
-	cache_shape(&idle_1.shapes[9], r);
-	
-	cache_shape(&idle_2.shapes[0], r);
-	cache_shape(&idle_2.shapes[1], r);
-	cache_shape(&idle_2.shapes[2], r);
-	cache_shape(&idle_2.shapes[3], r);
-	cache_shape(&idle_2.shapes[4], r);
-	cache_shape(&idle_2.shapes[5], r);
-	cache_shape(&idle_2.shapes[6], r);
-	cache_shape(&idle_2.shapes[7], r);
-	cache_shape(&idle_2.shapes[8], r);
-	cache_shape(&idle_2.shapes[9], r);
+	cache_shape(&keys.anims[0].frames[0].shapes[0], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[1], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[2], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[3], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[4], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[5], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[6], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[7], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[8], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[0].shapes[9], r, p_x, p_y);
+		                                             
+	cache_shape(&keys.anims[0].frames[1].shapes[0], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[1], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[2], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[3], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[4], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[5], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[6], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[7], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[8], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[1].shapes[9], r, p_x, p_y);
+	                                                 
+	cache_shape(&keys.anims[0].frames[2].shapes[0], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[1], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[2], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[3], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[4], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[5], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[6], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[7], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[8], r, p_x, p_y);
+	cache_shape(&keys.anims[0].frames[2].shapes[9], r, p_x, p_y);
 	
 }
 

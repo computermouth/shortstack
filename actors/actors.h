@@ -5,7 +5,7 @@
 #include "keys/keys.h"
 
 void init_actors();
-void cache_actors(float);
+void cache_actors(float, int, int);
 void del_actors();
 
 #endif
