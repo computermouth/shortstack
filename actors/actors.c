@@ -8,6 +8,12 @@ void init_actors(){
 	
 }
 
+void cache_actors(float r){
+	
+	cache_keys(r);
+	
+}
+
 void del_actors(){
 	
 	del_keys();

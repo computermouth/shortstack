@@ -13,6 +13,7 @@ struct Swindow{
 	int 			d_h;
 	int 			n_w;
 	int 			n_h;
+	int				r_changed;
 	float			r;
 	int				p_x;
 	int				p_y;

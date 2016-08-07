@@ -7,7 +7,8 @@
 
 #include "stack.h"
 
-SDL_Renderer* draw_shape(shape, SDL_Renderer*, float);
+void cache_shape(shape*, float);
+SDL_Renderer* draw_shape(shape *, SDL_Renderer*);
 SDL_Renderer* draw_stack(stack, SDL_Renderer*, float);
 
 #endif

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "keys.h"
 #include "../../structs.h"
+#include "../../draw.h"
 
 void init_pressed_0();
 void init_pressed_1();
@@ -132,6 +133,43 @@ void init_pressed_2(){
 	pressed_2.shapes[8] = left_pressed_2;
 	pressed_2.shapes[9] = right_pressed_2;
 	pressed_2.real = 10;
+	
+}
+
+void cache_pressed(float r){
+	
+	cache_shape(&pressed_0.shapes[0], r);
+	cache_shape(&pressed_0.shapes[1], r);
+	cache_shape(&pressed_0.shapes[2], r);
+	cache_shape(&pressed_0.shapes[3], r);
+	cache_shape(&pressed_0.shapes[4], r);
+	cache_shape(&pressed_0.shapes[5], r);
+	cache_shape(&pressed_0.shapes[6], r);
+	cache_shape(&pressed_0.shapes[7], r);
+	cache_shape(&pressed_0.shapes[8], r);
+	cache_shape(&pressed_0.shapes[9], r);
+	
+	cache_shape(&pressed_1.shapes[0], r);
+	cache_shape(&pressed_1.shapes[1], r);
+	cache_shape(&pressed_1.shapes[2], r);
+	cache_shape(&pressed_1.shapes[3], r);
+	cache_shape(&pressed_1.shapes[4], r);
+	cache_shape(&pressed_1.shapes[5], r);
+	cache_shape(&pressed_1.shapes[6], r);
+	cache_shape(&pressed_1.shapes[7], r);
+	cache_shape(&pressed_1.shapes[8], r);
+	cache_shape(&pressed_1.shapes[9], r);
+	
+	cache_shape(&pressed_2.shapes[0], r);
+	cache_shape(&pressed_2.shapes[1], r);
+	cache_shape(&pressed_2.shapes[2], r);
+	cache_shape(&pressed_2.shapes[3], r);
+	cache_shape(&pressed_2.shapes[4], r);
+	cache_shape(&pressed_2.shapes[5], r);
+	cache_shape(&pressed_2.shapes[6], r);
+	cache_shape(&pressed_2.shapes[7], r);
+	cache_shape(&pressed_2.shapes[8], r);
+	cache_shape(&pressed_2.shapes[9], r);
 	
 }
 

@@ -8,6 +8,7 @@ swindow init_swindow( swindow g_swindow ){
 	g_swindow.d_h		= 500;
 	g_swindow.n_w		= g_swindow.d_w;
 	g_swindow.n_h		= g_swindow.d_h;
+	g_swindow.r_changed	= 1;
 	g_swindow.r			= 1.0;
 	g_swindow.p_x		= 0;
 	g_swindow.p_y		= 0;
@@ -48,7 +49,7 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
 				g_swindow->n_w = e->window.data1;
 				g_swindow->n_h = e->window.data2;
-								
+				g_swindow->r_changed = 1;
 				if(((float)g_swindow->n_w / (float)g_swindow->d_w) >= 
 					((float)g_swindow->n_w / (float)g_swindow->d_w)){
 					g_swindow->r = ((float)g_swindow->n_w / (float)g_swindow->d_w);

@@ -17,18 +17,26 @@ int main(){
 	init_actors();
 		
 	while( !g_swindow.quit ){
-		stack g_stack = init_stack();
+		//~ stack g_stack = init_stack();
 		
 		parse_event(&g_swindow.e, &g_swindow, &g_state);
-	
-		g_stack = push_stack(g_stack, keys.anims[1].frames[1]);
 		
-		g_swindow.renderer = draw_stack(g_stack, g_swindow.renderer, g_swindow.r);
+		if(g_swindow.r_changed){
+			cache_actors(g_swindow.r);
+			g_swindow.r_changed = 0;
+		}
 		
-		del_stack(g_stack);
+		//~ g_stack = push_stack(g_stack, keys.anims[1].frames[1]);
+		
+		//~ cache_shape(&keys.anims[1].frames[1].shapes[1], g_swindow.r);
+		g_swindow.renderer = draw_shape(&keys.anims[1].frames[1].shapes[1], g_swindow.renderer);
+		
+		//~ g_swindow.renderer = draw_stack(g_stack, g_swindow.renderer, g_swindow.r);
+		
+		//~ del_stack(g_stack);
 		
 		SDL_RenderPresent( g_swindow.renderer );
-		g_swindow.quit = 1;
+		//~ g_swindow.quit = 1;
 	}
 	
 	del_actors();

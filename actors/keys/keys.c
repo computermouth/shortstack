@@ -12,6 +12,11 @@ void init_keys(){
 		
 }
 
+void cache_keys(float r){
+	cache_idle(r);
+	cache_pressed(r);
+}
+
 void del_keys(){
 	del_idle();
 	del_pressed();

@@ -144,10 +144,14 @@ actor keys;
 			shape right_pressed_2;
 
 void init_keys();
+void cache_keys(float);
 void del_keys();
 
 void init_idle();
 void init_pressed();
+
+void cache_idle(float);
+void cache_pressed(float);
 
 void del_idle();
 void del_pressed();
