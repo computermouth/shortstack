@@ -1,10 +1,11 @@
 
 #include <stdio.h>
 #include "actors/actors.h"
-#include "stack/stack.h"
-#include "state/state.h"
-#include "sdl/draw.h"
-#include "sdl/swindow.h"
+#include "stack.h"
+#include "state.h"
+#include "draw.h"
+#include "window.h"
+#include "logic.h"
 
 int main(){
 	
@@ -15,20 +16,29 @@ int main(){
 	
 	state g_state = init_state();
 	init_actors();
+	stack g_stack = init_stack();
 		
 	while( !g_swindow.quit ){
-		stack g_stack = init_stack();
 		
 		parse_event(&g_swindow.e, &g_swindow, &g_state);
-	
-		g_stack = push_stack(g_stack, keys.anims[1].frames[1]);
 		
-		g_swindow.renderer = draw_stack(g_stack, g_swindow.renderer, g_swindow.r);
+		if(g_swindow.r_changed){
+			cache_actors(g_swindow.r, g_swindow.p_x, g_swindow.p_y);
+			g_swindow.r_changed = 0;
+		}
 		
-		del_stack(g_stack);
+		g_state = logic(&g_stack, g_state);
+				
+		//~ g_stack = push_stack(g_stack, keys.anims[0].frames[0]);
+		
+		g_swindow.renderer = draw_stack(&g_stack, g_swindow.renderer);
 		
 		SDL_RenderPresent( g_swindow.renderer );
 	}
+	
+	
+	del_stack(g_stack);
+	del_actors();
 	
 	SDL_DestroyWindow(g_swindow.window);
 	SDL_DestroyRenderer(g_swindow.renderer);
