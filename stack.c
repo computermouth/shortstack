@@ -37,7 +37,7 @@ stack push_stack(stack g_stack, frame g_frame){
 	for ( j = 0 ; j <= g_stack.top ; j++ ){
 		key = g_stack.stk[j];
 		int i = j - 1;
-		while ( i >= 0 && g_stack.stk[i].z > key.z ) {
+		while ( i >= 0 && g_stack.stk[i].z <= key.z ) {
 			g_stack.stk[i + 1] = g_stack.stk[i];
 			i = i - 1;
 		}    

@@ -15,9 +15,9 @@ state init_state(){
     g_state.k.lt = 0;
     g_state.k.rt = 0;
     
-    g_state.keyshape_delay = 0;
-	g_state.keywhole_stg = 0;
-	g_state.keypurp_stg = 1;
+    g_state.key_delay = 0;
+	g_state.key_idle_stg = 0;
+	g_state.key_pressed_stg = 1;
 
 	return g_state;
 }

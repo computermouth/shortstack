@@ -1,5 +1,5 @@
 
-MAIN_SRC = draw.c main.c nano_poly.c stack.c state.c structs.c window.c
+MAIN_SRC = draw.c main.c nano_poly.c stack.c state.c structs.c window.c logic.c
 ACT_SRC := $(shell find $(SOURCEDIR)actors -name '*.c')
 
 SOURCES_O := $(shell find $(SOURCEDIR) -name '*.o')

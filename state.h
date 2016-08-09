@@ -18,9 +18,9 @@ typedef struct Keystate keystate;
 
 struct State{
 	keystate k;
-	int keyshape_delay;
-	int keywhole_stg;
-	int keypurp_stg;
+	int key_delay;
+	int key_idle_stg;
+	int key_pressed_stg;
 };
 typedef struct State state;
 
