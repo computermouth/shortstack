@@ -1,0 +1,5 @@
+dependencies:
+  post:
+    - apt-get update -y -qq
+    - apt-get install -y -qq libsdl2-dev build-essential
+    - make
