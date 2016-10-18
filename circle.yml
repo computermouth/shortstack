@@ -10,5 +10,4 @@ dependencies:
 
 test:
   post:
-    - mkdir $CIRCLE_ARTIFACTS
     - cp shortstack $CIRCLE_ARTIFACTS
