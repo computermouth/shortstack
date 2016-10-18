@@ -1,5 +1,14 @@
+machine:
+  services:
+    - docker
+
 dependencies:
   post:
     - sudo apt-get update -y -qq
     - sudo apt-get install -y -qq libsdl2-dev build-essential
     - make
+
+test:
+  post:
+    - mkdir $CIRCLE_ARTIFACTS
+    - cp shortstack $CIRCLE_ARTIFACTS
