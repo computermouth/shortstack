@@ -46,7 +46,7 @@ extern "C" {
 
 #define _NANO_POLY_H_MAJOR	1
 #define _NANO_POLY_H_MINOR	0
-#define _NANO_POLY_H_MICRO	1
+#define _NANO_POLY_H_MICRO	0
 
 
 	/* ---- Function Prototypes */

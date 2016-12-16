@@ -23,7 +23,7 @@ swindow init_swindow( swindow g_swindow ){
 int init_sdl(swindow *g_swindow){
 	
 	if(SDL_Init(SDL_INIT_EVERYTHING) >= 0){
-		g_swindow->window = SDL_CreateWindow("Stacking",
+		g_swindow->window = SDL_CreateWindow("shortstack",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
 			g_swindow->n_w, g_swindow->n_h, 
 			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);

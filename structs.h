@@ -9,6 +9,16 @@ struct Line{
 };
 typedef struct Line liner;
 
+struct Test{
+	liner *lines;
+	short line_cnt;
+	float old_ratio;
+	short *test_x;
+	short *test_y;
+	unsigned short *test_color;
+};
+typedef struct Test test;
+
 struct Shape{
 	liner *lines;
 	short real;
