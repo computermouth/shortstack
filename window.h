@@ -2,8 +2,9 @@
 #ifndef _SWINDOW_H_
 #define _SWINDOW_H_
 
-#include "state.h"
 #include <SDL2/SDL.h>
+
+#include "state.h"
 
 struct Swindow{
 	SDL_Window*		window;

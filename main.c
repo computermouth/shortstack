@@ -1,10 +1,11 @@
 
 #include <stdio.h>
+#include <SDL2/SDL.h>
+
 #include "window.h"
 #include "state.h"
 #include "structs.h"
 #include "draw.h"
-#include <SDL2/SDL.h>
 #include "nano_poly.h"
 
 void test_square (float new_ratio, SDL_Renderer* renderer){
@@ -81,7 +82,8 @@ int main(){
 		//~ g_state = logic(&g_stack, g_state);
 		
 		// CLEAR SCREEN
-		SDL_SetRenderDrawColor( g_swindow.renderer, 0x00, 0x00, 0x00, 0x00 );
+		SDL_SetRenderDrawColor( g_swindow.renderer,
+			0x00, 0x00, 0x00, 0x00 );
 		SDL_RenderClear( g_swindow.renderer );
 
 		// DRAW

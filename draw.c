@@ -1,5 +1,6 @@
 
 #include <SDL2/SDL.h>
+
 #include "nano_poly.h"
 #include "draw.h"
 #include "structs.h"
