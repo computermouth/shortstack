@@ -1,6 +1,7 @@
 
-MAIN_SRC = draw.c main.c nano_poly.c stack.c state.c structs.c window.c logic.c
+MAIN_SRC = draw.c main.c nano_poly.c window.c state.c
 
+SOURCES := ${MAIN_SRC}
 SOURCES_O := $(shell find $(SOURCEDIR) -name '*.o')
 SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 
@@ -22,8 +23,14 @@ run:
 re: clean all run
 
 memtest:
-	valgrind --track-origins=yes --leak-check=yes ./$(MAIN_NAME)
+	valgrind --track-origins=yes --leak-check=yes\
+ --suppressions=i915.supp\
+ ./$(MAIN_NAME)
+
+memtest_nosup:
+	valgrind --track-origins=yes --leak-check=yes\
+ ./$(MAIN_NAME)
 
 lint:
 	cppcheck --language=c --enable=warning,style --template=gcc\
- $(SOURCES) $(SOURCES_H)
+ $(SOURCES)

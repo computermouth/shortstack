@@ -43,7 +43,7 @@ int _gfxPrimitivesCompareInt(const void *a, const void *b)
 	return (*(const int *) a) - (*(const int *) b);
 }
 
-int filledPolygonRGBA(liner **lines, short *diff, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	
 	int result;
@@ -83,7 +83,8 @@ int filledPolygonRGBA(liner **lines, short *diff, const Sint16 * vx, const Sint1
 	*/
 	result = 0;
 	
-	(*diff) = 0;
+	//~ short old_line_cnt = (*line_cnt);
+	(*line_cnt) = 0;
 
 	//wastefully get number of lines
 	for (y = miny; (y <= maxy); y++) {
@@ -106,17 +107,22 @@ int filledPolygonRGBA(liner **lines, short *diff, const Sint16 * vx, const Sint1
 				continue;
 			}
 			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
-				(*diff)++;
+				(*line_cnt)++;
 			}
 		}
 	}
 	
-	free(*lines);
 	
-	(*diff) /= 2;
+	(*line_cnt) /= 2;
 	
-	*lines = calloc((*diff), sizeof(liner));
-	(*diff) = 0;
+	//~ if ((*line_cnt) < old_line_cnt){
+		//~ *lines = (liner *)realloc((void*)line_cnt, sizeof(liner));
+	//~ }else{
+		free(*lines);
+		*lines = calloc((*line_cnt), sizeof(liner));
+	//~ }
+	
+	(*line_cnt) = 0;
 	
 	for (y = miny; (y <= maxy); y++) {
 		ints = 0;
@@ -156,11 +162,11 @@ int filledPolygonRGBA(liner **lines, short *diff, const Sint16 * vx, const Sint1
 			xa = gfxPrimitivesPolyInts[i] + 1;
 			xb = gfxPrimitivesPolyInts[i+1] - 1;
 			
-			(*lines)[(*diff)].xa = (xa >> 16) + ((xa & 32768) >> 15);
-			(*lines)[(*diff)].xb = (xb >> 16) + ((xb & 32768) >> 15);
-			(*lines)[(*diff)].y = y;
+			(*lines)[(*line_cnt)].xa = (xa >> 16) + ((xa & 32768) >> 15);
+			(*lines)[(*line_cnt)].xb = (xb >> 16) + ((xb & 32768) >> 15);
+			(*lines)[(*line_cnt)].y = y;
 			
-			(*diff)++;
+			(*line_cnt)++;
 		}
 	}
 	
