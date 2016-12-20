@@ -43,7 +43,8 @@ int _gfxPrimitivesCompareInt(const void *a, const void *b)
 	return (*(const int *) a) - (*(const int *) b);
 }
 
-int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx,
+	const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	
 	int result;
@@ -106,7 +107,9 @@ int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx, const S
 			} else {
 				continue;
 			}
-			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
+			if ( ((y >= y1) && (y < y2)) || 
+				((y == maxy) && (y > y1) 
+				&& (y <= y2)) ) {
 				(*line_cnt)++;
 			}
 		}
@@ -147,12 +150,17 @@ int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx, const S
 			} else {
 				continue;
 			}
-			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
-				gfxPrimitivesPolyInts[ints++] = ((65536 * (y - y1)) / (y2 - y1)) * (x2 - x1) + (65536 * x1);
+			if ( ((y >= y1) && (y < y2)) || 
+				((y == maxy) && (y > y1) 
+				&& (y <= y2)) ) {
+				gfxPrimitivesPolyInts[ints++] = 
+					((65536 * (y - y1)) / (y2 - y1)) * 
+					(x2 - x1) + (65536 * x1);
 			}
 		}
 		
-		qsort(gfxPrimitivesPolyInts, ints, sizeof(int), _gfxPrimitivesCompareInt);
+		qsort(gfxPrimitivesPolyInts, ints, 
+			sizeof(int), _gfxPrimitivesCompareInt);
 
 		/*
 		* Set color 
@@ -162,8 +170,10 @@ int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx, const S
 			xa = gfxPrimitivesPolyInts[i] + 1;
 			xb = gfxPrimitivesPolyInts[i+1] - 1;
 			
-			(*lines)[(*line_cnt)].xa = (xa >> 16) + ((xa & 32768) >> 15);
-			(*lines)[(*line_cnt)].xb = (xb >> 16) + ((xb & 32768) >> 15);
+			(*lines)[(*line_cnt)].xa = (xa >> 16) + 
+				((xa & 32768) >> 15);
+			(*lines)[(*line_cnt)].xb = (xb >> 16) + 
+				((xb & 32768) >> 15);
 			(*lines)[(*line_cnt)].y = y;
 			
 			(*line_cnt)++;

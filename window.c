@@ -28,7 +28,11 @@ int init_sdl(swindow *g_swindow){
 			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		
 		if(g_swindow->window != 0){
-			g_swindow->renderer = SDL_CreateRenderer(g_swindow->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			g_swindow->renderer = SDL_CreateRenderer
+				(g_swindow->window,
+				-1, 
+				SDL_RENDERER_ACCELERATED | 
+				SDL_RENDERER_PRESENTVSYNC);
 		}else{
 			return 1;
 		}
@@ -52,14 +56,18 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 				if(((float)g_swindow->n_w / (float)g_swindow->d_w) >= 
 					((float)g_swindow->n_h / (float)g_swindow->d_h)){
 					//larger width ratio
-					g_swindow->r = ((float)g_swindow->n_h / (float)g_swindow->d_h);
-					g_swindow->p_x = ((g_swindow->n_w - (g_swindow->d_w* g_swindow->r)) / 2);
+					g_swindow->r = ((float)g_swindow->n_h / 
+						(float)g_swindow->d_h);
+					g_swindow->p_x = ((g_swindow->n_w - 
+						(g_swindow->d_w* g_swindow->r)) / 2);
 					g_swindow->p_y	= 0;
 				}else{
 					//larger height ratio
-					g_swindow->r = ((float)g_swindow->n_w / (float)g_swindow->d_w);
+					g_swindow->r = ((float)g_swindow->n_w / 
+						(float)g_swindow->d_w);
 					g_swindow->p_x	= 0;
-					g_swindow->p_y	= ((g_swindow->n_h - (g_swindow->d_h* g_swindow->r)) / 2);
+					g_swindow->p_y	= ((g_swindow->n_h - 
+						(g_swindow->d_h* g_swindow->r)) / 2);
 				}
 				
 				SDL_RenderPresent( g_swindow->renderer );
@@ -94,7 +102,8 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 				SDL_SetWindowFullscreen( g_swindow->window, SDL_FALSE );
 				g_swindow->fs = 0;
 			}else{
-				SDL_SetWindowFullscreen( g_swindow->window, SDL_WINDOW_FULLSCREEN_DESKTOP );
+				SDL_SetWindowFullscreen( g_swindow->window, 
+					SDL_WINDOW_FULLSCREEN_DESKTOP );
 				g_swindow->fs = 1;
 			}
 		}
