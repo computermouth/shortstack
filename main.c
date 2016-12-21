@@ -8,7 +8,7 @@
 #include "draw.h"
 #include "nano_poly.h"
 
-void test_square (float new_ratio, SDL_Renderer* renderer){
+void test_square (swindow *g_swindow){
 	
 	ushort verts = 4;
 	
@@ -28,15 +28,15 @@ void test_square (float new_ratio, SDL_Renderer* renderer){
 		.color 		= orig_color
 		};
 	
-	if (shape_s.old_ratio != new_ratio){
+	if (shape_s.old_ratio != g_swindow->r){
 		ushort i;
 		for(i = 0; i < verts; i++){
-			curr_x[i] = orig_x[i] * new_ratio;
-			curr_y[i] = orig_y[i] * new_ratio;
+			curr_x[i] = (orig_x[i] * g_swindow->r) + g_swindow->p_x;
+			curr_y[i] = (orig_y[i] * g_swindow->r) + g_swindow->p_y;
 		}
 		shape_s.x = curr_x;
 		shape_s.y = curr_y;
-		shape_s.old_ratio = new_ratio;
+		shape_s.old_ratio = g_swindow->r;
 		
 		filledPolygonRGBA(
 			&shape_s.lines,
@@ -51,14 +51,8 @@ void test_square (float new_ratio, SDL_Renderer* renderer){
 			);
 	}
 
-	SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0x00 );
-	SDL_RenderClear( renderer );
+	draw_shape(&shape_s, g_swindow->renderer);
 
-	draw_shape(&shape_s, renderer);
-		
-	SDL_RenderPresent( renderer );
-
-	//~ free(test_t.lines);
 }
 
 int main(){
@@ -87,10 +81,10 @@ int main(){
 		SDL_RenderClear( g_swindow.renderer );
 
 		// DRAW
-		test_square(g_swindow.r, g_swindow.renderer );
+		test_square(&g_swindow);
 
 		// PRESENT
-		//~ SDL_RenderPresent( g_swindow.renderer );
+		SDL_RenderPresent( g_swindow.renderer );
 		
 	}
 	
