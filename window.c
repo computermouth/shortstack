@@ -31,8 +31,9 @@ int init_sdl(swindow *g_swindow){
 			g_swindow->renderer = SDL_CreateRenderer
 				(g_swindow->window,
 				-1, 
-				SDL_RENDERER_ACCELERATED | 
-				SDL_RENDERER_PRESENTVSYNC);
+				SDL_RENDERER_ACCELERATED);
+				 //~ | 
+				//~ SDL_RENDERER_PRESENTVSYNC);
 		}else{
 			return 1;
 		}

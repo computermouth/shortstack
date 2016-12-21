@@ -8,6 +8,16 @@
 #include "draw.h"
 #include "nano_poly.h"
 
+#include <unistd.h>
+
+const int SCREEN_TICKS_PER_FRAME = 1000 / 60;
+
+struct Timer{
+	int startTicks;
+	int pausedTicks;
+};
+typedef struct Timer timer;
+
 void test_square (swindow *g_swindow){
 	
 	ushort verts = 4;
@@ -67,8 +77,21 @@ int main(){
 	if(init_sdl(&g_swindow) == 1)
 		g_swindow.quit = 1;
 		
+
+	timer fpsTimer = { .startTicks = 0, .pausedTicks = 0};
+	timer capTimer = { .startTicks = 0, .pausedTicks = 0};
+	int countedFrames = 0;
+	fpsTimer.startTicks = SDL_GetTicks();
+
 	while( !g_swindow.quit ){
-		
+		capTimer.startTicks = SDL_GetTicks();
+		float avgFPS = countedFrames / ((SDL_GetTicks() - fpsTimer.startTicks) / 1000.0 );
+		if( avgFPS > 2000000 )
+		{
+			avgFPS = 0;
+		}
+		printf("avg: %f\n", avgFPS);
+
 		// INPUT
 		parse_event(&g_swindow.e, &g_swindow, &g_state);
 		
@@ -85,6 +108,11 @@ int main(){
 
 		// PRESENT
 		SDL_RenderPresent( g_swindow.renderer );
+		
+		countedFrames++;
+		
+		if ((SDL_GetTicks() - capTimer.startTicks) < SCREEN_TICKS_PER_FRAME )
+			SDL_Delay(SCREEN_TICKS_PER_FRAME - (SDL_GetTicks() - capTimer.startTicks));
 		
 	}
 	
