@@ -12,7 +12,7 @@ LIBS = -lSDL2
 .PHONY: all clean lint
 
 all: $(MAIN)
-	gcc $(MAIN_SRC) $(ACT_SRC) -Wall -o $(MAIN_NAME) $(LIBS)
+	gcc -O2 $(MAIN_SRC) $(ACT_SRC) -Wall -o $(MAIN_NAME) $(LIBS)
 
 clean:
 	rm $(MAIN_NAME) $(SOURCES_O) $(SOURCES_GCH)
