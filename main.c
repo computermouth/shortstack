@@ -22,8 +22,8 @@ void test_square (swindow *g_swindow){
 	
 	ushort verts = 4;
 	
-	static short orig_x[4] = { 50, 100, 100, 50 };
-	static short orig_y[4] = { 50, 50, 100, 100 };
+	static short orig_x[4] = { 0, 800, 800, 0 };
+	static short orig_y[4] = { 0, 0, 500, 500 };
 	static ushort orig_color[4]  = { 0, 255, 125, 255};
 	
 	static short curr_x[4] = { 0 };
@@ -65,6 +65,49 @@ void test_square (swindow *g_swindow){
 
 }
 
+struct P_a{
+	SDL_Point* sdlp;
+	unsigned int count;
+};
+typedef struct P_a p_a;
+
+void point(swindow *g_swindow){
+
+	static p_a points = { 
+		.sdlp		= NULL,
+		.count	= 0
+		};
+		
+	if (points.sdlp == NULL){
+		points.count = 800*500;
+		points.sdlp = calloc((points.count), sizeof(SDL_Point));
+
+		int l_x, l_y;
+		unsigned int c = 0;
+	
+		for(l_y = 0; l_y < 500; l_y++){
+			for(l_x = 0; l_x < 800; l_x++){
+				(points.sdlp + (c))->x = l_x;
+				(points.sdlp + (c))->y = l_y;
+				c++;
+			}
+		}
+	}
+	
+	//~ printf("800x500: %dx%d\n", (points.sdlp+(800*500 - 1))->x, (points.sdlp+(800*500 - 1))->y);
+	//~ printf("123x123: %dx%d\n", (points.sdlp+((800*123)+123))->x, (points.sdlp+((800*123)+123))->y);
+	//~ printf("00x00: %dx%d\n", (points.sdlp)->x, (points.sdlp)->y);
+	
+	SDL_SetRenderDrawColor( g_swindow->renderer,
+	0xFF, 0x00, 0xFF, 0xFF );
+	
+	//~ int i;
+	//~ for(i = 0; )
+	SDL_RenderDrawPoints(g_swindow->renderer, points.sdlp, points.count);
+
+}
+
+
 int main(){
 	
 	// INITIALIZE
@@ -104,7 +147,10 @@ int main(){
 		SDL_RenderClear( g_swindow.renderer );
 
 		// DRAW
-		test_square(&g_swindow);
+		//~ test_square(&g_swindow);
+		point(&g_swindow);
+		
+		
 
 		// PRESENT
 		SDL_RenderPresent( g_swindow.renderer );
