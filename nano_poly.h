@@ -46,7 +46,7 @@ extern "C" {
 
 #define _NANO_POLY_H_MAJOR	1
 #define _NANO_POLY_H_MINOR	0
-#define _NANO_POLY_H_MICRO	1
+#define _NANO_POLY_H_MICRO	0
 
 
 	/* ---- Function Prototypes */
@@ -59,8 +59,16 @@ extern "C" {
 
 	/* Filled Polygon */
 
-	_NANO_POLY_H_SCOPE int filledPolygonRGBA(liner **lines, short *diff, 
-		const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+	_NANO_POLY_H_SCOPE int filledPolygonRGBA(
+		liner **lines, 
+		short *diff, 
+		const Sint16 * vx, 
+		const Sint16 * vy, 
+		int n, 
+		Uint8 r, 
+		Uint8 g, 
+		Uint8 b, 
+		Uint8 a);
 
 	/* Ends C function definitions when using C++ */
 #ifdef __cplusplus

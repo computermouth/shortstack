@@ -8,7 +8,6 @@ swindow init_swindow( swindow g_swindow ){
 	g_swindow.d_h		= 500;
 	g_swindow.n_w		= g_swindow.d_w;
 	g_swindow.n_h		= g_swindow.d_h;
-	g_swindow.r_changed	= 1;
 	g_swindow.r			= 1.0;
 	g_swindow.p_x		= 0;
 	g_swindow.p_y		= 0;
@@ -23,13 +22,17 @@ swindow init_swindow( swindow g_swindow ){
 int init_sdl(swindow *g_swindow){
 	
 	if(SDL_Init(SDL_INIT_EVERYTHING) >= 0){
-		g_swindow->window = SDL_CreateWindow("Stacking",
+		g_swindow->window = SDL_CreateWindow("shortstack",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
 			g_swindow->n_w, g_swindow->n_h, 
 			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		
 		if(g_swindow->window != 0){
-			g_swindow->renderer = SDL_CreateRenderer(g_swindow->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			g_swindow->renderer = SDL_CreateRenderer
+				(g_swindow->window,
+				-1, 
+				SDL_RENDERER_ACCELERATED | 
+				SDL_RENDERER_PRESENTVSYNC);
 		}else{
 			return 1;
 		}
@@ -49,18 +52,22 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
 				g_swindow->n_w = e->window.data1;
 				g_swindow->n_h = e->window.data2;
-				g_swindow->r_changed = 1;
+				
 				if(((float)g_swindow->n_w / (float)g_swindow->d_w) >= 
 					((float)g_swindow->n_h / (float)g_swindow->d_h)){
 					//larger width ratio
-					g_swindow->r = ((float)g_swindow->n_h / (float)g_swindow->d_h);
-					g_swindow->p_x = ((g_swindow->n_w - (g_swindow->d_w* g_swindow->r)) / 2);
+					g_swindow->r = ((float)g_swindow->n_h / 
+						(float)g_swindow->d_h);
+					g_swindow->p_x = ((g_swindow->n_w - 
+						(g_swindow->d_w* g_swindow->r)) / 2);
 					g_swindow->p_y	= 0;
 				}else{
 					//larger height ratio
-					g_swindow->r = ((float)g_swindow->n_w / (float)g_swindow->d_w);
+					g_swindow->r = ((float)g_swindow->n_w / 
+						(float)g_swindow->d_w);
 					g_swindow->p_x	= 0;
-					g_swindow->p_y	= ((g_swindow->n_h - (g_swindow->d_h* g_swindow->r)) / 2);
+					g_swindow->p_y	= ((g_swindow->n_h - 
+						(g_swindow->d_h* g_swindow->r)) / 2);
 				}
 				
 				SDL_RenderPresent( g_swindow->renderer );
@@ -95,11 +102,10 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 				SDL_SetWindowFullscreen( g_swindow->window, SDL_FALSE );
 				g_swindow->fs = 0;
 			}else{
-				SDL_SetWindowFullscreen( g_swindow->window, SDL_WINDOW_FULLSCREEN_DESKTOP );
+				SDL_SetWindowFullscreen( g_swindow->window, 
+					SDL_WINDOW_FULLSCREEN_DESKTOP );
 				g_swindow->fs = 1;
 			}
-		}else if (currentKeyStates[SDL_SCANCODE_RETURN]){
-			
 		}
 	}
 }
@@ -175,19 +181,6 @@ void key_event(SDL_Event *e, state *g_state){
 	}
 }
 
-void clear_keys(state *g_state){
-	g_state->k.esc = 0;
-	g_state->k.ent = 0;
-	g_state->k.w = 0;
-	g_state->k.a = 0;
-	g_state->k.s = 0;
-	g_state->k.d = 0;
-	g_state->k.up = 0;
-	g_state->k.dn = 0;
-	g_state->k.lt = 0;
-	g_state->k.rt = 0;
-}
-
 void parse_event(SDL_Event *e, swindow *g_swindow, state *g_state){
 	
 	while( SDL_PollEvent( e )){
@@ -201,6 +194,4 @@ void parse_event(SDL_Event *e, swindow *g_swindow, state *g_state){
 				break;
 		}
 	}
-	
-
 }
