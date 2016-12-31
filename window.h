@@ -5,27 +5,11 @@
 #include <SDL2/SDL.h>
 
 #include "state.h"
-
-struct Swindow{
-	SDL_Window*		window;
-	SDL_Renderer*	renderer;
-	SDL_Event		e;
-	int 			d_w;
-	int 			d_h;
-	int 			n_w;
-	int 			n_h;
-	float			r;
-	int				p_x;
-	int				p_y;
-	int				focus;
-	int				fs;
-	int				min;
-	int 			quit;
-};
-typedef struct Swindow swindow;
+#include "structs.h"
 
 swindow init_swindow(swindow);
 int init_sdl(swindow *);
+void destroy_polys(swindow *g_swindow);
 void window_event(SDL_Event *, swindow *);
 void key_event(SDL_Event *, state *);
 void parse_event(SDL_Event *, swindow *, state *);

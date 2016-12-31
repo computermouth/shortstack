@@ -25,10 +25,23 @@ re: clean all run
 memtest:
 	valgrind --track-origins=yes --leak-check=yes\
  --suppressions=i915.supp\
+ --suppressions=nv_prop.supp\
  ./$(MAIN_NAME)
 
 memtest_nosup:
 	valgrind --track-origins=yes --leak-check=yes\
+ ./$(MAIN_NAME)
+
+memtest_gensup:
+	valgrind --track-origins=yes --leak-check=yes\
+ --suppressions=i915.supp\
+ --suppressions=nv_prop.supp\
+ --gen-suppressions=yes\
+ ./$(MAIN_NAME)
+
+memtest_gensup_clean:
+	valgrind --track-origins=yes --leak-check=yes\
+ --gen-suppressions=yes\
  ./$(MAIN_NAME)
 
 lint:

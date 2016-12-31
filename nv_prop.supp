@@ -1,0 +1,30 @@
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   fun:init_sdl
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   obj:/usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.2.0
+   fun:init_sdl
+   fun:main
+}

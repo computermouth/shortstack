@@ -41,6 +41,7 @@
 			shape_s.old_ratio = g_swindow->r;                           \
 			                                                            \
 			filledPolygonRGBA(                                          \
+				g_swindow,                                              \
 				&shape_s.lines,                                         \
 				&shape_s.line_cnt,                                      \
 				curr_x,                                                 \
@@ -57,7 +58,7 @@
 	}																
 
 NP_SH(
-	new_test_square,
+	test_square,
 	NP_VS(4),
 	NP_VX(4),
 	NP_VY(4), 

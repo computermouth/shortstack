@@ -36,6 +36,7 @@ Ben Young -- computermouth@crunchbangplusplus.org
 #include <string.h>
 
 #include "nano_poly.h"
+#include "window.h"
 #include "structs.h"
 
 int _gfxPrimitivesCompareInt(const void *a, const void *b)
@@ -43,8 +44,9 @@ int _gfxPrimitivesCompareInt(const void *a, const void *b)
 	return (*(const int *) a) - (*(const int *) b);
 }
 
-int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx,
-	const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+int filledPolygonRGBA(swindow* g_swindow, liner **lines, 
+	short *line_cnt, const Sint16 * vx, const Sint16 * vy, int n,
+	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	
 	int result;
@@ -84,7 +86,6 @@ int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx,
 	*/
 	result = 0;
 	
-	//~ short old_line_cnt = (*line_cnt);
 	(*line_cnt) = 0;
 
 	//wastefully get number of lines
@@ -118,12 +119,20 @@ int filledPolygonRGBA(liner **lines, short *line_cnt, const Sint16 * vx,
 	
 	(*line_cnt) /= 2;
 	
-	//~ if ((*line_cnt) < old_line_cnt){
-		//~ *lines = (liner *)realloc((void*)line_cnt, sizeof(liner));
-	//~ }else{
-		free(*lines);
-		*lines = calloc((*line_cnt), sizeof(liner));
-	//~ }
+	free(*lines);
+	*lines = calloc((*line_cnt), sizeof(liner));
+	
+	if (g_swindow->lines_count != g_swindow->lines_max){
+		g_swindow->lines_count++;
+		(g_swindow->lines[g_swindow->lines_count]) = *lines;
+	} else {
+		g_swindow->lines_max+=128;
+		printf("lines reached: %d", g_swindow->lines_max);
+		liner **new_lines = (liner**) calloc(g_swindow->lines_max, sizeof(liner*));
+		memcpy(new_lines, g_swindow->lines, (g_swindow->lines_max-128)*sizeof(liner*));
+		destroy_polys(g_swindow);
+		g_swindow->lines = new_lines;
+	}
 	
 	(*line_cnt) = 0;
 	

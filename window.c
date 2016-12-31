@@ -2,19 +2,22 @@
 #include "window.h"
 
 swindow init_swindow( swindow g_swindow ){
-	g_swindow.window	= 0;
-	g_swindow.renderer	= 0;
-	g_swindow.d_w		= 800;
-	g_swindow.d_h		= 500;
-	g_swindow.n_w		= g_swindow.d_w;
-	g_swindow.n_h		= g_swindow.d_h;
-	g_swindow.r			= 1.0;
-	g_swindow.p_x		= 0;
-	g_swindow.p_y		= 0;
-	g_swindow.focus		= 1;
-	g_swindow.fs		= 0;
-	g_swindow.min		= 0;
-	g_swindow.quit 		= 0;
+	g_swindow.window		= 0;
+	g_swindow.renderer		= 0;
+	g_swindow.d_w			= 800;
+	g_swindow.d_h			= 500;
+	g_swindow.n_w			= g_swindow.d_w;
+	g_swindow.n_h			= g_swindow.d_h;
+	g_swindow.r				= 1.0;
+	g_swindow.p_x			= 0;
+	g_swindow.p_y			= 0;
+	g_swindow.focus			= 1;
+	g_swindow.fs			= 0;
+	g_swindow.min			= 0;
+	g_swindow.quit 			= 0;
+	g_swindow.lines_count	= 0;
+	g_swindow.lines_max 	= 128;
+	g_swindow.lines			= (liner**) calloc(g_swindow.lines_max, sizeof(liner*));
 	
 	return g_swindow;
 }
@@ -41,6 +44,14 @@ int init_sdl(swindow *g_swindow){
 	}
 	
 	return 0;
+}
+
+void destroy_polys(swindow *g_swindow){
+	int i;
+	for(i = 0; i < g_swindow->lines_count; i++)
+		free(g_swindow->lines[i]);
+
+	free(g_swindow->lines);
 }
 
 void window_event(SDL_Event *e, swindow *g_swindow){
@@ -70,7 +81,9 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 						(g_swindow->d_h* g_swindow->r)) / 2);
 				}
 				
-				SDL_RenderPresent( g_swindow->renderer );
+				destroy_polys(g_swindow);
+				g_swindow->lines = (liner**) calloc(g_swindow->lines_max, sizeof(liner*));
+
 				break;
 				
 			case SDL_WINDOWEVENT_FOCUS_GAINED:
