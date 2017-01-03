@@ -60,7 +60,6 @@ extern "C" {
 	/* Filled Polygon */
 
 	_NANO_POLY_H_SCOPE int filledPolygonRGBA(
-		swindow* g_swindow,
 		liner **lines, 
 		short *diff, 
 		const Sint16 * vx, 

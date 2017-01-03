@@ -15,16 +15,13 @@ swindow init_swindow( swindow g_swindow ){
 	g_swindow.fs			= 0;
 	g_swindow.min			= 0;
 	g_swindow.quit 			= 0;
-	g_swindow.lines_count	= 0;
-	g_swindow.lines_max 	= 128;
-	g_swindow.lines			= (liner**) calloc(g_swindow.lines_max, sizeof(liner*));
 	
 	return g_swindow;
 }
 
 int init_sdl(swindow *g_swindow){
 	
-	if(SDL_Init(SDL_INIT_EVERYTHING) >= 0){
+	if(SDL_Init(SDL_INIT_VIDEO) >= 0){
 		g_swindow->window = SDL_CreateWindow("shortstack",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
 			g_swindow->n_w, g_swindow->n_h, 
@@ -44,14 +41,6 @@ int init_sdl(swindow *g_swindow){
 	}
 	
 	return 0;
-}
-
-void destroy_polys(swindow *g_swindow){
-	int i;
-	for(i = 0; i < g_swindow->lines_count; i++)
-		free(g_swindow->lines[i]);
-
-	free(g_swindow->lines);
 }
 
 void window_event(SDL_Event *e, swindow *g_swindow){
@@ -80,9 +69,6 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 					g_swindow->p_y	= ((g_swindow->n_h - 
 						(g_swindow->d_h* g_swindow->r)) / 2);
 				}
-				
-				destroy_polys(g_swindow);
-				g_swindow->lines = (liner**) calloc(g_swindow->lines_max, sizeof(liner*));
 
 				break;
 				

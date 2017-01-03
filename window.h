@@ -9,7 +9,6 @@
 
 swindow init_swindow(swindow);
 int init_sdl(swindow *);
-void destroy_polys(swindow *g_swindow);
 void window_event(SDL_Event *, swindow *);
 void key_event(SDL_Event *, state *);
 void parse_event(SDL_Event *, swindow *, state *);

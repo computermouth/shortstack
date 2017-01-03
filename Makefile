@@ -29,7 +29,7 @@ memtest:
  ./$(MAIN_NAME)
 
 memtest_nosup:
-	valgrind --track-origins=yes --leak-check=yes\
+	valgrind --track-origins=yes --leak-check=yes --show-reachable=yes\
  ./$(MAIN_NAME)
 
 memtest_gensup:
