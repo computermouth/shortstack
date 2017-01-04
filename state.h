@@ -2,6 +2,8 @@
 #ifndef _STATE_H_
 #define _STATE_H_
 
+#include "structs.h"
+
 struct Keystate{
 	unsigned char esc;
 	unsigned char ent;
@@ -18,12 +20,21 @@ typedef struct Keystate keystate;
 
 struct State{
 	keystate k;
-	int key_delay;
-	int key_idle_stg;
-	int key_pressed_stg;
+	
+	unsigned short frame;
+	unsigned short menu;
+	unsigned short game;
+	unsigned short score;
+	unsigned short lives;
+	unsigned short ball_color;
+	unsigned short ball_x;
+	unsigned short ball_y;
+	unsigned short paddle_x;
+	unsigned short over;
 };
 typedef struct State state;
 
 state init_state();
+state logic(state, swindow *);
 
 #endif

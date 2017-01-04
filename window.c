@@ -43,7 +43,9 @@ int init_sdl(swindow *g_swindow){
 	return 0;
 }
 
-void window_event(SDL_Event *e, swindow *g_swindow){
+int window_event(SDL_Event *e, swindow *g_swindow){
+	int rc = 0;
+	
 	const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
 	if( e->type == SDL_WINDOWEVENT )
 	{
@@ -105,8 +107,12 @@ void window_event(SDL_Event *e, swindow *g_swindow){
 					SDL_WINDOW_FULLSCREEN_DESKTOP );
 				g_swindow->fs = 1;
 			}
+			
+			rc = 1;
 		}
 	}
+	
+	return rc;
 }
 
 void key_event(SDL_Event *e, state *g_state){
@@ -188,8 +194,8 @@ void parse_event(SDL_Event *e, swindow *g_swindow, state *g_state){
 				g_swindow->quit++;
 				break;
 			default:
-				window_event(e , g_swindow);
-				key_event(e , g_state);
+				if ( ! window_event(e , g_swindow))
+					key_event(e , g_state);
 				break;
 		}
 	}

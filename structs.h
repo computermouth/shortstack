@@ -2,6 +2,8 @@
 #ifndef _GFX_STRUCTS_
 #define _GFX_STRUCTS_
 
+#include <SDL2/SDL.h>
+
 struct Line{
 	int xa;
 	int xb;
