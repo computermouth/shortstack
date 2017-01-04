@@ -23,6 +23,7 @@ struct State{
 	
 	unsigned short frame;
 	unsigned short menu;
+	unsigned short menu_select;
 	unsigned short game;
 	unsigned short score;
 	unsigned short lives;

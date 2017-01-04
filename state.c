@@ -19,6 +19,7 @@ state init_state(){
 
 	g_state.frame = 0;
 	g_state.menu = 1;
+	g_state.menu_select = 1;
 	g_state.game = 0;
 
 	g_state.over = 0;
@@ -99,23 +100,58 @@ state logic(state g_state, swindow *g_swindow){
 			stop2_0(g_swindow);
 		}
 		
-		if(g_state.k.ent == 1){
-			g_state.k.ent = 0;
-			g_state.menu = 0;
-			
-			g_state.game = 1;
-			g_state.score = 0;
-			g_state.lives = 2;
-			g_state.ball_color = 0;
-			g_state.ball_x = 100;
-			g_state.ball_y = 100;
-			g_state.paddle_x = 350;
+		if(g_state.frame < 4){
+			if(g_state.menu_select == 0)
+				select_settings0(g_swindow);
+			else if(g_state.menu_select == 1)
+				select_play0(g_swindow);
+			else
+				select_stop0(g_swindow);
+		} else if(g_state.frame < 4){
+			if(g_state.menu_select == 0)
+				select_settings1(g_swindow);
+			else if(g_state.menu_select == 1)
+				select_play1(g_swindow);
+			else
+				select_stop1(g_swindow);
+		} else { 
+			if(g_state.menu_select == 0)
+				select_settings2(g_swindow);
+			else if(g_state.menu_select == 1)
+				select_play2(g_swindow);
+			else
+				select_stop2(g_swindow);
+		}
+		
+		if(g_state.k.lt == 1 && g_state.menu_select > 0){
+			g_state.menu_select--;
+			g_state.k.lt = 0;
+		}
+		if(g_state.k.rt == 1 && g_state.menu_select < 3){
+			g_state.menu_select++;
+			g_state.k.rt = 0;
+		}
+		
+		if(g_state.k.ent == 1 ){
+			if(g_state.menu_select == 0){
+				//SETTINGS
+			} else if(g_state.menu_select == 1){
+				g_state.k.ent = 0;
+				g_state.menu = 0;
+				
+				g_state.game = 1;
+				g_state.score = 0;
+				g_state.lives = 2;
+				g_state.ball_color = 0;
+				g_state.ball_x = 100;
+				g_state.ball_y = 100;
+				g_state.paddle_x = 350;
+			} else {
+				g_swindow->quit = 1;
+			}
 		}
 		
 	}
-	
-	
-	
 	
 	
 	

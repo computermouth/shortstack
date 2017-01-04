@@ -33,6 +33,7 @@ int init_sdl(swindow *g_swindow){
 				-1, 
 				SDL_RENDERER_ACCELERATED | 
 				SDL_RENDERER_PRESENTVSYNC);
+		SDL_ShowCursor(SDL_DISABLE);
 		}else{
 			return 1;
 		}
