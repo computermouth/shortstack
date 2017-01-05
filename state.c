@@ -22,9 +22,9 @@ state init_state(){
 	g_state.menu_select = 1;
 	g_state.game = 0;
 
-	g_state.ball_x = 100;
-	g_state.ball_x_dir = 5;
-	g_state.ball_y_dir = 5;
+	g_state.ball_x = 50;
+	g_state.ball_x_dir = 2;
+	g_state.ball_y_dir = 2;
 
 	g_state.over = 0;
 
@@ -145,8 +145,9 @@ state logic(state g_state, swindow *g_swindow){
 				g_state.game = 1;
 				g_state.score = 0;
 				g_state.lives = 2;
+				g_state.bounced = 0;
 				g_state.ball_color = 0;
-				g_state.ball_y = 100;
+				g_state.ball_y = 50;
 				g_state.paddle_color = 0;
 				g_state.paddle_x = 300;
 			} else {
@@ -155,16 +156,51 @@ state logic(state g_state, swindow *g_swindow){
 		}
 		
 	} else if(g_state.game == 1){
-		
+				
 		// BALL MOVEMENT
-		printf("%d\n", g_state.ball_x);
 		if (g_state.ball_x <= 0 || g_state.ball_x >=760){
-			g_state.ball_x_dir = g_state.ball_x_dir * -1;
+			g_state.ball_x_dir *= -1;
 		}
 		
-		if (g_state.ball_y >= 500)
-			g_state.ball_y = 100;
+		if (g_state.bounced == 0 && g_state.ball_y > 300){
+			int i, j, k = 0;
+			for(i = 0; i < abs(g_state.ball_x_dir); i++){
+				if (( g_state.ball_x_dir > 0 && (g_state.ball_x - i + 19) >= g_state.paddle_x) ||
+					( g_state.ball_x_dir < 0 && (g_state.ball_x + i + 19) >= g_state.paddle_x)
+					){
+					
+					for(j = 0; j < abs(g_state.ball_x_dir); j++){
+						if (( g_state.ball_x_dir > 0 && g_state.ball_x <= (g_state.paddle_x - j + 181)) ||
+							( g_state.ball_x_dir < 0 && g_state.ball_x <= (g_state.paddle_x + j + 181))
+							){
+							
+							for(k = 0; k < g_state.ball_y_dir; k++){
+								if ((g_state.ball_y - k) > 395 && (g_state.ball_y - k) < 405) {
+									
+									g_state.score += 10;
+									g_state.ball_y_dir *= -1;
+									g_state.bounced = 1;
+									
+								}
+							if (g_state.bounced) break;
+							}
+						}
+						if (g_state.bounced) break;
+					}
+				}
+				if (g_state.bounced) break;
+			}
+		}
 		
+		if (g_state.ball_y >= 500){
+			g_state.ball_y = 50;
+			g_state.bounced = 0;
+		} else 
+		if (g_state.ball_y <= 0){
+			g_state.ball_y_dir *= -1;
+			g_state.bounced = 0;
+		}
+				
 		g_state.ball_x += g_state.ball_x_dir;
 		g_state.ball_y += g_state.ball_y_dir;
 		
@@ -176,13 +212,14 @@ state logic(state g_state, swindow *g_swindow){
 			ball2(g_swindow, g_state.ball_x, g_state.ball_y, g_state.ball_color);
 		}
 		
+				
 		// PADDLE MOVEMENT
 		if(g_state.k.lt && g_state.paddle_x > 0){
-			g_state.paddle_x -= 10;
+			g_state.paddle_x -= 20;
 			g_state.k.lt = 0;
 		}
 		if(g_state.k.rt && g_state.paddle_x < 600){
-			g_state.paddle_x += 10;
+			g_state.paddle_x += 20;
 			g_state.k.rt = 0;
 		}
 		
