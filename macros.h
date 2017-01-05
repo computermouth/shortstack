@@ -10,6 +10,7 @@
 #define NP_AX(xcoords...) = {xcoords};
 #define NP_AY(ycoords...) = {ycoords};
 #define NP_CO(vals...) static ushort orig_color[4] = {vals};
+
 #define NP_SH(np_name, np_vs, np_vx, np_vy, np_ax, np_ay, np_co)		\
 	void np_name(swindow *g_swindow){									\
 		np_vs															\
@@ -121,5 +122,49 @@ NP_SH(
 	//~ NP_CO(139, 112, 178, 255)
 //~ );
 
+#define NP_SH_PC(np_name, np_vs, np_vx, np_vy, np_ax, np_ay, np_co)		\
+	void np_name(swindow *g_swindow, unsigned short pad_x,				\
+					unsigned short pad_y, unsigned short color_code){	\
+		np_vs															\
+		np_vx 															\
+		np_ax															\
+		np_vy 															\
+		np_ay															\
+		np_co															\
+																		\
+		static shape shape_s = { 										\
+			.lines		= NULL,											\
+			.line_cnt	= 0,											\
+			.old_ratio 	= 0,                                            \
+			.x 			= orig_x,                                       \
+			.y 			= orig_y,                                       \
+			.color 		= orig_color                                    \
+			};                                                          \
+																		\
+		ushort i;                                                   	\
+		for(i = 0; i < verts; i++){                                 	\
+			curr_x[i] = ((orig_x[i] + pad_x) 							\
+				* g_swindow->r) + g_swindow->p_x;						\
+			curr_y[i] = ((orig_y[i] + pad_y) 							\
+				* g_swindow->r) + g_swindow->p_y;						\
+		}                                                           	\
+		shape_s.x = curr_x;                                         	\
+		shape_s.y = curr_y;                                         	\
+		shape_s.old_ratio = g_swindow->r;                           	\
+																		\
+		filledPolygonRGBA(                                          	\
+			&shape_s.lines,                                         	\
+			&shape_s.line_cnt,                                      	\
+			curr_x,                                                 	\
+			curr_y,                                                 	\
+			verts,                                                  	\
+			shape_s.color[0],                                       	\
+			shape_s.color[1],                                       	\
+			shape_s.color[2],                                       	\
+			shape_s.color[3]                                        	\
+			);                                                      	\
+																		\
+		draw_shape(&shape_s, g_swindow->renderer);						\
+	}
 
 #endif

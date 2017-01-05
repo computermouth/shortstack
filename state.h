@@ -30,6 +30,9 @@ struct State{
 	unsigned short ball_color;
 	unsigned short ball_x;
 	unsigned short ball_y;
+	short ball_x_dir;
+	short ball_y_dir;
+	unsigned short paddle_color;
 	unsigned short paddle_x;
 	unsigned short over;
 };
