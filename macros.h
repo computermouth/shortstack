@@ -2,6 +2,10 @@
 #ifndef _MACROS_H_
 #define _MACROS_H_
 
+#include "nano_poly.h"
+#include "draw.h"
+#include "window.h"
+
 #define NP_VS(vertnum) ushort verts = vertnum;\
  static short curr_x[vertnum] = { 0 };\
  static short curr_y[vertnum] = { 0 };
@@ -55,15 +59,15 @@
 		draw_shape(&shape_s, g_swindow->renderer);						\
 	}
 
-NP_SH(
-	test_square,
-	NP_VS(4),
-	NP_VX(4),
-	NP_VY(4), 
-	NP_AX(150, 200, 200, 150), 
-	NP_AY(150, 150, 200, 200), 
-	NP_CO(255, 125, 0, 255)
-);
+//~ FAKE_NP_SH(
+	//~ test_square,
+	//~ NP_VS(4),
+	//~ NP_VX(4),
+	//~ NP_VY(4), 
+	//~ NP_AX(150, 200, 200, 150), 
+	//~ NP_AY(150, 150, 200, 200), 
+	//~ NP_CO(255, 125, 0, 255)
+//~ );
 
 //~ void test_square (swindow *g_swindow){
 	//~ 
@@ -121,6 +125,8 @@ NP_SH(
 	//~ NP_AY(172, 151, 94, 70),
 	//~ NP_CO(139, 112, 178, 255)
 //~ );
+
+void set_color(unsigned short *,unsigned short);
 
 #define NP_SH_PC(np_name, np_vs, np_vx, np_vy, np_ax, np_ay, np_co)		\
 	void np_name(swindow *g_swindow, unsigned short pad_x,				\
