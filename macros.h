@@ -158,6 +158,8 @@ void set_color(unsigned short *,unsigned short);
 		shape_s.y = curr_y;                                         	\
 		shape_s.old_ratio = g_swindow->r;                           	\
 																		\
+		set_color(shape_s.color, color_code);				\
+																		\
 		filledPolygonRGBA(                                          	\
 			&shape_s.lines,                                         	\
 			&shape_s.line_cnt,                                      	\

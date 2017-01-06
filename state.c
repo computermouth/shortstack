@@ -146,7 +146,7 @@ state logic(state g_state, swindow *g_swindow){
 				g_state.score = 0;
 				g_state.lives = 2;
 				g_state.bounced = 0;
-				g_state.ball_color = 0;
+				g_state.ball_color = 15;
 				g_state.ball_y = 50;
 				g_state.paddle_color = 0;
 				g_state.paddle_x = 300;
