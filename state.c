@@ -23,8 +23,8 @@ state init_state(){
 	g_state.game = 0;
 
 	g_state.ball_x = 50;
-	g_state.ball_x_dir = 2;
-	g_state.ball_y_dir = 2;
+	g_state.ball_x_dir = 1;
+	g_state.ball_y_dir = 1;
 
 	g_state.over = 0;
 
@@ -148,15 +148,40 @@ state logic(state g_state, swindow *g_swindow){
 				g_state.bounced = 0;
 				g_state.ball_color = 15;
 				g_state.ball_y = 50;
-				g_state.paddle_color = 0;
 				g_state.paddle_x = 300;
+				g_state.paddle_color_delay = 0;
+				g_state.ball_x_speed = 3;
+				g_state.ball_y_speed = 2;
 			} else {
 				g_swindow->quit = 1;
 			}
 		}
 		
 	} else if(g_state.game == 1){
-				
+		
+		if(g_state.frame < 4){
+			top_wall0(g_swindow);
+			pad0_0(g_swindow);
+			pad1_0(g_swindow);
+			pad2_0(g_swindow);
+			pad3_0(g_swindow);
+			hole_open0(g_swindow);
+		} else if (g_state.frame < 8){
+			top_wall1(g_swindow);
+			pad0_1(g_swindow);
+			pad1_1(g_swindow);
+			pad2_1(g_swindow);
+			pad3_1(g_swindow);
+			hole_open1(g_swindow);
+		} else {
+			top_wall2(g_swindow);
+			pad0_2(g_swindow);
+			pad1_2(g_swindow);
+			pad2_2(g_swindow);
+			pad3_2(g_swindow);
+			hole_open2(g_swindow);
+		}
+		
 		// BALL MOVEMENT
 		if (g_state.ball_x <= 0 || g_state.ball_x >=760){
 			g_state.ball_x_dir *= -1;
@@ -164,25 +189,44 @@ state logic(state g_state, swindow *g_swindow){
 		
 		if (g_state.bounced == 0 && g_state.ball_y > 300){
 			int i, j, k = 0;
-			for(i = 0; i < abs(g_state.ball_x_dir); i++){
-				if (( g_state.ball_x_dir > 0 && (g_state.ball_x - i + 19) >= g_state.paddle_x) ||
-					( g_state.ball_x_dir < 0 && (g_state.ball_x + i + 19) >= g_state.paddle_x)
-					){
+			for(i = 0; i < g_state.ball_x_speed; i++){
+				if ((g_state.ball_x + (i * g_state.ball_x_dir)) >= (g_state.paddle_x - 19)){
 					
-					for(j = 0; j < abs(g_state.ball_x_dir); j++){
-						if (( g_state.ball_x_dir > 0 && g_state.ball_x <= (g_state.paddle_x - j + 181)) ||
-							( g_state.ball_x_dir < 0 && g_state.ball_x <= (g_state.paddle_x + j + 181))
-							){
+					for(j = 0; j < g_state.ball_x_speed; j++){
+						if ( g_state.ball_x <= (g_state.paddle_x + (j * g_state.ball_x_dir) + 179)){
 							
-							for(k = 0; k < g_state.ball_y_dir; k++){
+							for(k = 0; k < g_state.ball_y_speed; k++){
 								if ((g_state.ball_y - k) > 395 && (g_state.ball_y - k) < 405) {
 									
-									g_state.score += 10;
+									g_state.score += 1;
+									g_state.paddle_color = 12;
+									g_state.paddle_color_delay = 8;
+									g_state.ball_y = 395;
+									
+									if (g_state.score % 5 == 0){
+										if(g_state.ball_color > 0){
+											
+											if(g_state.ball_color != 2){
+												g_state.ball_color--;
+											}else if(g_state.ball_color > 0){
+												g_state.ball_color -= 2;
+											}
+											
+												g_state.ball_x_speed++;
+												g_state.ball_y_speed++;
+										}
+									}
+										
 									g_state.ball_y_dir *= -1;
 									g_state.bounced = 1;
 									
+									short diff = g_state.ball_x - g_state.paddle_x + 19;
+									if ( diff <= 79 || diff > 159)
+										g_state.ball_x_dir *= -1;
+																
 								}
-							if (g_state.bounced) break;
+									
+								if (g_state.bounced) break;
 							}
 						}
 						if (g_state.bounced) break;
@@ -192,17 +236,18 @@ state logic(state g_state, swindow *g_swindow){
 			}
 		}
 		
+		
 		if (g_state.ball_y >= 500){
 			g_state.ball_y = 50;
 			g_state.bounced = 0;
 		} else 
-		if (g_state.ball_y <= 0){
-			g_state.ball_y_dir *= -1;
+		if ((g_state.ball_x + 21) < 350 && g_state.ball_y <= 20){
 			g_state.bounced = 0;
+			g_state.ball_y_dir *= -1;
 		}
 				
-		g_state.ball_x += g_state.ball_x_dir;
-		g_state.ball_y += g_state.ball_y_dir;
+		g_state.ball_x += (g_state.ball_x_dir * g_state.ball_x_speed);
+		g_state.ball_y += (g_state.ball_y_dir * g_state.ball_y_speed);
 		
 		if(g_state.frame < 4){
 			ball0(g_swindow, g_state.ball_x, g_state.ball_y, g_state.ball_color);
@@ -212,7 +257,7 @@ state logic(state g_state, swindow *g_swindow){
 			ball2(g_swindow, g_state.ball_x, g_state.ball_y, g_state.ball_color);
 		}
 		
-				
+		
 		// PADDLE MOVEMENT
 		if(g_state.k.lt && g_state.paddle_x > 0){
 			g_state.paddle_x -= 20;
@@ -230,6 +275,11 @@ state logic(state g_state, swindow *g_swindow){
 		} else {
 			paddle2(g_swindow, g_state.paddle_x, 0, g_state.paddle_color);
 		}
+		
+		if (g_state.paddle_color_delay == 0)
+			g_state.paddle_color = 13;
+		else
+			g_state.paddle_color_delay--;
 	}
 	
 	

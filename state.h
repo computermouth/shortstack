@@ -30,10 +30,13 @@ struct State{
 	unsigned short ball_color;
 	short ball_x;
 	short ball_y;
+	short ball_x_speed;
+	short ball_y_speed;
 	short ball_x_dir;
 	short ball_y_dir;
 	unsigned short bounced;
 	unsigned short paddle_color;
+	unsigned short paddle_color_delay;
 	short paddle_x;
 	unsigned short over;
 };
