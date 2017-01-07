@@ -34,6 +34,11 @@ struct State{
 	short ball_y_speed;
 	short ball_x_dir;
 	short ball_y_dir;
+	short pad0_dir;
+	short pad1_dir;
+	short pad2_dir;
+	short pad3_dir;
+	unsigned short hole_open;
 	unsigned short bounced;
 	unsigned short paddle_color;
 	unsigned short paddle_color_delay;

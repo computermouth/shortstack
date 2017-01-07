@@ -22,6 +22,12 @@ state init_state(){
 	g_state.menu_select = 1;
 	g_state.game = 0;
 
+	g_state.pad0_dir = -1;
+	g_state.pad1_dir = 1;
+	g_state.pad2_dir = -1;
+	g_state.pad3_dir = 1;
+	g_state.hole_open = 1;
+
 	g_state.ball_x = 50;
 	g_state.ball_x_dir = 1;
 	g_state.ball_y_dir = 1;
@@ -165,22 +171,123 @@ state logic(state g_state, swindow *g_swindow){
 			pad1_0(g_swindow);
 			pad2_0(g_swindow);
 			pad3_0(g_swindow);
-			hole_open0(g_swindow);
+			if(g_state.hole_open)
+				hole_open0(g_swindow);
+			else
+				hole_closed0(g_swindow);
 		} else if (g_state.frame < 8){
 			top_wall1(g_swindow);
 			pad0_1(g_swindow);
 			pad1_1(g_swindow);
 			pad2_1(g_swindow);
 			pad3_1(g_swindow);
-			hole_open1(g_swindow);
+			if(g_state.hole_open)
+				hole_open1(g_swindow);
+			else
+				hole_closed1(g_swindow);
 		} else {
 			top_wall2(g_swindow);
 			pad0_2(g_swindow);
 			pad1_2(g_swindow);
 			pad2_2(g_swindow);
 			pad3_2(g_swindow);
-			hole_open2(g_swindow);
+			if(g_state.hole_open)
+				hole_open2(g_swindow);
+			else
+				hole_closed2(g_swindow);
 		}
+		
+		// TOP WALL PADS
+		
+		if(g_state.frame < 4){
+			if (g_state.pad0_dir == -1){
+				pad0_arrow_left0_0(g_swindow);
+				pad0_arrow_left0_1(g_swindow);
+			} else {
+				pad0_arrow_right0_0(g_swindow);
+				pad0_arrow_right0_1(g_swindow);
+			}
+			if (g_state.pad1_dir == -1){
+				pad1_arrow_left0_0(g_swindow);
+				pad1_arrow_left0_1(g_swindow);
+			} else {
+				pad1_arrow_right0_0(g_swindow);
+				pad1_arrow_right0_1(g_swindow);
+			}
+			if (g_state.pad2_dir == -1){
+				pad2_arrow_left0_0(g_swindow);
+				pad2_arrow_left0_1(g_swindow);
+			} else {
+				pad2_arrow_right0_0(g_swindow);
+				pad2_arrow_right0_1(g_swindow);
+			}
+			if (g_state.pad3_dir == -1){
+				pad3_arrow_left0_0(g_swindow);
+				pad3_arrow_left0_1(g_swindow);
+			} else {
+				pad3_arrow_right0_0(g_swindow);
+				pad3_arrow_right0_1(g_swindow);
+			}
+		} else if (g_state.frame < 8){
+			if (g_state.pad0_dir == -1){
+				pad0_arrow_left1_0(g_swindow);
+				pad0_arrow_left1_1(g_swindow);
+			} else {
+				pad0_arrow_right1_0(g_swindow);
+				pad0_arrow_right1_1(g_swindow);
+			}
+			if (g_state.pad1_dir == -1){
+				pad1_arrow_left1_0(g_swindow);
+				pad1_arrow_left1_1(g_swindow);
+			} else {
+				pad1_arrow_right1_0(g_swindow);
+				pad1_arrow_right1_1(g_swindow);
+			}
+			if (g_state.pad2_dir == -1){
+				pad2_arrow_left1_0(g_swindow);
+				pad2_arrow_left1_1(g_swindow);
+			} else {
+				pad2_arrow_right1_0(g_swindow);
+				pad2_arrow_right1_1(g_swindow);
+			}
+			if (g_state.pad3_dir == -1){
+				pad3_arrow_left1_0(g_swindow);
+				pad3_arrow_left1_1(g_swindow);
+			} else {
+				pad3_arrow_right1_0(g_swindow);
+				pad3_arrow_right1_1(g_swindow);
+			}
+		} else {
+			if (g_state.pad0_dir == -1){
+				pad0_arrow_left2_0(g_swindow);
+				pad0_arrow_left2_1(g_swindow);
+			} else {
+				pad0_arrow_right2_0(g_swindow);
+				pad0_arrow_right2_1(g_swindow);
+			}
+			if (g_state.pad1_dir == -1){
+				pad1_arrow_left2_0(g_swindow);
+				pad1_arrow_left2_1(g_swindow);
+			} else {
+				pad1_arrow_right2_0(g_swindow);
+				pad1_arrow_right2_1(g_swindow);
+			}
+			if (g_state.pad2_dir == -1){
+				pad2_arrow_left2_0(g_swindow);
+				pad2_arrow_left2_1(g_swindow);
+			} else {
+				pad2_arrow_right2_0(g_swindow);
+				pad2_arrow_right2_1(g_swindow);
+			}
+			if (g_state.pad3_dir == -1){
+				pad3_arrow_left2_0(g_swindow);
+				pad3_arrow_left2_1(g_swindow);
+			} else {
+				pad3_arrow_right2_0(g_swindow);
+				pad3_arrow_right2_1(g_swindow);
+			}
+		}
+		
 		
 		// BALL MOVEMENT
 		if (g_state.ball_x <= 0 || g_state.ball_x >=760){
@@ -240,11 +347,57 @@ state logic(state g_state, swindow *g_swindow){
 		if (g_state.ball_y >= 500){
 			g_state.ball_y = 50;
 			g_state.bounced = 0;
-		} else 
-		if ((g_state.ball_x + 21) < 350 && g_state.ball_y <= 20){
+		}
+		
+		if ((g_state.ball_x + 21) > 30 && 
+				(g_state.ball_x + 21) < 109 && 
+				g_state.ball_y <= 20){
+			//PAD 0
 			g_state.bounced = 0;
 			g_state.ball_y_dir *= -1;
+			g_state.ball_x_dir = g_state.pad0_dir;
+			g_state.pad0_dir *= -1;
+			g_state.hole_open = 1;
+		} else if ((g_state.ball_x + 21) > 180 && 
+				(g_state.ball_x + 21) < 259 && 
+				g_state.ball_y <= 20){
+			//PAD 1
+			g_state.bounced = 0;
+			g_state.ball_y_dir *= -1;
+			g_state.ball_x_dir = g_state.pad1_dir;
+			g_state.pad1_dir *= -1;
+			g_state.hole_open = 1;
+		} else if ((g_state.ball_x + 21) > 350 && 
+				(g_state.ball_x + 21) < 450 && 
+				g_state.ball_y <= 20 &&
+				g_state.hole_open == 1){
+			//HOLE
+			g_state.ball_y = 499;
+			g_state.bounced = 1;
+			g_state.hole_open = 0;
+		} else if ((g_state.ball_x + 21) > 540 && 
+				(g_state.ball_x + 21) < 619 && 
+				g_state.ball_y <= 20){
+			//PAD 2
+			g_state.bounced = 0;
+			g_state.ball_y_dir *= -1;
+			g_state.ball_x_dir = g_state.pad2_dir;
+			g_state.pad2_dir *= -1;
+		} else if ((g_state.ball_x + 21) > 690 && 
+				(g_state.ball_x + 21) < 769 && 
+				g_state.ball_y <= 20){
+			//PAD 3
+			g_state.bounced = 0;
+			g_state.ball_y_dir *= -1;
+			g_state.ball_x_dir = g_state.pad3_dir;
+			g_state.pad3_dir *= -1;
+			g_state.hole_open = 1;
+		} else if (g_state.ball_y <= 20 ){
+			g_state.ball_y_dir *= -1;
+			g_state.bounced = 0;
+			g_state.hole_open = 1;
 		}
+
 				
 		g_state.ball_x += (g_state.ball_x_dir * g_state.ball_x_speed);
 		g_state.ball_y += (g_state.ball_y_dir * g_state.ball_y_speed);

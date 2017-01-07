@@ -1178,6 +1178,248 @@ NP_SH(
 	NP_CO(96, 48, 31, 255)
 );
 
+// TOP WALL PAD ARROW RIGHT
+
+NP_SH(
+	pad0_arrow_right0_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(46, 56, 45, 53, 61, 52),
+	NP_AY(19, 10, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad0_arrow_right0_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(76, 84, 75, 85, 93, 85),
+	NP_AY(19, 10, 0, 0, 11, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad0_arrow_right1_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(45, 54, 45, 56, 61, 53),
+	NP_AY(19, 11, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad0_arrow_right1_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(77, 85, 76, 83, 89, 84),
+	NP_AY(20, 10, 0, 0, 11, 21),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad0_arrow_right2_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(45, 52, 45, 54, 60, 53),
+	NP_AY(18, 10, 0, 0, 11, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad0_arrow_right2_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(77, 85, 76, 84, 91, 85),
+	NP_AY(19, 9, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad1_arrow_right0_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(195, 201, 192, 201, 209, 200),
+	NP_AY(19, 9, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad1_arrow_right0_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(230, 237, 226, 235, 244, 237),
+	NP_AY(19, 11, 0, 0, 11, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad1_arrow_right1_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(195, 201, 193, 202, 208, 203),
+	NP_AY(19, 9, 0, 0, 9, 19),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad1_arrow_right1_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(231, 237, 231, 238, 242, 239),
+	NP_AY(20, 10, 0, 0, 11, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad1_arrow_right2_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(195, 200, 194, 202, 207, 203),
+	NP_AY(20, 11, 0, 0, 10, 21),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad1_arrow_right2_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(234, 237, 232, 239, 242, 239),
+	NP_AY(18, 10, 0, 0, 12, 19),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad2_arrow_right0_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(556, 563, 555, 564, 569, 562),
+	NP_AY(19, 10, 0, 0, 9, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad2_arrow_right0_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(588, 593, 588, 594, 599, 594),
+	NP_AY(19, 10, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad2_arrow_right1_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(556, 561, 558, 564, 568, 563),
+	NP_AY(19, 9, 0, 0, 11, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad2_arrow_right1_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(590, 597, 592, 597, 602, 596),
+	NP_AY(20, 10, 0, 0, 12, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad2_arrow_right2_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(559, 563, 559, 564, 568, 566),
+	NP_AY(19, 9, 0, 0, 10, 18),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad2_arrow_right2_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(590, 595, 590, 596, 599, 596),
+	NP_AY(19, 11, 0, 0, 11, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad3_arrow_right0_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(704, 709, 704, 710, 714, 709),
+	NP_AY(19, 10, 0, 0, 10, 19),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad3_arrow_right0_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(742, 746, 740, 749, 755, 750),
+	NP_AY(19, 10, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad3_arrow_right1_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(704, 711, 706, 713, 716, 710),
+	NP_AY(19, 9, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad3_arrow_right1_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(743, 747, 742, 749, 754, 748),
+	NP_AY(19, 10, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad3_arrow_right2_0,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(707, 711, 705, 714, 717, 712),
+	NP_AY(19, 8, 0, 0, 10, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
+NP_SH(
+	pad3_arrow_right2_1,
+	NP_VS(6),
+	NP_VX(6),
+	NP_VY(6),
+	NP_AX(743, 747, 742, 748, 752, 748),
+	NP_AY(19, 10, 0, 0, 12, 20),
+	NP_CO(96, 48, 31, 255)
+);
+
 
 
 #endif
