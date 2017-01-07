@@ -347,6 +347,9 @@ state logic(state g_state, swindow *g_swindow){
 		if (g_state.ball_y >= 500){
 			g_state.ball_y = 50;
 			g_state.bounced = 0;
+			g_state.lives--;
+			if (g_state.lives < 0)
+				g_swindow->quit = 1;
 		}
 		
 		if ((g_state.ball_x + 21) > 30 && 

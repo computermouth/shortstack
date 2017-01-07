@@ -26,7 +26,7 @@ struct State{
 	unsigned short menu_select;
 	unsigned short game;
 	unsigned short score;
-	unsigned short lives;
+	short lives;
 	unsigned short ball_color;
 	short ball_x;
 	short ball_y;
