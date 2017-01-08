@@ -22,10 +22,10 @@ state init_state(){
 	g_state.menu_select = 1;
 	g_state.game = 0;
 
-	g_state.pad0_dir = -1;
-	g_state.pad1_dir = 1;
-	g_state.pad2_dir = -1;
-	g_state.pad3_dir = 1;
+	g_state.pad0_dir = 1;
+	g_state.pad1_dir = -1;
+	g_state.pad2_dir = 1;
+	g_state.pad3_dir = -1;
 	g_state.hole_open = 1;
 
 	g_state.ball_x = 50;
@@ -137,7 +137,7 @@ state logic(state g_state, swindow *g_swindow){
 			g_state.menu_select--;
 			g_state.k.lt = 0;
 		}
-		if(g_state.k.rt == 1 && g_state.menu_select < 3){
+		if(g_state.k.rt == 1 && g_state.menu_select < 2){
 			g_state.menu_select++;
 			g_state.k.rt = 0;
 		}
@@ -164,6 +164,34 @@ state logic(state g_state, swindow *g_swindow){
 		}
 		
 	} else if(g_state.game == 1){
+		
+		// HEARTS
+		
+		if(g_state.frame < 4){
+			heart0_disabled0(g_swindow);
+			heart1_disabled0(g_swindow);
+			heart2_disabled0(g_swindow);
+			if (g_state.lives > 0) heart0_enabled0(g_swindow);
+			if (g_state.lives > 1) heart1_enabled0(g_swindow);
+			if (g_state.lives > 2) heart2_enabled0(g_swindow);
+		} else if (g_state.frame < 8){
+			heart0_disabled1(g_swindow);
+			heart1_disabled1(g_swindow);
+			heart2_disabled1(g_swindow);
+			if (g_state.lives > 0) heart0_enabled1(g_swindow);
+			if (g_state.lives > 1) heart1_enabled1(g_swindow);
+			if (g_state.lives > 2) heart2_enabled1(g_swindow);
+		} else {
+			heart0_disabled2(g_swindow);
+			heart1_disabled2(g_swindow);
+			heart2_disabled2(g_swindow);
+			if (g_state.lives > 0) heart0_enabled2(g_swindow);
+			if (g_state.lives > 1) heart1_enabled2(g_swindow);
+			if (g_state.lives > 2) heart2_enabled2(g_swindow);
+		}
+
+		
+		// TOP WALL PADS
 		
 		if(g_state.frame < 4){
 			top_wall0(g_swindow);
@@ -196,8 +224,6 @@ state logic(state g_state, swindow *g_swindow){
 			else
 				hole_closed2(g_swindow);
 		}
-		
-		// TOP WALL PADS
 		
 		if(g_state.frame < 4){
 			if (g_state.pad0_dir == -1){
@@ -290,7 +316,11 @@ state logic(state g_state, swindow *g_swindow){
 		
 		
 		// BALL MOVEMENT
-		if (g_state.ball_x <= 0 || g_state.ball_x >=760){
+		if (g_state.ball_x <= 0){
+			g_state.ball_x = 1;
+			g_state.ball_x_dir *= -1;
+		} else if (g_state.ball_x >=760){
+			g_state.ball_x = 759;
 			g_state.ball_x_dir *= -1;
 		}
 		
@@ -323,12 +353,16 @@ state logic(state g_state, swindow *g_swindow){
 												g_state.ball_y_speed++;
 										}
 									}
+									if (g_state.score % 10 == 0 && g_state.lives < 3){
+										g_state.lives++;
+									}
 										
 									g_state.ball_y_dir *= -1;
 									g_state.bounced = 1;
 									
 									short diff = g_state.ball_x - g_state.paddle_x + 19;
-									if ( diff <= 79 || diff > 159)
+									if ( (diff <= 79 && g_state.ball_x_dir == 1) ||
+											(diff > 159 && g_state.ball_x_dir == -1))
 										g_state.ball_x_dir *= -1;
 																
 								}
