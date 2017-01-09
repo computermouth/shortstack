@@ -29,6 +29,8 @@ struct Swindow{
 	int 			d_h;
 	int 			n_w;
 	int 			n_h;
+	int 			cached_w;
+	int 			cached_h;
 	float			r;
 	unsigned char	scaler;
 	int				p_x;

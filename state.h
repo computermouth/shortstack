@@ -22,6 +22,9 @@ struct State{
 	keystate k;
 	
 	unsigned short frame;
+	unsigned short settings;
+	unsigned short settings_select;
+	unsigned short settings_volume;
 	unsigned short menu;
 	unsigned short menu_select;
 	unsigned short game;

@@ -9,6 +9,7 @@
 
 swindow init_swindow(swindow);
 int init_sdl(swindow *);
+void set_scaler(SDL_Event *, swindow *);
 int window_event(SDL_Event *, swindow *);
 void key_event(SDL_Event *, state *);
 void parse_event(SDL_Event *, swindow *, state *);
