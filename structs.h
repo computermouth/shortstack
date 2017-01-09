@@ -30,6 +30,7 @@ struct Swindow{
 	int 			n_w;
 	int 			n_h;
 	float			r;
+	unsigned char	scaler;
 	int				p_x;
 	int				p_y;
 	int				focus;

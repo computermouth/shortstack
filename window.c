@@ -9,6 +9,7 @@ swindow init_swindow( swindow g_swindow ){
 	g_swindow.n_w			= g_swindow.d_w;
 	g_swindow.n_h			= g_swindow.d_h;
 	g_swindow.r				= 1.0;
+	g_swindow.scaler		= 1;
 	g_swindow.p_x			= 0;
 	g_swindow.p_y			= 0;
 	g_swindow.focus			= 1;
@@ -28,6 +29,7 @@ int init_sdl(swindow *g_swindow){
 			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		
 		if(g_swindow->window != 0){
+			
 			g_swindow->renderer = SDL_CreateRenderer
 				(g_swindow->window,
 				-1, 
@@ -41,6 +43,8 @@ int init_sdl(swindow *g_swindow){
 		return 1;
 	}
 	
+	SDL_RenderSetScale(g_swindow->renderer, g_swindow->scaler, g_swindow->scaler);
+	
 	return 0;
 }
 
@@ -53,24 +57,26 @@ int window_event(SDL_Event *e, swindow *g_swindow){
 		switch( e->window.event )
 		{
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
-				g_swindow->n_w = e->window.data1;
-				g_swindow->n_h = e->window.data2;
+				g_swindow->n_w = e->window.data1 / g_swindow->scaler;
+				g_swindow->n_h = e->window.data2 / g_swindow->scaler;
 				
 				if(((float)g_swindow->n_w / (float)g_swindow->d_w) >= 
 					((float)g_swindow->n_h / (float)g_swindow->d_h)){
 					//larger width ratio
 					g_swindow->r = ((float)g_swindow->n_h / 
 						(float)g_swindow->d_h);
+					//~ g_swindow->r = .7;
 					g_swindow->p_x = ((g_swindow->n_w - 
-						(g_swindow->d_w* g_swindow->r)) / 2);
+						(g_swindow->d_w* g_swindow->r))) / g_swindow->scaler;
 					g_swindow->p_y	= 0;
 				}else{
 					//larger height ratio
 					g_swindow->r = ((float)g_swindow->n_w / 
 						(float)g_swindow->d_w);
+					//~ g_swindow->r = .7;
 					g_swindow->p_x	= 0;
 					g_swindow->p_y	= ((g_swindow->n_h - 
-						(g_swindow->d_h* g_swindow->r)) / 2);
+						(g_swindow->d_h* g_swindow->r))) / g_swindow->scaler;
 				}
 
 				break;
