@@ -17,7 +17,7 @@ void set_color(unsigned short* old_color, unsigned short color_code){
 	unsigned short c11[4] = {193, 137, 179, 255};
 	unsigned short c12[4] = {206, 164, 161, 255};
 	unsigned short c13[4] = {221, 218, 184, 255};
-	unsigned short c14[4] = {221, 293, 215, 255};
+	unsigned short c14[4] = {221, 239, 215, 255};
 	unsigned short c15[4] = {242, 249, 246, 255};
 	
 	unsigned short oops[4] = {0, 255, 0, 255};
