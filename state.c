@@ -382,8 +382,10 @@ state logic(state g_state, swindow *g_swindow){
 			g_state.ball_y = 50;
 			g_state.bounced = 0;
 			g_state.lives--;
-			if (g_state.lives < 0)
-				g_swindow->quit = 1;
+			if (g_state.lives < 0){
+				g_state.over = 1;
+				g_state.game = 0;
+			}
 		}
 		
 		if ((g_state.ball_x + 21) > 30 && 
@@ -470,6 +472,232 @@ state logic(state g_state, swindow *g_swindow){
 			g_state.paddle_color = 13;
 		else
 			g_state.paddle_color_delay--;
+			
+	} else if(g_state.over) {
+	
+		if(g_state.k.ent == 1 ){
+			g_state.over = 0;
+			g_state.menu = 1;
+			g_state.k.ent = 0;
+		}
+	
+		// HEARTS
+		
+		if(g_state.frame < 4){
+			heart0_disabled0(g_swindow);
+			heart1_disabled0(g_swindow);
+			heart2_disabled0(g_swindow);
+			if (g_state.lives > 0) heart0_enabled0(g_swindow);
+			if (g_state.lives > 1) heart1_enabled0(g_swindow);
+			if (g_state.lives > 2) heart2_enabled0(g_swindow);
+		} else if (g_state.frame < 8){
+			heart0_disabled1(g_swindow);
+			heart1_disabled1(g_swindow);
+			heart2_disabled1(g_swindow);
+			if (g_state.lives > 0) heart0_enabled1(g_swindow);
+			if (g_state.lives > 1) heart1_enabled1(g_swindow);
+			if (g_state.lives > 2) heart2_enabled1(g_swindow);
+		} else {
+			heart0_disabled2(g_swindow);
+			heart1_disabled2(g_swindow);
+			heart2_disabled2(g_swindow);
+			if (g_state.lives > 0) heart0_enabled2(g_swindow);
+			if (g_state.lives > 1) heart1_enabled2(g_swindow);
+			if (g_state.lives > 2) heart2_enabled2(g_swindow);
+		}
+
+		
+		// TOP WALL PADS
+		
+		if(g_state.frame < 4){
+			top_wall0(g_swindow);
+			pad0_0(g_swindow);
+			pad1_0(g_swindow);
+			pad2_0(g_swindow);
+			pad3_0(g_swindow);
+			if(g_state.hole_open)
+				hole_open0(g_swindow);
+			else
+				hole_closed0(g_swindow);
+		} else if (g_state.frame < 8){
+			top_wall1(g_swindow);
+			pad0_1(g_swindow);
+			pad1_1(g_swindow);
+			pad2_1(g_swindow);
+			pad3_1(g_swindow);
+			if(g_state.hole_open)
+				hole_open1(g_swindow);
+			else
+				hole_closed1(g_swindow);
+		} else {
+			top_wall2(g_swindow);
+			pad0_2(g_swindow);
+			pad1_2(g_swindow);
+			pad2_2(g_swindow);
+			pad3_2(g_swindow);
+			if(g_state.hole_open)
+				hole_open2(g_swindow);
+			else
+				hole_closed2(g_swindow);
+		}
+		
+		if(g_state.frame < 4){
+			if (g_state.pad0_dir == -1){
+				pad0_arrow_left0_0(g_swindow);
+				pad0_arrow_left0_1(g_swindow);
+			} else {
+				pad0_arrow_right0_0(g_swindow);
+				pad0_arrow_right0_1(g_swindow);
+			}
+			if (g_state.pad1_dir == -1){
+				pad1_arrow_left0_0(g_swindow);
+				pad1_arrow_left0_1(g_swindow);
+			} else {
+				pad1_arrow_right0_0(g_swindow);
+				pad1_arrow_right0_1(g_swindow);
+			}
+			if (g_state.pad2_dir == -1){
+				pad2_arrow_left0_0(g_swindow);
+				pad2_arrow_left0_1(g_swindow);
+			} else {
+				pad2_arrow_right0_0(g_swindow);
+				pad2_arrow_right0_1(g_swindow);
+			}
+			if (g_state.pad3_dir == -1){
+				pad3_arrow_left0_0(g_swindow);
+				pad3_arrow_left0_1(g_swindow);
+			} else {
+				pad3_arrow_right0_0(g_swindow);
+				pad3_arrow_right0_1(g_swindow);
+			}
+		} else if (g_state.frame < 8){
+			if (g_state.pad0_dir == -1){
+				pad0_arrow_left1_0(g_swindow);
+				pad0_arrow_left1_1(g_swindow);
+			} else {
+				pad0_arrow_right1_0(g_swindow);
+				pad0_arrow_right1_1(g_swindow);
+			}
+			if (g_state.pad1_dir == -1){
+				pad1_arrow_left1_0(g_swindow);
+				pad1_arrow_left1_1(g_swindow);
+			} else {
+				pad1_arrow_right1_0(g_swindow);
+				pad1_arrow_right1_1(g_swindow);
+			}
+			if (g_state.pad2_dir == -1){
+				pad2_arrow_left1_0(g_swindow);
+				pad2_arrow_left1_1(g_swindow);
+			} else {
+				pad2_arrow_right1_0(g_swindow);
+				pad2_arrow_right1_1(g_swindow);
+			}
+			if (g_state.pad3_dir == -1){
+				pad3_arrow_left1_0(g_swindow);
+				pad3_arrow_left1_1(g_swindow);
+			} else {
+				pad3_arrow_right1_0(g_swindow);
+				pad3_arrow_right1_1(g_swindow);
+			}
+		} else {
+			if (g_state.pad0_dir == -1){
+				pad0_arrow_left2_0(g_swindow);
+				pad0_arrow_left2_1(g_swindow);
+			} else {
+				pad0_arrow_right2_0(g_swindow);
+				pad0_arrow_right2_1(g_swindow);
+			}
+			if (g_state.pad1_dir == -1){
+				pad1_arrow_left2_0(g_swindow);
+				pad1_arrow_left2_1(g_swindow);
+			} else {
+				pad1_arrow_right2_0(g_swindow);
+				pad1_arrow_right2_1(g_swindow);
+			}
+			if (g_state.pad2_dir == -1){
+				pad2_arrow_left2_0(g_swindow);
+				pad2_arrow_left2_1(g_swindow);
+			} else {
+				pad2_arrow_right2_0(g_swindow);
+				pad2_arrow_right2_1(g_swindow);
+			}
+			if (g_state.pad3_dir == -1){
+				pad3_arrow_left2_0(g_swindow);
+				pad3_arrow_left2_1(g_swindow);
+			} else {
+				pad3_arrow_right2_0(g_swindow);
+				pad3_arrow_right2_1(g_swindow);
+			}
+		}
+		
+		if(g_state.frame < 4){
+			paddle0(g_swindow, g_state.paddle_x, 0, g_state.paddle_color);
+		} else if (g_state.frame < 8){
+			paddle1(g_swindow, g_state.paddle_x, 0, g_state.paddle_color);
+		} else {
+			paddle2(g_swindow, g_state.paddle_x, 0, g_state.paddle_color);
+		}
+		
+		
+		
+		
+		// GAMEOVER
+		
+		gameover_shade(g_swindow);
+		
+		if(g_state.frame < 4){
+			gameover0_G0_0(g_swindow);
+			gameover0_A0_0(g_swindow);
+			gameover0_A0_1(g_swindow);
+			gameover0_M0_0(g_swindow);
+			gameover0_E0_0(g_swindow);
+			gameover0_O0_0(g_swindow);
+			gameover0_O0_1(g_swindow);
+			gameover0_V0_0(g_swindow);
+			gameover0_E1_0(g_swindow);
+			gameover0_R0_0(g_swindow);
+			gameover0_R0_1(g_swindow);
+			
+			house0_0(g_swindow);
+			house0_1(g_swindow);
+			
+			select_play0(g_swindow);
+		} else if (g_state.frame < 8){
+			gameover1_G0_0(g_swindow);
+			gameover1_A0_0(g_swindow);
+			gameover1_A0_1(g_swindow);
+			gameover1_M0_0(g_swindow);
+			gameover1_E0_0(g_swindow);
+			gameover1_O0_0(g_swindow);
+			gameover1_O0_1(g_swindow);
+			gameover1_V0_0(g_swindow);
+			gameover1_E1_0(g_swindow);
+			gameover1_R0_0(g_swindow);
+			gameover1_R0_1(g_swindow);
+			
+			house1_0(g_swindow);
+			house1_1(g_swindow);
+			
+			select_play1(g_swindow);
+		} else {
+			gameover2_G0_0(g_swindow);
+			gameover2_A0_0(g_swindow);
+			gameover2_A0_1(g_swindow);
+			gameover2_M0_0(g_swindow);
+			gameover2_E0_0(g_swindow);
+			gameover2_O0_0(g_swindow);
+			gameover2_O0_1(g_swindow);
+			gameover2_V0_0(g_swindow);
+			gameover2_E1_0(g_swindow);
+			gameover2_R0_0(g_swindow);
+			gameover2_R0_1(g_swindow);
+			
+			house2_0(g_swindow);
+			house2_1(g_swindow);
+			
+			select_play2(g_swindow);
+		}
+		
 	}
 	
 	
