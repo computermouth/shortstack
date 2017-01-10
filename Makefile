@@ -8,11 +8,15 @@ SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 MAIN_NAME = shortstack
 
 LIBS = -lSDL2
+WIN_LIBS = -lmingw32 -lSDL2main -lSDL2
 
 .PHONY: all clean lint
 
 all: $(MAIN)
-	gcc $(MAIN_SRC) $(ACT_SRC) -Wall -o $(MAIN_NAME) $(LIBS)
+	gcc $(MAIN_SRC) -Wall -o $(MAIN_NAME) $(LIBS)
+
+win: $(MAIN)
+	i686-w64-mingw32-gcc $(MAIN_SRC) -std=gnu89 -I/mingw32/include/ -L/mingw32/lib -Wall -Wl,-subsystem,windows -o $(MAIN_NAME) $(WIN_LIBS)
 
 clean:
 	rm $(MAIN_NAME) $(SOURCES_O) $(SOURCES_GCH)

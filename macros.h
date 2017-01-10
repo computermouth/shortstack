@@ -6,14 +6,14 @@
 #include "draw.h"
 #include "window.h"
 
-#define NP_VS(vertnum) ushort verts = vertnum;\
+#define NP_VS(vertnum) unsigned short verts = vertnum;\
  static short curr_x[vertnum] = { 0 };\
  static short curr_y[vertnum] = { 0 };
 #define NP_VX(vertnum) static short orig_x[vertnum]
 #define NP_VY(vertnum) static short orig_y[vertnum]
 #define NP_AX(xcoords...) = {xcoords};
 #define NP_AY(ycoords...) = {ycoords};
-#define NP_CO(vals...) static ushort orig_color[4] = {vals};
+#define NP_CO(vals...) static unsigned short orig_color[4] = {vals};
 
 #define NP_SH(np_name, np_vs, np_vx, np_vy, np_ax, np_ay, np_co)		\
 	void np_name(swindow *g_swindow){									\
@@ -34,7 +34,7 @@
 			};                                                          \
 		                                                                \
 		if (shape_s.old_ratio != g_swindow->r){                         \
-			ushort i;                                                   \
+			unsigned short i;                                                   \
 			for(i = 0; i < verts; i++){                                 \
 				curr_x[i] = (orig_x[i] * g_swindow->r) + g_swindow->p_x;\
 				curr_y[i] = (orig_y[i] * g_swindow->r) + g_swindow->p_y;\
@@ -71,11 +71,11 @@
 
 //~ void test_square (swindow *g_swindow){
 	//~ 
-	//~ ushort verts = 4;
+	//~ unsigned short verts = 4;
 	//~ 
 	//~ static short orig_x[4] = { 50, 100, 100, 50 };
 	//~ static short orig_y[4] = { 50, 50, 100, 100 };
-	//~ static ushort orig_color[4]  = { 0, 255, 125, 255};
+	//~ static unsigned short orig_color[4]  = { 0, 255, 125, 255};
 	//~ 
 	//~ static short curr_x[4] = { 0 };
 	//~ static short curr_y[4] = { 0 };
@@ -90,7 +90,7 @@
 		//~ };
 	//~ 
 	//~ if (shape_s.old_ratio != g_swindow->r){
-		//~ ushort i;
+		//~ unsigned short i;
 		//~ for(i = 0; i < verts; i++){
 			//~ curr_x[i] = (orig_x[i] * g_swindow->r) + g_swindow->p_x;
 			//~ curr_y[i] = (orig_y[i] * g_swindow->r) + g_swindow->p_y;
@@ -147,7 +147,7 @@ void set_color(unsigned short *,unsigned short);
 			.color 		= orig_color                                    \
 			};                                                          \
 																		\
-		ushort i;                                                   	\
+		unsigned short i;                                                   	\
 		for(i = 0; i < verts; i++){                                 	\
 			curr_x[i] = ((orig_x[i] + pad_x) 							\
 				* g_swindow->r) + g_swindow->p_x;						\

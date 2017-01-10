@@ -8,7 +8,7 @@
 #include "draw.h"
 #include "nano_poly.h"
 
-int main(){
+int main(int argc, char* argv[]){
 	
 	// INITIALIZE
 	swindow g_swindow = init_swindow(g_swindow);
