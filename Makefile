@@ -8,7 +8,7 @@ SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 MAIN_NAME = shortstack
 
 LIBS = -lSDL2
-WIN_LIBS = -lmingw32 -lSDL2main -lSDL2
+WIN_LIBS= -static $(shell pkg-config --libs --static sdl2)
 
 .PHONY: all clean lint
 
