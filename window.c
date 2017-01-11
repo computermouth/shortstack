@@ -1,7 +1,12 @@
 
 #include "window.h"
+#include "config.h"
 
 swindow init_swindow( swindow g_swindow ){
+	
+	init_config();
+	//~ check_config();
+	
 	g_swindow.window		= 0;
 	g_swindow.renderer		= 0;
 	g_swindow.d_w			= 800;

@@ -1,5 +1,5 @@
 
-MAIN_SRC = draw.c main.c nano_poly.c window.c state.c macros.c
+MAIN_SRC = draw.c main.c nano_poly.c window.c state.c macros.c config.c
 
 SOURCES := ${MAIN_SRC}
 SOURCES_O := $(shell find $(SOURCEDIR) -name '*.o')
@@ -7,7 +7,7 @@ SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 
 MAIN_NAME = shortstack
 
-LIBS = -lSDL2
+LIBS = -lSDL2 -lconfig
 WIN_LIBS= -static $(shell pkg-config --libs --static sdl2)
 
 .PHONY: all clean lint
