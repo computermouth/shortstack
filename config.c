@@ -107,20 +107,13 @@ int check_config(){
 	
 	root = config_root_setting(&cfg);
 	
-	if(! config_read_file(&cfg, tmp))
-	{
-		fprintf(stderr, "%s:%d - %s\n", config_error_file(&cfg),
-			config_error_line(&cfg), config_error_text(&cfg));
-		config_destroy(&cfg);
-		return(1);
-	}
-	
 	int test_int;
 	
-	if(!(config_setting_lookup_int(root, "video_mode", &test_int)
+	if( (! config_read_file(&cfg, tmp) ) ||
+		(!(config_setting_lookup_int(root, "video_mode", &test_int)
 		&& config_setting_lookup_int(root, "audio_level", &test_int)
 		&& config_setting_lookup_int(root, "fullscreen", &test_int)
-		&& config_setting_lookup_int(root, "high_score", &test_int))){
+		&& config_setting_lookup_int(root, "high_score", &test_int)))){
 	
 		struct stat st = {0};
 		
