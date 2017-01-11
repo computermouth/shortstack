@@ -34,7 +34,7 @@
 			};                                                          \
 		                                                                \
 		if (shape_s.old_ratio != g_swindow->r){                         \
-			unsigned short i;                                                   \
+			unsigned short i;											\
 			for(i = 0; i < verts; i++){                                 \
 				curr_x[i] = (orig_x[i] * g_swindow->r) + g_swindow->p_x;\
 				curr_y[i] = (orig_y[i] * g_swindow->r) + g_swindow->p_y;\
@@ -147,7 +147,7 @@ void set_color(unsigned short *,unsigned short);
 			.color 		= orig_color                                    \
 			};                                                          \
 																		\
-		unsigned short i;                                                   	\
+		unsigned short i;												\
 		for(i = 0; i < verts; i++){                                 	\
 			curr_x[i] = ((orig_x[i] + pad_x) 							\
 				* g_swindow->r) + g_swindow->p_x;						\
@@ -158,7 +158,7 @@ void set_color(unsigned short *,unsigned short);
 		shape_s.y = curr_y;                                         	\
 		shape_s.old_ratio = g_swindow->r;                           	\
 																		\
-		set_color(shape_s.color, color_code);				\
+		set_color(shape_s.color, color_code);							\
 																		\
 		filledPolygonRGBA(                                          	\
 			&shape_s.lines,                                         	\
