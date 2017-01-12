@@ -1,0 +1,315 @@
+
+#include "game_logic.h"
+#include "game_logic_shapes.c"
+
+void game_logic(state* g_state, swindow *g_swindow){
+	
+	// HEARTS
+	
+	if(g_state->frame < 4){
+		heart0_disabled0(g_swindow);
+		heart1_disabled0(g_swindow);
+		heart2_disabled0(g_swindow);
+		if (g_state->lives > 0) heart0_enabled0(g_swindow);
+		if (g_state->lives > 1) heart1_enabled0(g_swindow);
+		if (g_state->lives > 2) heart2_enabled0(g_swindow);
+	} else if (g_state->frame < 8){
+		heart0_disabled1(g_swindow);
+		heart1_disabled1(g_swindow);
+		heart2_disabled1(g_swindow);
+		if (g_state->lives > 0) heart0_enabled1(g_swindow);
+		if (g_state->lives > 1) heart1_enabled1(g_swindow);
+		if (g_state->lives > 2) heart2_enabled1(g_swindow);
+	} else {
+		heart0_disabled2(g_swindow);
+		heart1_disabled2(g_swindow);
+		heart2_disabled2(g_swindow);
+		if (g_state->lives > 0) heart0_enabled2(g_swindow);
+		if (g_state->lives > 1) heart1_enabled2(g_swindow);
+		if (g_state->lives > 2) heart2_enabled2(g_swindow);
+	}
+
+	
+	// TOP WALL PADS
+	
+	if(g_state->frame < 4){
+		top_wall0(g_swindow);
+		pad0_0(g_swindow);
+		pad1_0(g_swindow);
+		pad2_0(g_swindow);
+		pad3_0(g_swindow);
+		if(g_state->hole_open)
+			hole_open0(g_swindow);
+		else
+			hole_closed0(g_swindow);
+	} else if (g_state->frame < 8){
+		top_wall1(g_swindow);
+		pad0_1(g_swindow);
+		pad1_1(g_swindow);
+		pad2_1(g_swindow);
+		pad3_1(g_swindow);
+		if(g_state->hole_open)
+			hole_open1(g_swindow);
+		else
+			hole_closed1(g_swindow);
+	} else {
+		top_wall2(g_swindow);
+		pad0_2(g_swindow);
+		pad1_2(g_swindow);
+		pad2_2(g_swindow);
+		pad3_2(g_swindow);
+		if(g_state->hole_open)
+			hole_open2(g_swindow);
+		else
+			hole_closed2(g_swindow);
+	}
+	
+	if(g_state->frame < 4){
+		if (g_state->pad0_dir == -1){
+			pad0_arrow_left0_0(g_swindow);
+			pad0_arrow_left0_1(g_swindow);
+		} else {
+			pad0_arrow_right0_0(g_swindow);
+			pad0_arrow_right0_1(g_swindow);
+		}
+		if (g_state->pad1_dir == -1){
+			pad1_arrow_left0_0(g_swindow);
+			pad1_arrow_left0_1(g_swindow);
+		} else {
+			pad1_arrow_right0_0(g_swindow);
+			pad1_arrow_right0_1(g_swindow);
+		}
+		if (g_state->pad2_dir == -1){
+			pad2_arrow_left0_0(g_swindow);
+			pad2_arrow_left0_1(g_swindow);
+		} else {
+			pad2_arrow_right0_0(g_swindow);
+			pad2_arrow_right0_1(g_swindow);
+		}
+		if (g_state->pad3_dir == -1){
+			pad3_arrow_left0_0(g_swindow);
+			pad3_arrow_left0_1(g_swindow);
+		} else {
+			pad3_arrow_right0_0(g_swindow);
+			pad3_arrow_right0_1(g_swindow);
+		}
+	} else if (g_state->frame < 8){
+		if (g_state->pad0_dir == -1){
+			pad0_arrow_left1_0(g_swindow);
+			pad0_arrow_left1_1(g_swindow);
+		} else {
+			pad0_arrow_right1_0(g_swindow);
+			pad0_arrow_right1_1(g_swindow);
+		}
+		if (g_state->pad1_dir == -1){
+			pad1_arrow_left1_0(g_swindow);
+			pad1_arrow_left1_1(g_swindow);
+		} else {
+			pad1_arrow_right1_0(g_swindow);
+			pad1_arrow_right1_1(g_swindow);
+		}
+		if (g_state->pad2_dir == -1){
+			pad2_arrow_left1_0(g_swindow);
+			pad2_arrow_left1_1(g_swindow);
+		} else {
+			pad2_arrow_right1_0(g_swindow);
+			pad2_arrow_right1_1(g_swindow);
+		}
+		if (g_state->pad3_dir == -1){
+			pad3_arrow_left1_0(g_swindow);
+			pad3_arrow_left1_1(g_swindow);
+		} else {
+			pad3_arrow_right1_0(g_swindow);
+			pad3_arrow_right1_1(g_swindow);
+		}
+	} else {
+		if (g_state->pad0_dir == -1){
+			pad0_arrow_left2_0(g_swindow);
+			pad0_arrow_left2_1(g_swindow);
+		} else {
+			pad0_arrow_right2_0(g_swindow);
+			pad0_arrow_right2_1(g_swindow);
+		}
+		if (g_state->pad1_dir == -1){
+			pad1_arrow_left2_0(g_swindow);
+			pad1_arrow_left2_1(g_swindow);
+		} else {
+			pad1_arrow_right2_0(g_swindow);
+			pad1_arrow_right2_1(g_swindow);
+		}
+		if (g_state->pad2_dir == -1){
+			pad2_arrow_left2_0(g_swindow);
+			pad2_arrow_left2_1(g_swindow);
+		} else {
+			pad2_arrow_right2_0(g_swindow);
+			pad2_arrow_right2_1(g_swindow);
+		}
+		if (g_state->pad3_dir == -1){
+			pad3_arrow_left2_0(g_swindow);
+			pad3_arrow_left2_1(g_swindow);
+		} else {
+			pad3_arrow_right2_0(g_swindow);
+			pad3_arrow_right2_1(g_swindow);
+		}
+	}
+	
+	
+	// BALL MOVEMENT
+	if (g_state->ball_x <= 0){
+		g_state->ball_x = 1;
+		g_state->ball_x_dir *= -1;
+	} else if (g_state->ball_x >=760){
+		g_state->ball_x = 759;
+		g_state->ball_x_dir *= -1;
+	}
+	
+	if (g_state->bounced == 0 && g_state->ball_y > 300){
+		int i, j, k = 0;
+		for(i = 0; i < g_state->ball_x_speed; i++){
+			if ((g_state->ball_x + (i * g_state->ball_x_dir)) >= (g_state->paddle_x - 19)){
+				
+				for(j = 0; j < g_state->ball_x_speed; j++){
+					if ( g_state->ball_x <= (g_state->paddle_x + (j * g_state->ball_x_dir) + 179)){
+						
+						for(k = 0; k < g_state->ball_y_speed; k++){
+							if ((g_state->ball_y - k) > 395 && (g_state->ball_y - k) < 405) {
+								
+								g_state->score += 1;
+								g_state->paddle_color = 12;
+								g_state->paddle_color_delay = 8;
+								g_state->ball_y = 395;
+								
+								if (g_state->score % 5 == 0){
+									if(g_state->ball_color > 0){
+										
+										if(g_state->ball_color != 2){
+											g_state->ball_color--;
+										}else if(g_state->ball_color > 0){
+											g_state->ball_color -= 2;
+										}
+										
+											g_state->ball_x_speed++;
+											g_state->ball_y_speed++;
+									}
+								}
+								if (g_state->score % 10 == 0 && g_state->lives < 3){
+									g_state->lives++;
+								}
+									
+								g_state->ball_y_dir *= -1;
+								g_state->bounced = 1;
+								
+								short diff = g_state->ball_x - g_state->paddle_x + 19;
+								if ( (diff <= 79 && g_state->ball_x_dir == 1) ||
+										(diff > 159 && g_state->ball_x_dir == -1))
+									g_state->ball_x_dir *= -1;
+															
+							}
+								
+							if (g_state->bounced) break;
+						}
+					}
+					if (g_state->bounced) break;
+				}
+			}
+			if (g_state->bounced) break;
+		}
+	}
+	
+	
+	if (g_state->ball_y >= 500){
+		g_state->ball_y = 50;
+		g_state->bounced = 0;
+		g_state->lives--;
+		if (g_state->lives < 0){
+			g_state->over = 1;
+			g_state->game = 0;
+		}
+	}
+	
+	if ((g_state->ball_x + 21) > 30 && 
+			(g_state->ball_x + 21) < 109 && 
+			g_state->ball_y <= 20){
+		//PAD 0
+		g_state->bounced = 0;
+		g_state->ball_y_dir *= -1;
+		g_state->ball_x_dir = g_state->pad0_dir;
+		g_state->pad0_dir *= -1;
+		g_state->hole_open = 1;
+	} else if ((g_state->ball_x + 21) > 180 && 
+			(g_state->ball_x + 21) < 259 && 
+			g_state->ball_y <= 20){
+		//PAD 1
+		g_state->bounced = 0;
+		g_state->ball_y_dir *= -1;
+		g_state->ball_x_dir = g_state->pad1_dir;
+		g_state->pad1_dir *= -1;
+		g_state->hole_open = 1;
+	} else if ((g_state->ball_x + 21) > 350 && 
+			(g_state->ball_x + 21) < 450 && 
+			g_state->ball_y <= 20 &&
+			g_state->hole_open == 1){
+		//HOLE
+		g_state->ball_y = 499;
+		g_state->bounced = 1;
+		g_state->hole_open = 0;
+	} else if ((g_state->ball_x + 21) > 540 && 
+			(g_state->ball_x + 21) < 619 && 
+			g_state->ball_y <= 20){
+		//PAD 2
+		g_state->bounced = 0;
+		g_state->ball_y_dir *= -1;
+		g_state->ball_x_dir = g_state->pad2_dir;
+		g_state->pad2_dir *= -1;
+	} else if ((g_state->ball_x + 21) > 690 && 
+			(g_state->ball_x + 21) < 769 && 
+			g_state->ball_y <= 20){
+		//PAD 3
+		g_state->bounced = 0;
+		g_state->ball_y_dir *= -1;
+		g_state->ball_x_dir = g_state->pad3_dir;
+		g_state->pad3_dir *= -1;
+		g_state->hole_open = 1;
+	} else if (g_state->ball_y <= 20 ){
+		g_state->ball_y_dir *= -1;
+		g_state->bounced = 0;
+		g_state->hole_open = 1;
+	}
+
+			
+	g_state->ball_x += (g_state->ball_x_dir * g_state->ball_x_speed);
+	g_state->ball_y += (g_state->ball_y_dir * g_state->ball_y_speed);
+	
+	if(g_state->frame < 4){
+		ball0(g_swindow, g_state->ball_x, g_state->ball_y, g_state->ball_color);
+	} else if (g_state->frame < 8){
+		ball1(g_swindow, g_state->ball_x, g_state->ball_y, g_state->ball_color);
+	} else {
+		ball2(g_swindow, g_state->ball_x, g_state->ball_y, g_state->ball_color);
+	}
+	
+	
+	// PADDLE MOVEMENT
+	if(g_state->k.lt && g_state->paddle_x > 0){
+		g_state->paddle_x -= 20;
+		g_state->k.lt = 0;
+	}
+	if(g_state->k.rt && g_state->paddle_x < 600){
+		g_state->paddle_x += 20;
+		g_state->k.rt = 0;
+	}
+	
+	if(g_state->frame < 4){
+		paddle0(g_swindow, g_state->paddle_x, 0, g_state->paddle_color);
+	} else if (g_state->frame < 8){
+		paddle1(g_swindow, g_state->paddle_x, 0, g_state->paddle_color);
+	} else {
+		paddle2(g_swindow, g_state->paddle_x, 0, g_state->paddle_color);
+	}
+	
+	if (g_state->paddle_color_delay == 0)
+		g_state->paddle_color = 13;
+	else
+		g_state->paddle_color_delay--;
+	
+}

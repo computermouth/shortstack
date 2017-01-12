@@ -38,6 +38,10 @@
 			for(i = 0; i < verts; i++){                                 \
 				curr_x[i] = (orig_x[i] * g_swindow->r) + g_swindow->p_x;\
 				curr_y[i] = (orig_y[i] * g_swindow->r) + g_swindow->p_y;\
+				if (curr_x[i] < 0) curr_x[i] = 0;						\
+				if (curr_y[i] < 0) curr_y[i] = 0;						\
+				if (curr_x[i] > g_swindow->n_w) curr_x[i] = g_swindow->n_w;\
+				if (curr_y[i] > g_swindow->n_h) curr_y[i] = g_swindow->n_h;\
 			}                                                           \
 			shape_s.x = curr_x;                                         \
 			shape_s.y = curr_y;                                         \
@@ -153,6 +157,10 @@ void set_color(unsigned short *,unsigned short);
 				* g_swindow->r) + g_swindow->p_x;						\
 			curr_y[i] = ((orig_y[i] + pad_y) 							\
 				* g_swindow->r) + g_swindow->p_y;						\
+			if (curr_x[i] < 0) curr_x[i] = 0;							\
+			if (curr_y[i] < 0) curr_y[i] = 0;							\
+			if (curr_x[i] > g_swindow->n_w) curr_x[i] = g_swindow->n_w;	\
+			if (curr_y[i] > g_swindow->n_h) curr_y[i] = g_swindow->n_h;	\
 		}                                                           	\
 		shape_s.x = curr_x;                                         	\
 		shape_s.y = curr_y;                                         	\

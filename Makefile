@@ -1,5 +1,6 @@
 
-MAIN_SRC = draw.c main.c nano_poly.c window.c state.c macros.c config.c
+MAIN_SRC = draw.c main.c nano_poly.c window.c state.c macros.c config.c\
+ menu_logic.c settings_logic.c game_logic.c gameover_logic.c
 
 SOURCES := ${MAIN_SRC}
 SOURCES_O := $(shell find $(SOURCEDIR) -name '*.o')
