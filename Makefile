@@ -8,8 +8,8 @@ SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 
 MAIN_NAME = shortstack
 
-LIBS = -lSDL2 -lconfig
-WIN_LIBS= -static $(shell pkg-config --libs --static sdl2)
+LIBS = -lSDL2 -lconfuse
+WIN_LIBS= -static $(shell pkg-config --libs --static sdl2) $(shell pkg-config --libs --static libconfuse)
 
 .PHONY: all clean lint
 
@@ -23,9 +23,7 @@ clean:
 	rm $(MAIN_NAME) $(SOURCES_O) $(SOURCES_GCH)
 
 run:
-	./shortstack
-
-re: clean all run
+	./$(MAIN_NAME)
 
 memtest:
 	valgrind --track-origins=yes --leak-check=yes\

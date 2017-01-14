@@ -4,9 +4,6 @@
 
 swindow init_swindow( swindow g_swindow ){
 	
-	init_config();
-	check_config();
-	
 	g_swindow.window		= 0;
 	g_swindow.renderer		= 0;
 	g_swindow.d_w			= 800;
@@ -23,6 +20,8 @@ swindow init_swindow( swindow g_swindow ){
 	g_swindow.fs			= 0;
 	g_swindow.min			= 0;
 	g_swindow.quit 			= 0;
+	
+	load_config(&g_swindow);
 	
 	return g_swindow;
 }
