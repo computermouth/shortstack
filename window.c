@@ -4,24 +4,26 @@
 
 window_t init_window(){
 	
-	window_t window;
+	window_t window = {
 	
-	window.window		= 0;
-	window.renderer		= 0;
-	window.d_w			= 800;
-	window.d_h			= 500;
-	window.n_w			= window.d_w;
-	window.n_h			= window.d_h;
-	window.cached_w		= window.d_w;
-	window.cached_h		= window.d_h;
-	window.r			= 1.0;
-	window.scaler		= 1;
-	window.p_x			= 0;
-	window.p_y			= 0;
-	window.focus		= 1;
-	window.fs			= 0;
-	window.min			= 0;
-	window.quit 		= 0;
+		.window			= 0,
+		.renderer		= 0,
+		.d_w			= 800,
+		.d_h			= 500,
+		.n_w			= window.d_w,
+		.n_h			= window.d_h,
+		.cached_w		= window.d_w,
+		.cached_h		= window.d_h,
+		.r				= 1.0,
+		.scaler			= 1,
+		.p_x			= 0,
+		.p_y			= 0,
+		.focus			= 1,
+		.fs				= 0,
+		.min			= 0,
+		.quit 			= 0
+	
+	};
 	
 	load_config(&window);
 	

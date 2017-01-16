@@ -13,27 +13,31 @@ void gameover_logic(state_t* state, window_t *window){
 
 	// HEARTS
 	
-	if(state->frame < 4){
-		go_heart0_disabled0(window);
-		go_heart1_disabled0(window);
-		go_heart2_disabled0(window);
-		if (state->lives > 0) go_heart0_enabled0(window);
-		if (state->lives > 1) go_heart1_enabled0(window);
-		if (state->lives > 2) go_heart2_enabled0(window);
-	} else if (state->frame < 8){
-		go_heart0_disabled1(window);
-		go_heart1_disabled1(window);
-		go_heart2_disabled1(window);
-		if (state->lives > 0) go_heart0_enabled1(window);
-		if (state->lives > 1) go_heart1_enabled1(window);
-		if (state->lives > 2) go_heart2_enabled1(window);
-	} else {
-		go_heart0_disabled2(window);
-		go_heart1_disabled2(window);
-		go_heart2_disabled2(window);
-		if (state->lives > 0) go_heart0_enabled2(window);
-		if (state->lives > 1) go_heart1_enabled2(window);
-		if (state->lives > 2) go_heart2_enabled2(window);
+	switch (state->triplet) {
+		case 0:
+			go_heart0_disabled0(window);
+			go_heart1_disabled0(window);
+			go_heart2_disabled0(window);
+			if (state->lives > 0) go_heart0_enabled0(window);
+			if (state->lives > 1) go_heart1_enabled0(window);
+			if (state->lives > 2) go_heart2_enabled0(window);
+			break;
+		case 1:
+			go_heart0_disabled1(window);
+			go_heart1_disabled1(window);
+			go_heart2_disabled1(window);
+			if (state->lives > 0) go_heart0_enabled1(window);
+			if (state->lives > 1) go_heart1_enabled1(window);
+			if (state->lives > 2) go_heart2_enabled1(window);
+			break;
+		case 2:
+			go_heart0_disabled2(window);
+			go_heart1_disabled2(window);
+			go_heart2_disabled2(window);
+			if (state->lives > 0) go_heart0_enabled2(window);
+			if (state->lives > 1) go_heart1_enabled2(window);
+			if (state->lives > 2) go_heart2_enabled2(window);
+			break;
 	}
 
 	

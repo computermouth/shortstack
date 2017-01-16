@@ -4,7 +4,7 @@
 
 #include "structs.h"
 
-struct Keystate_t{
+typedef struct{
 	unsigned char esc;
 	unsigned char ent;
 	unsigned char w;
@@ -15,13 +15,13 @@ struct Keystate_t{
 	unsigned char dn;
 	unsigned char lt;
 	unsigned char rt;
-};
-typedef struct Keystate_t keystate_t;
+} keystate_t;
 
-struct State_t{
+typedef struct{
 	keystate_t k;
 	
 	unsigned short frame;
+	unsigned short triplet;
 	unsigned short settings;
 	unsigned short settings_select;
 	unsigned short settings_volume;
@@ -47,8 +47,7 @@ struct State_t{
 	unsigned short paddle_color_delay;
 	short paddle_x;
 	unsigned short over;
-};
-typedef struct State_t state_t;
+} state_t;
 
 state_t init_state();
 void logic(state_t *, window_t *);

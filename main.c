@@ -5,8 +5,6 @@
 #include "window.h"
 #include "state.h"
 #include "structs.h"
-#include "draw.h"
-#include "nano_poly.h"
 
 int main(int argc, char* argv[]){
 		
@@ -14,8 +12,7 @@ int main(int argc, char* argv[]){
 	window_t window = init_window();
 	state_t state = init_state();
 	
-	if(init_sdl(&window) == 1)
-		window.quit = 1;
+	window.quit = init_sdl(&window);
 	
 	while( !window.quit ){
 		

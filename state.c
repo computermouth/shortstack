@@ -20,37 +20,40 @@ NP_SH(
 );
 
 state_t init_state(){
-	state_t state;
 	
-	state.k.esc = 0;
-	state.k.ent = 0;
-	state.k.w = 0;
-	state.k.a = 0;
-	state.k.s = 0;
-	state.k.d = 0;
-	state.k.up = 0;
-	state.k.dn = 0;
-	state.k.lt = 0;
-	state.k.rt = 0;
+	state_t state = {
+	
+		.k.esc = 0,
+		.k.ent = 0,
+		.k.w = 0,
+		.k.a = 0,
+		.k.s = 0,
+		.k.d = 0,
+		.k.up = 0,
+		.k.dn = 0,
+		.k.lt = 0,
+		.k.rt = 0,
 
-	state.frame = 0;
-	state.settings_select = 0;
-	state.settings_volume = 7;
-	state.menu = 1;
-	state.menu_select = 1;
-	state.game = 0;
+		.frame = 0,
+		.settings_select = 0,
+		.settings_volume = 7,
+		.menu = 1,
+		.menu_select = 1,
+		.game = 0,
 
-	state.pad0_dir = 1;
-	state.pad1_dir = -1;
-	state.pad2_dir = 1;
-	state.pad3_dir = -1;
-	state.hole_open = 1;
+		.pad0_dir = 1,
+		.pad1_dir = -1,
+		.pad2_dir = 1,
+		.pad3_dir = -1,
+		.hole_open = 1,
 
-	state.ball_x = 50;
-	state.ball_x_dir = 1;
-	state.ball_y_dir = 1;
+		.ball_x = 50,
+		.ball_x_dir = 1,
+		.ball_y_dir = 1,
 
-	state.over = 0;
+		.over = 0
+	
+	};
 
 	return state;
 }
@@ -64,6 +67,8 @@ void logic(state_t* state, window_t *window){
 		state->frame = 0;
 	else
 		state->frame++;
+	
+	state->triplet = state->frame / 4;
 	
 	if(state->menu == 1){
 		menu_logic(state, window);
