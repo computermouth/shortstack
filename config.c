@@ -85,7 +85,7 @@ void check_dirs(){
 	}
 }
 
-void load_config(swindow* g_swindow){
+void load_config(window_t* window){
 	check_dirs();
 
 	char *home_dir = getenv("HOME");
@@ -119,8 +119,8 @@ void load_config(swindow* g_swindow){
 		high_score = 0;
 	}
 	
-	//~ g_swindow->scaler = video_mode;
-	//~ g_swindow->fs = fullscreen;
+	//~ window->scaler = video_mode;
+	//~ window->fs = fullscreen;
 	
 	FILE *fp = fopen(tmp_path, "w");
 	cfg_print(cfg, fp);

@@ -5,6 +5,6 @@
 #include "state.h"
 #include "window.h"
 
-void menu_logic(state*, swindow *);
+void menu_logic(state_t*, window_t*);
 
 #endif

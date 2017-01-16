@@ -6,6 +6,6 @@
 #include "state.h"
 #include "window.h"
 
-void settings_logic(state*, swindow *);
+void settings_logic(state_t*, window_t*);
 
 #endif

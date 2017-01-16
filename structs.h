@@ -4,24 +4,24 @@
 
 #include <SDL2/SDL.h>
 
-struct Line{
+struct Line_t{
 	int xa;
 	int xb;
 	int y;
 };
-typedef struct Line liner;
+typedef struct Line_t line_t;
 
-struct Shape{
-	liner *lines;
+struct Shape_t{
+	line_t *lines;
 	short line_cnt;
 	float old_ratio;
 	short *x;
 	short *y;
 	unsigned short *color;
 };
-typedef struct Shape shape;
+typedef struct Shape_t shape_t;
 
-struct Swindow{
+struct Window_t{
 	SDL_Window*		window;
 	SDL_Renderer*	renderer;
 	SDL_Event		e;
@@ -39,10 +39,7 @@ struct Swindow{
 	int				fs;
 	int				min;
 	int 			quit;
-	liner**			lines;
-	int				lines_count;
-	int				lines_max;
 };
-typedef struct Swindow swindow;
+typedef struct Window_t window_t;
 
 #endif

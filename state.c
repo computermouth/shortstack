@@ -19,62 +19,60 @@ NP_SH(
 	NP_CO(3, 30, 33, 255)
 );
 
-state init_state(){
-	state g_state;
+state_t init_state(){
+	state_t state;
 	
-	g_state.k.esc = 0;
-	g_state.k.ent = 0;
-	g_state.k.w = 0;
-	g_state.k.a = 0;
-	g_state.k.s = 0;
-	g_state.k.d = 0;
-	g_state.k.up = 0;
-	g_state.k.dn = 0;
-	g_state.k.lt = 0;
-	g_state.k.rt = 0;
+	state.k.esc = 0;
+	state.k.ent = 0;
+	state.k.w = 0;
+	state.k.a = 0;
+	state.k.s = 0;
+	state.k.d = 0;
+	state.k.up = 0;
+	state.k.dn = 0;
+	state.k.lt = 0;
+	state.k.rt = 0;
 
-	g_state.frame = 0;
-	g_state.settings_select = 0;
-	g_state.settings_volume = 7;
-	g_state.menu = 1;
-	g_state.menu_select = 1;
-	g_state.game = 0;
+	state.frame = 0;
+	state.settings_select = 0;
+	state.settings_volume = 7;
+	state.menu = 1;
+	state.menu_select = 1;
+	state.game = 0;
 
-	g_state.pad0_dir = 1;
-	g_state.pad1_dir = -1;
-	g_state.pad2_dir = 1;
-	g_state.pad3_dir = -1;
-	g_state.hole_open = 1;
+	state.pad0_dir = 1;
+	state.pad1_dir = -1;
+	state.pad2_dir = 1;
+	state.pad3_dir = -1;
+	state.hole_open = 1;
 
-	g_state.ball_x = 50;
-	g_state.ball_x_dir = 1;
-	g_state.ball_y_dir = 1;
+	state.ball_x = 50;
+	state.ball_x_dir = 1;
+	state.ball_y_dir = 1;
 
-	g_state.over = 0;
+	state.over = 0;
 
-	return g_state;
+	return state;
 }
 
 
-state logic(state g_state, swindow *g_swindow){
+void logic(state_t* state, window_t *window){
 		
-	active_bg(g_swindow);
+	active_bg(window);
 	
-	if (g_state.frame == 11)
-		g_state.frame = 0;
+	if (state->frame == 11)
+		state->frame = 0;
 	else
-		g_state.frame++;
+		state->frame++;
 	
-	if(g_state.menu == 1){
-		menu_logic(&g_state, g_swindow);
-	} else if (g_state.settings == 1){
-		settings_logic(&g_state, g_swindow);
-	} else if(g_state.game == 1){
-		game_logic(&g_state, g_swindow);
-	} else if(g_state.over) {
-		gameover_logic(&g_state, g_swindow);
+	if(state->menu == 1){
+		menu_logic(state, window);
+	} else if (state->settings == 1){
+		settings_logic(state, window);
+	} else if(state->game == 1){
+		game_logic(state, window);
+	} else if(state->over) {
+		gameover_logic(state, window);
 	}
 	
-	
-	return g_state;
 }

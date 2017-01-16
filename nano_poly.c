@@ -43,7 +43,7 @@ int _gfxPrimitivesCompareInt(const void *a, const void *b)
 	return (*(const int *) a) - (*(const int *) b);
 }
 
-int filledPolygonRGBA(liner **lines, 
+int filledPolygonRGBA(line_t **lines, 
 	short *line_cnt, const Sint16 * vx, const Sint16 * vy, int n,
 	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
@@ -119,7 +119,7 @@ int filledPolygonRGBA(liner **lines,
 	(*line_cnt) /= 2;
 	
 	free(*lines);
-	*lines = malloc((*line_cnt) * sizeof(liner));
+	*lines = malloc((*line_cnt) * sizeof(line_t));
 	
 	(*line_cnt) = 0;
 	

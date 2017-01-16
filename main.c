@@ -9,35 +9,35 @@
 #include "nano_poly.h"
 
 int main(int argc, char* argv[]){
-	
+		
 	// INITIALIZE
-	swindow g_swindow = init_swindow(g_swindow);
-	state g_state = init_state();
+	window_t window = init_window();
+	state_t state = init_state();
 	
-	if(init_sdl(&g_swindow) == 1)
-		g_swindow.quit = 1;
+	if(init_sdl(&window) == 1)
+		window.quit = 1;
 	
-	while( !g_swindow.quit ){
+	while( !window.quit ){
 		
 		// INPUT
-		parse_event(&g_swindow.e, &g_swindow, &g_state);
+		parse_event(&window, &state);
 		
 		// CLEAR SCREEN
-		SDL_SetRenderDrawColor( g_swindow.renderer,
+		SDL_SetRenderDrawColor( window.renderer,
 			0x1C, 0x1F, 0x20, 0xFF );
-		SDL_RenderClear( g_swindow.renderer );
+		SDL_RenderClear( window.renderer );
 		
 		// UPDATE/DRAW
-		g_state = logic(g_state, &g_swindow);
+		logic(&state, &window);
 		
 		// PRESENT
-		SDL_RenderPresent( g_swindow.renderer );
+		SDL_RenderPresent( window.renderer );
 		
 	}
 	
 	// CLEANUP SDL
-	SDL_DestroyRenderer(g_swindow.renderer);
-	SDL_DestroyWindow(g_swindow.window);
+	SDL_DestroyRenderer(window.renderer);
+	SDL_DestroyWindow(window.window);
 	SDL_Quit();
 	
 	return 0;

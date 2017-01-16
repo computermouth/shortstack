@@ -2,42 +2,44 @@
 #include "window.h"
 #include "config.h"
 
-swindow init_swindow( swindow g_swindow ){
+window_t init_window(){
 	
-	g_swindow.window		= 0;
-	g_swindow.renderer		= 0;
-	g_swindow.d_w			= 800;
-	g_swindow.d_h			= 500;
-	g_swindow.n_w			= g_swindow.d_w;
-	g_swindow.n_h			= g_swindow.d_h;
-	g_swindow.cached_w		= g_swindow.d_w;
-	g_swindow.cached_h		= g_swindow.d_h;
-	g_swindow.r				= 1.0;
-	g_swindow.scaler		= 1;
-	g_swindow.p_x			= 0;
-	g_swindow.p_y			= 0;
-	g_swindow.focus			= 1;
-	g_swindow.fs			= 0;
-	g_swindow.min			= 0;
-	g_swindow.quit 			= 0;
+	window_t window;
 	
-	load_config(&g_swindow);
+	window.window		= 0;
+	window.renderer		= 0;
+	window.d_w			= 800;
+	window.d_h			= 500;
+	window.n_w			= window.d_w;
+	window.n_h			= window.d_h;
+	window.cached_w		= window.d_w;
+	window.cached_h		= window.d_h;
+	window.r			= 1.0;
+	window.scaler		= 1;
+	window.p_x			= 0;
+	window.p_y			= 0;
+	window.focus		= 1;
+	window.fs			= 0;
+	window.min			= 0;
+	window.quit 		= 0;
 	
-	return g_swindow;
+	load_config(&window);
+	
+	return window;
 }
 
-int init_sdl(swindow *g_swindow){
+int init_sdl(window_t *window){
 	
 	if(SDL_Init(SDL_INIT_VIDEO) >= 0){
-		g_swindow->window = SDL_CreateWindow("shortstack",
+		window->window = SDL_CreateWindow("shortstack",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-			g_swindow->n_w, g_swindow->n_h, 
+			window->n_w, window->n_h, 
 			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		
-		if(g_swindow->window != 0){
+		if(window->window != 0){
 			
-			g_swindow->renderer = SDL_CreateRenderer
-				(g_swindow->window,
+			window->renderer = SDL_CreateRenderer
+				(window->window,
 				-1, 
 				SDL_RENDERER_ACCELERATED | 
 				SDL_RENDERER_PRESENTVSYNC);
@@ -52,98 +54,98 @@ int init_sdl(swindow *g_swindow){
 	return 0;
 }
 
-void set_scaler(SDL_Event *e, swindow *g_swindow){
+void set_scaler(window_t *window){
 	
-	g_swindow->n_w = g_swindow->cached_w / g_swindow->scaler;
-	g_swindow->n_h = g_swindow->cached_h / g_swindow->scaler;
+	window->n_w = window->cached_w / window->scaler;
+	window->n_h = window->cached_h / window->scaler;
 	
-	if(((float)g_swindow->n_w / (float)g_swindow->d_w) >= 
-		((float)g_swindow->n_h / (float)g_swindow->d_h)){
+	if(((float)window->n_w / (float)window->d_w) >= 
+		((float)window->n_h / (float)window->d_h)){
 		//larger width ratio
-		g_swindow->r = ((float)g_swindow->n_h / 
-			(float)g_swindow->d_h);
-		g_swindow->p_x = ((g_swindow->n_w - 
-			(g_swindow->d_w* g_swindow->r))) / 2;
-		g_swindow->p_y	= 0;
+		window->r = ((float)window->n_h / 
+			(float)window->d_h);
+		window->p_x = ((window->n_w - 
+			(window->d_w * window->r))) / 2;
+		window->p_y	= 0;
 	}else{
 		//larger height ratio
-		g_swindow->r = ((float)g_swindow->n_w / 
-			(float)g_swindow->d_w);
-		g_swindow->p_x	= 0;
-		g_swindow->p_y	= ((g_swindow->n_h - 
-			(g_swindow->d_h* g_swindow->r))) / 2;
+		window->r = ((float)window->n_w / 
+			(float)window->d_w);
+		window->p_x	= 0;
+		window->p_y	= ((window->n_h - 
+			(window->d_h * window->r))) / 2;
 	}
 	
-	SDL_RenderSetScale(g_swindow->renderer, g_swindow->scaler, g_swindow->scaler);
+	SDL_RenderSetScale(window->renderer, window->scaler, window->scaler);
 
 }
 
-int window_event(SDL_Event *e, swindow *g_swindow){
+int window_event(window_t *window){
 	int rc = 0;
 	
 	const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-	if( e->type == SDL_WINDOWEVENT )
+	if( window->e.type == SDL_WINDOWEVENT )
 	{
-		switch( e->window.event )
+		switch( window->e.window.event )
 		{
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
-				g_swindow->cached_w = e->window.data1;
-				g_swindow->cached_h = e->window.data2;
-				g_swindow->n_w = g_swindow->cached_w / g_swindow->scaler;
-				g_swindow->n_h = g_swindow->cached_h / g_swindow->scaler;
+				window->cached_w = window->e.window.data1;
+				window->cached_h = window->e.window.data2;
+				window->n_w = window->cached_w / window->scaler;
+				window->n_h = window->cached_h / window->scaler;
 				
-				if(((float)g_swindow->n_w / (float)g_swindow->d_w) >= 
-					((float)g_swindow->n_h / (float)g_swindow->d_h)){
+				if(((float)window->n_w / (float)window->d_w) >= 
+					((float)window->n_h / (float)window->d_h)){
 					//larger width ratio
-					g_swindow->r = ((float)g_swindow->n_h / 
-						(float)g_swindow->d_h);
-					g_swindow->p_x = ((g_swindow->n_w - 
-						(g_swindow->d_w* g_swindow->r))) / 2;
-					g_swindow->p_y	= 0;
+					window->r = ((float)window->n_h / 
+						(float)window->d_h);
+					window->p_x = ((window->n_w - 
+						(window->d_w * window->r))) / 2;
+					window->p_y	= 0;
 				}else{
 					//larger height ratio
-					g_swindow->r = ((float)g_swindow->n_w / 
-						(float)g_swindow->d_w);
-					g_swindow->p_x	= 0;
-					g_swindow->p_y	= ((g_swindow->n_h - 
-						(g_swindow->d_h* g_swindow->r))) / 2;
+					window->r = ((float)window->n_w / 
+						(float)window->d_w);
+					window->p_x	= 0;
+					window->p_y	= ((window->n_h - 
+						(window->d_h * window->r))) / 2;
 				}
 				
-				SDL_RenderSetScale(g_swindow->renderer, g_swindow->scaler, g_swindow->scaler);
+				SDL_RenderSetScale(window->renderer, window->scaler, window->scaler);
 				break;
 				
 			case SDL_WINDOWEVENT_FOCUS_GAINED:
-				g_swindow->focus = 1;
+				window->focus = 1;
 				break;
 
 			case SDL_WINDOWEVENT_FOCUS_LOST:
-				g_swindow->focus = 0;
+				window->focus = 0;
 				break;
 
 			case SDL_WINDOWEVENT_MINIMIZED:
-				g_swindow->min = 1;
+				window->min = 1;
 				break;
 
 			case SDL_WINDOWEVENT_MAXIMIZED:
-				g_swindow->min = 0;
+				window->min = 0;
 				break;
 			
 			case SDL_WINDOWEVENT_RESTORED:
-				g_swindow->min = 0;
+				window->min = 0;
 				break;
 		}
 	}
-	if( e->type == SDL_KEYDOWN ){
+	if( window->e.type == SDL_KEYDOWN ){
 		if( ((currentKeyStates[SDL_SCANCODE_RETURN]) && 
 		((currentKeyStates[SDL_SCANCODE_RALT]) || 
 		(currentKeyStates[SDL_SCANCODE_LALT]))) ){
-			if( g_swindow->fs ){
-				SDL_SetWindowFullscreen( g_swindow->window, SDL_FALSE );
-				g_swindow->fs = 0;
+			if( window->fs ){
+				SDL_SetWindowFullscreen( window->window, SDL_FALSE );
+				window->fs = 0;
 			}else{
-				SDL_SetWindowFullscreen( g_swindow->window, 
+				SDL_SetWindowFullscreen( window->window, 
 					SDL_WINDOW_FULLSCREEN_DESKTOP );
-				g_swindow->fs = 1;
+				window->fs = 1;
 			}
 			
 			rc = 1;
@@ -153,87 +155,87 @@ int window_event(SDL_Event *e, swindow *g_swindow){
 	return rc;
 }
 
-void key_event(SDL_Event *e, state *g_state){
+void key_event(SDL_Event *e, state_t *state){
 	
 	if( e->type == SDL_KEYDOWN ){
 		switch(e->key.keysym.sym){
 			case SDLK_ESCAPE:
-				g_state->k.esc = 1;
+				state->k.esc = 1;
 				break;
 			case SDLK_RETURN:
-				g_state->k.ent = 1;
+				state->k.ent = 1;
 				break;
 			case SDLK_UP:
-				g_state->k.up = 1;
+				state->k.up = 1;
 				break;
 			case SDLK_DOWN:
-				g_state->k.dn = 1;
+				state->k.dn = 1;
 				break;
 			case SDLK_LEFT:
-				g_state->k.lt = 1;
+				state->k.lt = 1;
 				break;
 			case SDLK_RIGHT:
-				g_state->k.rt = 1;
+				state->k.rt = 1;
 				break;
 			case SDLK_w:
-				g_state->k.w = 1;
+				state->k.w = 1;
 				break;
 			case SDLK_a:
-				g_state->k.a = 1;
+				state->k.a = 1;
 				break;
 			case SDLK_s:
-				g_state->k.s = 1;
+				state->k.s = 1;
 				break;
 			case SDLK_d:
-				g_state->k.d = 1;
+				state->k.d = 1;
 				break;
 		}
 	} else if ( e->type == SDL_KEYUP) {
 		switch(e->key.keysym.sym){
 			case SDLK_ESCAPE:
-				g_state->k.esc = 0;
+				state->k.esc = 0;
 				break;
 			case SDLK_RETURN:
-				g_state->k.ent = 0;
+				state->k.ent = 0;
 				break;
 			case SDLK_UP:
-				g_state->k.up = 0;
+				state->k.up = 0;
 				break;
 			case SDLK_DOWN:
-				g_state->k.dn = 0;
+				state->k.dn = 0;
 				break;
 			case SDLK_LEFT:
-				g_state->k.lt = 0;
+				state->k.lt = 0;
 				break;
 			case SDLK_RIGHT:
-				g_state->k.rt = 0;
+				state->k.rt = 0;
 				break;
 			case SDLK_w:
-				g_state->k.w = 0;
+				state->k.w = 0;
 				break;
 			case SDLK_a:
-				g_state->k.a = 0;
+				state->k.a = 0;
 				break;
 			case SDLK_s:
-				g_state->k.s = 0;
+				state->k.s = 0;
 				break;
 			case SDLK_d:
-				g_state->k.d = 0;
+				state->k.d = 0;
 				break;
 		}
 	}
 }
 
-void parse_event(SDL_Event *e, swindow *g_swindow, state *g_state){
+void parse_event(window_t *window, state_t *state){
 	
-	while( SDL_PollEvent( e )){
-		switch(e->type){
+	while( SDL_PollEvent( &(window->e) )){
+		switch(window->e.type){
 			case SDL_QUIT:
-				g_swindow->quit++;
+				window->quit++;
 				break;
 			default:
-				if ( ! window_event(e , g_swindow))
-					key_event(e , g_state);
+				if ( ! window_event(window))
+					key_event( &(window->e) , state);
 				break;
 		}
 	}
