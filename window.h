@@ -1,6 +1,6 @@
 
-#ifndef _SWINDOW_H_
-#define _SWINDOW_H_
+#ifndef _WINDOW_H_
+#define _WINDOW_H_
 
 #include <SDL2/SDL.h>
 
