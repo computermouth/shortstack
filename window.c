@@ -6,8 +6,6 @@ window_t init_window(){
 	
 	window_t window = {
 	
-		.window			= 0,
-		.renderer		= 0,
 		.d_w			= 800,
 		.d_h			= 500,
 		.n_w			= window.d_w,
@@ -30,18 +28,18 @@ window_t init_window(){
 	return window;
 }
 
-int init_sdl(window_t *window){
+int init_sdl(god_t *god){
 	
 	if(SDL_Init(SDL_INIT_VIDEO) >= 0){
-		window->window = SDL_CreateWindow("shortstack",
+		god->sdl.window = SDL_CreateWindow("shortstack",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-			window->n_w, window->n_h, 
+			god->window.n_w, god->window.n_h, 
 			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		
-		if(window->window != 0){
+		if(god->sdl.window != 0){
 			
-			window->renderer = SDL_CreateRenderer
-				(window->window,
+			god->sdl.renderer = SDL_CreateRenderer
+				(god->sdl.window,
 				-1, 
 				SDL_RENDERER_ACCELERATED | 
 				SDL_RENDERER_PRESENTVSYNC);
@@ -56,98 +54,98 @@ int init_sdl(window_t *window){
 	return 0;
 }
 
-void set_scaler(window_t *window){
+void set_scaler(god_t *god){
 	
-	window->n_w = window->cached_w / window->scaler;
-	window->n_h = window->cached_h / window->scaler;
+	god->window.n_w = god->window.cached_w / god->window.scaler;
+	god->window.n_h = god->window.cached_h / god->window.scaler;
 	
-	if(((float)window->n_w / (float)window->d_w) >= 
-		((float)window->n_h / (float)window->d_h)){
+	if(((float)god->window.n_w / (float)god->window.d_w) >= 
+		((float)god->window.n_h / (float)god->window.d_h)){
 		//larger width ratio
-		window->r = ((float)window->n_h / 
-			(float)window->d_h);
-		window->p_x = ((window->n_w - 
-			(window->d_w * window->r))) / 2;
-		window->p_y	= 0;
+		god->window.r = ((float)god->window.n_h / 
+			(float)god->window.d_h);
+		god->window.p_x = ((god->window.n_w - 
+			(god->window.d_w * god->window.r))) / 2;
+		god->window.p_y	= 0;
 	}else{
 		//larger height ratio
-		window->r = ((float)window->n_w / 
-			(float)window->d_w);
-		window->p_x	= 0;
-		window->p_y	= ((window->n_h - 
-			(window->d_h * window->r))) / 2;
+		god->window.r = ((float)god->window.n_w / 
+			(float)god->window.d_w);
+		god->window.p_x	= 0;
+		god->window.p_y	= ((god->window.n_h - 
+			(god->window.d_h * god->window.r))) / 2;
 	}
 	
-	SDL_RenderSetScale(window->renderer, window->scaler, window->scaler);
+	SDL_RenderSetScale(god->sdl.renderer, god->window.scaler, god->window.scaler);
 
 }
 
-int window_event(window_t *window){
+int window_event(god_t *god){
 	int rc = 0;
 	
 	const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-	if( window->e.type == SDL_WINDOWEVENT )
+	if( god->sdl.e.type == SDL_WINDOWEVENT )
 	{
-		switch( window->e.window.event )
+		switch( god->sdl.e.window.event )
 		{
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
-				window->cached_w = window->e.window.data1;
-				window->cached_h = window->e.window.data2;
-				window->n_w = window->cached_w / window->scaler;
-				window->n_h = window->cached_h / window->scaler;
+				god->window.cached_w = god->sdl.e.window.data1;
+				god->window.cached_h = god->sdl.e.window.data2;
+				god->window.n_w = god->window.cached_w / god->window.scaler;
+				god->window.n_h = god->window.cached_h / god->window.scaler;
 				
-				if(((float)window->n_w / (float)window->d_w) >= 
-					((float)window->n_h / (float)window->d_h)){
+				if(((float)god->window.n_w / (float)god->window.d_w) >= 
+					((float)god->window.n_h / (float)god->window.d_h)){
 					//larger width ratio
-					window->r = ((float)window->n_h / 
-						(float)window->d_h);
-					window->p_x = ((window->n_w - 
-						(window->d_w * window->r))) / 2;
-					window->p_y	= 0;
+					god->window.r = ((float)god->window.n_h / 
+						(float)god->window.d_h);
+					god->window.p_x = ((god->window.n_w - 
+						(god->window.d_w * god->window.r))) / 2;
+					god->window.p_y	= 0;
 				}else{
 					//larger height ratio
-					window->r = ((float)window->n_w / 
-						(float)window->d_w);
-					window->p_x	= 0;
-					window->p_y	= ((window->n_h - 
-						(window->d_h * window->r))) / 2;
+					god->window.r = ((float)god->window.n_w / 
+						(float)god->window.d_w);
+					god->window.p_x	= 0;
+					god->window.p_y	= ((god->window.n_h - 
+						(god->window.d_h * god->window.r))) / 2;
 				}
 				
-				SDL_RenderSetScale(window->renderer, window->scaler, window->scaler);
+				SDL_RenderSetScale(god->sdl.renderer, god->window.scaler, god->window.scaler);
 				break;
 				
 			case SDL_WINDOWEVENT_FOCUS_GAINED:
-				window->focus = 1;
+				god->window.focus = 1;
 				break;
 
 			case SDL_WINDOWEVENT_FOCUS_LOST:
-				window->focus = 0;
+				god->window.focus = 0;
 				break;
 
 			case SDL_WINDOWEVENT_MINIMIZED:
-				window->min = 1;
+				god->window.min = 1;
 				break;
 
 			case SDL_WINDOWEVENT_MAXIMIZED:
-				window->min = 0;
+				god->window.min = 0;
 				break;
 			
 			case SDL_WINDOWEVENT_RESTORED:
-				window->min = 0;
+				god->window.min = 0;
 				break;
 		}
 	}
-	if( window->e.type == SDL_KEYDOWN ){
+	if(god->sdl.e.type == SDL_KEYDOWN ){
 		if( ((currentKeyStates[SDL_SCANCODE_RETURN]) && 
 		((currentKeyStates[SDL_SCANCODE_RALT]) || 
 		(currentKeyStates[SDL_SCANCODE_LALT]))) ){
-			if( window->fs ){
-				SDL_SetWindowFullscreen( window->window, SDL_FALSE );
-				window->fs = 0;
+			if( god->window.fs ){
+				SDL_SetWindowFullscreen( god->sdl.window, SDL_FALSE );
+				god->window.fs = 0;
 			}else{
-				SDL_SetWindowFullscreen( window->window, 
+				SDL_SetWindowFullscreen( god->sdl.window, 
 					SDL_WINDOW_FULLSCREEN_DESKTOP );
-				window->fs = 1;
+				god->window.fs = 1;
 			}
 			
 			rc = 1;
@@ -228,16 +226,16 @@ void key_event(SDL_Event *e, state_t *state){
 	}
 }
 
-void parse_event(window_t *window, state_t *state){
+void parse_event(god_t* god){
 	
-	while( SDL_PollEvent( &(window->e) )){
-		switch(window->e.type){
+	while( SDL_PollEvent( &(god->sdl.e) )){
+		switch(god->sdl.e.type){
 			case SDL_QUIT:
-				window->quit++;
+				god->window.quit++;
 				break;
 			default:
-				if ( ! window_event(window))
-					key_event( &(window->e) , state);
+				if ( ! window_event(god))
+					key_event( &(god->sdl.e), &god->state);
 				break;
 		}
 	}

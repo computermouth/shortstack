@@ -4,7 +4,7 @@
 
 #include "nano_poly.h"
 #include "draw.h"
-#include "window.h"
+#include "structs.h"
 
 #define NP_VS(vertnum) unsigned short verts = vertnum;					\
  static short curr_x[vertnum] = { 0 };									\
@@ -16,7 +16,7 @@
 #define NP_CO(vals...) static unsigned short orig_color[4] = {vals};
 
 #define NP_SH(np_name, np_vs, np_vx, np_vy, np_ax, np_ay, np_co)		\
-	void np_name(window_t *window){										\
+	void np_name(god_t *god){											\
 		np_vs															\
 		np_vx 															\
 		np_ax															\
@@ -33,19 +33,19 @@
 			.color 		= orig_color                                    \
 			};                                                          \
 		                                                                \
-		if (shape.old_ratio != window->r){								\
+		if (shape.old_ratio != god->window.r){								\
 			unsigned short i;											\
 			for(i = 0; i < verts; i++){                                 \
-				curr_x[i] = (orig_x[i] * window->r) + window->p_x;		\
-				curr_y[i] = (orig_y[i] * window->r) + window->p_y;		\
+				curr_x[i] = (orig_x[i] * god->window.r) + god->window.p_x;		\
+				curr_y[i] = (orig_y[i] * god->window.r) + god->window.p_y;		\
 				if (curr_x[i] < 0) curr_x[i] = 0;						\
 				if (curr_y[i] < 0) curr_y[i] = 0;						\
-				if (curr_x[i] > window->n_w) curr_x[i] = window->n_w;	\
-				if (curr_y[i] > window->n_h) curr_y[i] = window->n_h;	\
+				if (curr_x[i] > god->window.n_w) curr_x[i] = god->window.n_w;	\
+				if (curr_y[i] > god->window.n_h) curr_y[i] = god->window.n_h;	\
 			}                                                           \
 			shape.x = curr_x;											\
 			shape.y = curr_y;											\
-			shape.old_ratio = window->r;               	          		\
+			shape.old_ratio = god->window.r;               	          		\
 			                                                            \
 			filledPolygonRGBA(                                          \
 				&shape.lines,											\
@@ -60,7 +60,7 @@
 				);                                                      \
 		}                                                               \
                                                                         \
-		draw_shape(&shape, window->renderer);							\
+		draw_shape(&shape, god->sdl.renderer);							\
 	}
 
 //~ FAKE_NP_SH(
@@ -127,7 +127,7 @@
 void set_color(unsigned short *,unsigned short);
 
 #define NP_SH_PC(np_name, np_vs, np_vx, np_vy, np_ax, np_ay, np_co)		\
-	void np_name(window_t *window, unsigned short pad_x,				\
+	void np_name(god_t *god, unsigned short pad_x,				\
 					unsigned short pad_y, unsigned short color_code){	\
 		np_vs															\
 		np_vx 															\
@@ -148,17 +148,17 @@ void set_color(unsigned short *,unsigned short);
 		unsigned short i;												\
 		for(i = 0; i < verts; i++){                                 	\
 			curr_x[i] = ((orig_x[i] + pad_x) 							\
-				* window->r) + window->p_x;								\
+				* god->window.r) + god->window.p_x;								\
 			curr_y[i] = ((orig_y[i] + pad_y) 							\
-				* window->r) + window->p_y;								\
-			if (curr_x[i] < 0) curr_x[i] = window->p_x + pad_x;			\
-			if (curr_y[i] < 0) curr_y[i] = window->p_y + pad_y;			\
-			if (curr_x[i] > window->n_w) curr_x[i] = window->n_w;		\
-			if (curr_y[i] > window->n_h) curr_y[i] = window->n_h;		\
+				* god->window.r) + god->window.p_y;								\
+			if (curr_x[i] < 0) curr_x[i] = god->window.p_x + pad_x;			\
+			if (curr_y[i] < 0) curr_y[i] = god->window.p_y + pad_y;			\
+			if (curr_x[i] > god->window.n_w) curr_x[i] = god->window.n_w;		\
+			if (curr_y[i] > god->window.n_h) curr_y[i] = god->window.n_h;		\
 		}                                                           	\
 		shape.x = curr_x;              		                          	\
 		shape.y = curr_y;              		                          	\
-		shape.old_ratio = window->r;		                          	\
+		shape.old_ratio = god->window.r;		                          	\
 																		\
 		set_color(shape.color, color_code);								\
 																		\
@@ -174,7 +174,7 @@ void set_color(unsigned short *,unsigned short);
 			shape.color[3]  	                                    	\
 			);                                                      	\
 																		\
-		draw_shape(&shape, window->renderer);							\
+		draw_shape(&shape, god->sdl.renderer);							\
 	}
 
 #endif

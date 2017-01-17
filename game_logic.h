@@ -6,6 +6,6 @@
 #include "state.h"
 #include "window.h"
 
-void game_logic(state_t*, window_t*);
+void game_logic(god_t*);
 
 #endif

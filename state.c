@@ -1,7 +1,6 @@
 
 #include "state.h"
 #include "structs.h"
-#include "window.h"
 #include "macros.h"
 
 #include "menu_logic.h"
@@ -59,25 +58,25 @@ state_t init_state(){
 }
 
 
-void logic(state_t* state, window_t *window){
+void logic(god_t *god){
 		
-	active_bg(window);
+	active_bg(god);
 	
-	if (state->frame == 11)
-		state->frame = 0;
+	if (god->state.frame == 11)
+		god->state.frame = 0;
 	else
-		state->frame++;
+		god->state.frame++;
 	
-	state->triplet = state->frame / 4;
+	god->state.triplet = god->state.frame / 4;
 	
-	if(state->menu == 1){
-		menu_logic(state, window);
-	} else if (state->settings == 1){
-		settings_logic(state, window);
-	} else if(state->game == 1){
-		game_logic(state, window);
-	} else if(state->over) {
-		gameover_logic(state, window);
+	if(god->state.menu == 1){
+		menu_logic(god);
+	} else if (god->state.settings == 1){
+		settings_logic(god);
+	} else if(god->state.game == 1){
+		game_logic(god);
+	} else if(god->state.over) {
+		gameover_logic(god);
 	}
 	
 }

@@ -3,9 +3,8 @@
 #ifndef _SETTINGS_LOGIC_H_
 #define _SETTINGS_LOGIC_H_
 
-#include "state.h"
-#include "window.h"
+#include "structs.h"
 
-void settings_logic(state_t*, window_t*);
+void settings_logic(god_t*);
 
 #endif

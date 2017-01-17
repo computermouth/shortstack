@@ -2,314 +2,314 @@
 #include "game_logic.h"
 #include "game_logic_shapes.c"
 
-void game_logic(state_t* state, window_t *window){
+void game_logic(god_t *god){
 	
 	// HEARTS
 	
-	if(state->frame < 4){
-		heart0_disabled0(window);
-		heart1_disabled0(window);
-		heart2_disabled0(window);
-		if (state->lives > 0) heart0_enabled0(window);
-		if (state->lives > 1) heart1_enabled0(window);
-		if (state->lives > 2) heart2_enabled0(window);
-	} else if (state->frame < 8){
-		heart0_disabled1(window);
-		heart1_disabled1(window);
-		heart2_disabled1(window);
-		if (state->lives > 0) heart0_enabled1(window);
-		if (state->lives > 1) heart1_enabled1(window);
-		if (state->lives > 2) heart2_enabled1(window);
+	if(god->state.frame < 4){
+		heart0_disabled0(god);
+		heart1_disabled0(god);
+		heart2_disabled0(god);
+		if (god->state.lives > 0) heart0_enabled0(god);
+		if (god->state.lives > 1) heart1_enabled0(god);
+		if (god->state.lives > 2) heart2_enabled0(god);
+	} else if (god->state.frame < 8){
+		heart0_disabled1(god);
+		heart1_disabled1(god);
+		heart2_disabled1(god);
+		if (god->state.lives > 0) heart0_enabled1(god);
+		if (god->state.lives > 1) heart1_enabled1(god);
+		if (god->state.lives > 2) heart2_enabled1(god);
 	} else {
-		heart0_disabled2(window);
-		heart1_disabled2(window);
-		heart2_disabled2(window);
-		if (state->lives > 0) heart0_enabled2(window);
-		if (state->lives > 1) heart1_enabled2(window);
-		if (state->lives > 2) heart2_enabled2(window);
+		heart0_disabled2(god);
+		heart1_disabled2(god);
+		heart2_disabled2(god);
+		if (god->state.lives > 0) heart0_enabled2(god);
+		if (god->state.lives > 1) heart1_enabled2(god);
+		if (god->state.lives > 2) heart2_enabled2(god);
 	}
 
 	
 	// TOP WALL PADS
 	
-	if(state->frame < 4){
-		top_wall0(window);
-		pad0_0(window);
-		pad1_0(window);
-		pad2_0(window);
-		pad3_0(window);
-		if(state->hole_open)
-			hole_open0(window);
+	if(god->state.frame < 4){
+		top_wall0(god);
+		pad0_0(god);
+		pad1_0(god);
+		pad2_0(god);
+		pad3_0(god);
+		if(god->state.hole_open)
+			hole_open0(god);
 		else
-			hole_closed0(window);
-	} else if (state->frame < 8){
-		top_wall1(window);
-		pad0_1(window);
-		pad1_1(window);
-		pad2_1(window);
-		pad3_1(window);
-		if(state->hole_open)
-			hole_open1(window);
+			hole_closed0(god);
+	} else if (god->state.frame < 8){
+		top_wall1(god);
+		pad0_1(god);
+		pad1_1(god);
+		pad2_1(god);
+		pad3_1(god);
+		if(god->state.hole_open)
+			hole_open1(god);
 		else
-			hole_closed1(window);
+			hole_closed1(god);
 	} else {
-		top_wall2(window);
-		pad0_2(window);
-		pad1_2(window);
-		pad2_2(window);
-		pad3_2(window);
-		if(state->hole_open)
-			hole_open2(window);
+		top_wall2(god);
+		pad0_2(god);
+		pad1_2(god);
+		pad2_2(god);
+		pad3_2(god);
+		if(god->state.hole_open)
+			hole_open2(god);
 		else
-			hole_closed2(window);
+			hole_closed2(god);
 	}
 	
-	if(state->frame < 4){
-		if (state->pad0_dir == -1){
-			pad0_arrow_left0_0(window);
-			pad0_arrow_left0_1(window);
+	if(god->state.frame < 4){
+		if (god->state.pad0_dir == -1){
+			pad0_arrow_left0_0(god);
+			pad0_arrow_left0_1(god);
 		} else {
-			pad0_arrow_right0_0(window);
-			pad0_arrow_right0_1(window);
+			pad0_arrow_right0_0(god);
+			pad0_arrow_right0_1(god);
 		}
-		if (state->pad1_dir == -1){
-			pad1_arrow_left0_0(window);
-			pad1_arrow_left0_1(window);
+		if (god->state.pad1_dir == -1){
+			pad1_arrow_left0_0(god);
+			pad1_arrow_left0_1(god);
 		} else {
-			pad1_arrow_right0_0(window);
-			pad1_arrow_right0_1(window);
+			pad1_arrow_right0_0(god);
+			pad1_arrow_right0_1(god);
 		}
-		if (state->pad2_dir == -1){
-			pad2_arrow_left0_0(window);
-			pad2_arrow_left0_1(window);
+		if (god->state.pad2_dir == -1){
+			pad2_arrow_left0_0(god);
+			pad2_arrow_left0_1(god);
 		} else {
-			pad2_arrow_right0_0(window);
-			pad2_arrow_right0_1(window);
+			pad2_arrow_right0_0(god);
+			pad2_arrow_right0_1(god);
 		}
-		if (state->pad3_dir == -1){
-			pad3_arrow_left0_0(window);
-			pad3_arrow_left0_1(window);
+		if (god->state.pad3_dir == -1){
+			pad3_arrow_left0_0(god);
+			pad3_arrow_left0_1(god);
 		} else {
-			pad3_arrow_right0_0(window);
-			pad3_arrow_right0_1(window);
+			pad3_arrow_right0_0(god);
+			pad3_arrow_right0_1(god);
 		}
-	} else if (state->frame < 8){
-		if (state->pad0_dir == -1){
-			pad0_arrow_left1_0(window);
-			pad0_arrow_left1_1(window);
+	} else if (god->state.frame < 8){
+		if (god->state.pad0_dir == -1){
+			pad0_arrow_left1_0(god);
+			pad0_arrow_left1_1(god);
 		} else {
-			pad0_arrow_right1_0(window);
-			pad0_arrow_right1_1(window);
+			pad0_arrow_right1_0(god);
+			pad0_arrow_right1_1(god);
 		}
-		if (state->pad1_dir == -1){
-			pad1_arrow_left1_0(window);
-			pad1_arrow_left1_1(window);
+		if (god->state.pad1_dir == -1){
+			pad1_arrow_left1_0(god);
+			pad1_arrow_left1_1(god);
 		} else {
-			pad1_arrow_right1_0(window);
-			pad1_arrow_right1_1(window);
+			pad1_arrow_right1_0(god);
+			pad1_arrow_right1_1(god);
 		}
-		if (state->pad2_dir == -1){
-			pad2_arrow_left1_0(window);
-			pad2_arrow_left1_1(window);
+		if (god->state.pad2_dir == -1){
+			pad2_arrow_left1_0(god);
+			pad2_arrow_left1_1(god);
 		} else {
-			pad2_arrow_right1_0(window);
-			pad2_arrow_right1_1(window);
+			pad2_arrow_right1_0(god);
+			pad2_arrow_right1_1(god);
 		}
-		if (state->pad3_dir == -1){
-			pad3_arrow_left1_0(window);
-			pad3_arrow_left1_1(window);
+		if (god->state.pad3_dir == -1){
+			pad3_arrow_left1_0(god);
+			pad3_arrow_left1_1(god);
 		} else {
-			pad3_arrow_right1_0(window);
-			pad3_arrow_right1_1(window);
+			pad3_arrow_right1_0(god);
+			pad3_arrow_right1_1(god);
 		}
 	} else {
-		if (state->pad0_dir == -1){
-			pad0_arrow_left2_0(window);
-			pad0_arrow_left2_1(window);
+		if (god->state.pad0_dir == -1){
+			pad0_arrow_left2_0(god);
+			pad0_arrow_left2_1(god);
 		} else {
-			pad0_arrow_right2_0(window);
-			pad0_arrow_right2_1(window);
+			pad0_arrow_right2_0(god);
+			pad0_arrow_right2_1(god);
 		}
-		if (state->pad1_dir == -1){
-			pad1_arrow_left2_0(window);
-			pad1_arrow_left2_1(window);
+		if (god->state.pad1_dir == -1){
+			pad1_arrow_left2_0(god);
+			pad1_arrow_left2_1(god);
 		} else {
-			pad1_arrow_right2_0(window);
-			pad1_arrow_right2_1(window);
+			pad1_arrow_right2_0(god);
+			pad1_arrow_right2_1(god);
 		}
-		if (state->pad2_dir == -1){
-			pad2_arrow_left2_0(window);
-			pad2_arrow_left2_1(window);
+		if (god->state.pad2_dir == -1){
+			pad2_arrow_left2_0(god);
+			pad2_arrow_left2_1(god);
 		} else {
-			pad2_arrow_right2_0(window);
-			pad2_arrow_right2_1(window);
+			pad2_arrow_right2_0(god);
+			pad2_arrow_right2_1(god);
 		}
-		if (state->pad3_dir == -1){
-			pad3_arrow_left2_0(window);
-			pad3_arrow_left2_1(window);
+		if (god->state.pad3_dir == -1){
+			pad3_arrow_left2_0(god);
+			pad3_arrow_left2_1(god);
 		} else {
-			pad3_arrow_right2_0(window);
-			pad3_arrow_right2_1(window);
+			pad3_arrow_right2_0(god);
+			pad3_arrow_right2_1(god);
 		}
 	}
 	
 	
 	// BALL MOVEMENT
-	if (state->ball_x <= 0){
-		state->ball_x = 1;
-		state->ball_x_dir *= -1;
-	} else if (state->ball_x >=760){
-		state->ball_x = 759;
-		state->ball_x_dir *= -1;
+	if (god->state.ball_x <= 0){
+		god->state.ball_x = 1;
+		god->state.ball_x_dir *= -1;
+	} else if (god->state.ball_x >=760){
+		god->state.ball_x = 759;
+		god->state.ball_x_dir *= -1;
 	}
 	
-	if (state->bounced == 0 && state->ball_y > 300){
+	if (god->state.bounced == 0 && god->state.ball_y > 300){
 		int i, j, k = 0;
-		for(i = 0; i < state->ball_x_speed; i++){
-			if ((state->ball_x + (i * state->ball_x_dir)) >= (state->paddle_x - 19)){
+		for(i = 0; i < god->state.ball_x_speed; i++){
+			if ((god->state.ball_x + (i * god->state.ball_x_dir)) >= (god->state.paddle_x - 19)){
 				
-				for(j = 0; j < state->ball_x_speed; j++){
-					if ( state->ball_x <= (state->paddle_x + (j * state->ball_x_dir) + 179)){
+				for(j = 0; j < god->state.ball_x_speed; j++){
+					if ( god->state.ball_x <= (god->state.paddle_x + (j * god->state.ball_x_dir) + 179)){
 						
-						for(k = 0; k < state->ball_y_speed; k++){
-							if ((state->ball_y - k) > 395 && (state->ball_y - k) < 405) {
+						for(k = 0; k < god->state.ball_y_speed; k++){
+							if ((god->state.ball_y - k) > 395 && (god->state.ball_y - k) < 405) {
 								
-								state->score += 1;
-								state->paddle_color = 12;
-								state->paddle_color_delay = 8;
-								state->ball_y = 395;
+								god->state.score += 1;
+								god->state.paddle_color = 12;
+								god->state.paddle_color_delay = 8;
+								god->state.ball_y = 395;
 								
-								if (state->score % 5 == 0){
-									if(state->ball_color > 0){
+								if (god->state.score % 5 == 0){
+									if(god->state.ball_color > 0){
 										
-										if(state->ball_color != 2){
-											state->ball_color--;
-										}else if(state->ball_color > 0){
-											state->ball_color -= 2;
+										if(god->state.ball_color != 2){
+											god->state.ball_color--;
+										}else if(god->state.ball_color > 0){
+											god->state.ball_color -= 2;
 										}
 										
-											state->ball_x_speed++;
-											state->ball_y_speed++;
+											god->state.ball_x_speed++;
+											god->state.ball_y_speed++;
 									}
 								}
-								if (state->score % 10 == 0 && state->lives < 3){
-									state->lives++;
+								if (god->state.score % 10 == 0 && god->state.lives < 3){
+									god->state.lives++;
 								}
 									
-								state->ball_y_dir *= -1;
-								state->bounced = 1;
+								god->state.ball_y_dir *= -1;
+								god->state.bounced = 1;
 								
-								short diff = state->ball_x - state->paddle_x + 19;
-								if ( (diff <= 79 && state->ball_x_dir == 1) ||
-										(diff > 159 && state->ball_x_dir == -1))
-									state->ball_x_dir *= -1;
+								short diff = god->state.ball_x - god->state.paddle_x + 19;
+								if ( (diff <= 79 && god->state.ball_x_dir == 1) ||
+										(diff > 159 && god->state.ball_x_dir == -1))
+									god->state.ball_x_dir *= -1;
 															
 							}
 								
-							if (state->bounced) break;
+							if (god->state.bounced) break;
 						}
 					}
-					if (state->bounced) break;
+					if (god->state.bounced) break;
 				}
 			}
-			if (state->bounced) break;
+			if (god->state.bounced) break;
 		}
 	}
 	
 	
-	if (state->ball_y >= 500){
-		state->ball_y = 50;
-		state->bounced = 0;
-		state->lives--;
-		if (state->lives < 0){
-			state->over = 1;
-			state->game = 0;
+	if (god->state.ball_y >= 500){
+		god->state.ball_y = 50;
+		god->state.bounced = 0;
+		god->state.lives--;
+		if (god->state.lives < 0){
+			god->state.over = 1;
+			god->state.game = 0;
 		}
 	}
 	
-	if ((state->ball_x + 21) > 30 && 
-			(state->ball_x + 21) < 109 && 
-			state->ball_y <= 20){
+	if ((god->state.ball_x + 21) > 30 && 
+			(god->state.ball_x + 21) < 109 && 
+			god->state.ball_y <= 20){
 		//PAD 0
-		state->bounced = 0;
-		state->ball_y_dir *= -1;
-		state->ball_x_dir = state->pad0_dir;
-		state->pad0_dir *= -1;
-		state->hole_open = 1;
-	} else if ((state->ball_x + 21) > 180 && 
-			(state->ball_x + 21) < 259 && 
-			state->ball_y <= 20){
+		god->state.bounced = 0;
+		god->state.ball_y_dir *= -1;
+		god->state.ball_x_dir = god->state.pad0_dir;
+		god->state.pad0_dir *= -1;
+		god->state.hole_open = 1;
+	} else if ((god->state.ball_x + 21) > 180 && 
+			(god->state.ball_x + 21) < 259 && 
+			god->state.ball_y <= 20){
 		//PAD 1
-		state->bounced = 0;
-		state->ball_y_dir *= -1;
-		state->ball_x_dir = state->pad1_dir;
-		state->pad1_dir *= -1;
-		state->hole_open = 1;
-	} else if ((state->ball_x + 21) > 350 && 
-			(state->ball_x + 21) < 450 && 
-			state->ball_y <= 20 &&
-			state->hole_open == 1){
+		god->state.bounced = 0;
+		god->state.ball_y_dir *= -1;
+		god->state.ball_x_dir = god->state.pad1_dir;
+		god->state.pad1_dir *= -1;
+		god->state.hole_open = 1;
+	} else if ((god->state.ball_x + 21) > 350 && 
+			(god->state.ball_x + 21) < 450 && 
+			god->state.ball_y <= 20 &&
+			god->state.hole_open == 1){
 		//HOLE
-		state->ball_y = 499;
-		state->bounced = 1;
-		state->hole_open = 0;
-	} else if ((state->ball_x + 21) > 540 && 
-			(state->ball_x + 21) < 619 && 
-			state->ball_y <= 20){
+		god->state.ball_y = 499;
+		god->state.bounced = 1;
+		god->state.hole_open = 0;
+	} else if ((god->state.ball_x + 21) > 540 && 
+			(god->state.ball_x + 21) < 619 && 
+			god->state.ball_y <= 20){
 		//PAD 2
-		state->bounced = 0;
-		state->ball_y_dir *= -1;
-		state->ball_x_dir = state->pad2_dir;
-		state->pad2_dir *= -1;
-	} else if ((state->ball_x + 21) > 690 && 
-			(state->ball_x + 21) < 769 && 
-			state->ball_y <= 20){
+		god->state.bounced = 0;
+		god->state.ball_y_dir *= -1;
+		god->state.ball_x_dir = god->state.pad2_dir;
+		god->state.pad2_dir *= -1;
+	} else if ((god->state.ball_x + 21) > 690 && 
+			(god->state.ball_x + 21) < 769 && 
+			god->state.ball_y <= 20){
 		//PAD 3
-		state->bounced = 0;
-		state->ball_y_dir *= -1;
-		state->ball_x_dir = state->pad3_dir;
-		state->pad3_dir *= -1;
-		state->hole_open = 1;
-	} else if (state->ball_y <= 20 ){
-		state->ball_y_dir *= -1;
-		state->bounced = 0;
-		state->hole_open = 1;
+		god->state.bounced = 0;
+		god->state.ball_y_dir *= -1;
+		god->state.ball_x_dir = god->state.pad3_dir;
+		god->state.pad3_dir *= -1;
+		god->state.hole_open = 1;
+	} else if (god->state.ball_y <= 20 ){
+		god->state.ball_y_dir *= -1;
+		god->state.bounced = 0;
+		god->state.hole_open = 1;
 	}
 
 			
-	state->ball_x += (state->ball_x_dir * state->ball_x_speed);
-	state->ball_y += (state->ball_y_dir * state->ball_y_speed);
+	god->state.ball_x += (god->state.ball_x_dir * god->state.ball_x_speed);
+	god->state.ball_y += (god->state.ball_y_dir * god->state.ball_y_speed);
 	
-	if(state->frame < 4){
-		ball0(window, state->ball_x, state->ball_y, state->ball_color);
-	} else if (state->frame < 8){
-		ball1(window, state->ball_x, state->ball_y, state->ball_color);
+	if(god->state.frame < 4){
+		ball0(god, god->state.ball_x, god->state.ball_y, god->state.ball_color);
+	} else if (god->state.frame < 8){
+		ball1(god, god->state.ball_x, god->state.ball_y, god->state.ball_color);
 	} else {
-		ball2(window, state->ball_x, state->ball_y, state->ball_color);
+		ball2(god, god->state.ball_x, god->state.ball_y, god->state.ball_color);
 	}
 	
 	
 	// PADDLE MOVEMENT
-	if(state->k.lt && state->paddle_x > 0){
-		state->paddle_x -= 20;
-		state->k.lt = 0;
+	if(god->state.k.lt && god->state.paddle_x > 0){
+		god->state.paddle_x -= 20;
+		god->state.k.lt = 0;
 	}
-	if(state->k.rt && state->paddle_x < 600){
-		state->paddle_x += 20;
-		state->k.rt = 0;
+	if(god->state.k.rt && god->state.paddle_x < 600){
+		god->state.paddle_x += 20;
+		god->state.k.rt = 0;
 	}
 	
-	if(state->frame < 4){
-		paddle0(window, state->paddle_x, 0, state->paddle_color);
-	} else if (state->frame < 8){
-		paddle1(window, state->paddle_x, 0, state->paddle_color);
+	if(god->state.frame < 4){
+		paddle0(god, god->state.paddle_x, 0, god->state.paddle_color);
+	} else if (god->state.frame < 8){
+		paddle1(god, god->state.paddle_x, 0, god->state.paddle_color);
 	} else {
-		paddle2(window, state->paddle_x, 0, state->paddle_color);
+		paddle2(god, god->state.paddle_x, 0, god->state.paddle_color);
 	}
 	
-	if (state->paddle_color_delay == 0)
-		state->paddle_color = 13;
+	if (god->state.paddle_color_delay == 0)
+		god->state.paddle_color = 13;
 	else
-		state->paddle_color_delay--;
+		god->state.paddle_color_delay--;
 	
 }

@@ -6,6 +6,6 @@
 #include "state.h"
 #include "window.h"
 
-void gameover_logic(state_t*, window_t*);
+void gameover_logic(god_t*);
 
 #endif
