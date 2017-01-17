@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 #include <confuse.h>
 
-#include "window.h"
+#include "scalar.h"
 
 #include "config.h"
 

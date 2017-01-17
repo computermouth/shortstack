@@ -4,7 +4,7 @@
 #include "nano_poly.h"
 #include "draw.h"
 #include "structs.h"
-#include "window.h"
+#include "scalar.h"
 
 SDL_Renderer* draw_shape(shape_t *shape, SDL_Renderer* renderer){
 	

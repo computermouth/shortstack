@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
-#include "window.h"
+#include "scalar.h"
 #include "state.h"
 #include "structs.h"
 
