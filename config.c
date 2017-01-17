@@ -85,7 +85,7 @@ void check_dirs(){
 	}
 }
 
-void load_config(window_t* window){
+void load_config(scalar_t* scalar){
 	check_dirs();
 
 	char *home_dir = getenv("HOME");

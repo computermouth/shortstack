@@ -2,18 +2,18 @@
 #include "window.h"
 #include "config.h"
 
-window_t init_window(){
+scalar_t init_scalar(){
 	
-	window_t window = {
+	scalar_t scalar = {
 	
 		.d_w			= 800,
 		.d_h			= 500,
-		.n_w			= window.d_w,
-		.n_h			= window.d_h,
-		.cached_w		= window.d_w,
-		.cached_h		= window.d_h,
+		.n_w			= scalar.d_w,
+		.n_h			= scalar.d_h,
+		.cached_w		= scalar.d_w,
+		.cached_h		= scalar.d_h,
 		.r				= 1.0,
-		.scaler			= 1,
+		.scale			= 1,
 		.p_x			= 0,
 		.p_y			= 0,
 		.focus			= 1,
@@ -23,9 +23,9 @@ window_t init_window(){
 	
 	};
 	
-	load_config(&window);
+	load_config(&scalar);
 	
-	return window;
+	return scalar;
 }
 
 int init_sdl(god_t *god){
@@ -33,7 +33,7 @@ int init_sdl(god_t *god){
 	if(SDL_Init(SDL_INIT_VIDEO) >= 0){
 		god->sdl.window = SDL_CreateWindow("shortstack",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-			god->window.n_w, god->window.n_h, 
+			god->scalar.n_w, god->scalar.n_h, 
 			SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		
 		if(god->sdl.window != 0){
@@ -56,27 +56,27 @@ int init_sdl(god_t *god){
 
 void set_scaler(god_t *god){
 	
-	god->window.n_w = god->window.cached_w / god->window.scaler;
-	god->window.n_h = god->window.cached_h / god->window.scaler;
+	god->scalar.n_w = god->scalar.cached_w / god->scalar.scale;
+	god->scalar.n_h = god->scalar.cached_h / god->scalar.scale;
 	
-	if(((float)god->window.n_w / (float)god->window.d_w) >= 
-		((float)god->window.n_h / (float)god->window.d_h)){
+	if(((float)god->scalar.n_w / (float)god->scalar.d_w) >= 
+		((float)god->scalar.n_h / (float)god->scalar.d_h)){
 		//larger width ratio
-		god->window.r = ((float)god->window.n_h / 
-			(float)god->window.d_h);
-		god->window.p_x = ((god->window.n_w - 
-			(god->window.d_w * god->window.r))) / 2;
-		god->window.p_y	= 0;
+		god->scalar.r = ((float)god->scalar.n_h / 
+			(float)god->scalar.d_h);
+		god->scalar.p_x = ((god->scalar.n_w - 
+			(god->scalar.d_w * god->scalar.r))) / 2;
+		god->scalar.p_y	= 0;
 	}else{
 		//larger height ratio
-		god->window.r = ((float)god->window.n_w / 
-			(float)god->window.d_w);
-		god->window.p_x	= 0;
-		god->window.p_y	= ((god->window.n_h - 
-			(god->window.d_h * god->window.r))) / 2;
+		god->scalar.r = ((float)god->scalar.n_w / 
+			(float)god->scalar.d_w);
+		god->scalar.p_x	= 0;
+		god->scalar.p_y	= ((god->scalar.n_h - 
+			(god->scalar.d_h * god->scalar.r))) / 2;
 	}
 	
-	SDL_RenderSetScale(god->sdl.renderer, god->window.scaler, god->window.scaler);
+	SDL_RenderSetScale(god->sdl.renderer, god->scalar.scale, god->scalar.scale);
 
 }
 
@@ -89,49 +89,49 @@ int window_event(god_t *god){
 		switch( god->sdl.e.window.event )
 		{
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
-				god->window.cached_w = god->sdl.e.window.data1;
-				god->window.cached_h = god->sdl.e.window.data2;
-				god->window.n_w = god->window.cached_w / god->window.scaler;
-				god->window.n_h = god->window.cached_h / god->window.scaler;
+				god->scalar.cached_w = god->sdl.e.window.data1;
+				god->scalar.cached_h = god->sdl.e.window.data2;
+				god->scalar.n_w = god->scalar.cached_w / god->scalar.scale;
+				god->scalar.n_h = god->scalar.cached_h / god->scalar.scale;
 				
-				if(((float)god->window.n_w / (float)god->window.d_w) >= 
-					((float)god->window.n_h / (float)god->window.d_h)){
+				if(((float)god->scalar.n_w / (float)god->scalar.d_w) >= 
+					((float)god->scalar.n_h / (float)god->scalar.d_h)){
 					//larger width ratio
-					god->window.r = ((float)god->window.n_h / 
-						(float)god->window.d_h);
-					god->window.p_x = ((god->window.n_w - 
-						(god->window.d_w * god->window.r))) / 2;
-					god->window.p_y	= 0;
+					god->scalar.r = ((float)god->scalar.n_h / 
+						(float)god->scalar.d_h);
+					god->scalar.p_x = ((god->scalar.n_w - 
+						(god->scalar.d_w * god->scalar.r))) / 2;
+					god->scalar.p_y	= 0;
 				}else{
 					//larger height ratio
-					god->window.r = ((float)god->window.n_w / 
-						(float)god->window.d_w);
-					god->window.p_x	= 0;
-					god->window.p_y	= ((god->window.n_h - 
-						(god->window.d_h * god->window.r))) / 2;
+					god->scalar.r = ((float)god->scalar.n_w / 
+						(float)god->scalar.d_w);
+					god->scalar.p_x	= 0;
+					god->scalar.p_y	= ((god->scalar.n_h - 
+						(god->scalar.d_h * god->scalar.r))) / 2;
 				}
 				
-				SDL_RenderSetScale(god->sdl.renderer, god->window.scaler, god->window.scaler);
+				SDL_RenderSetScale(god->sdl.renderer, god->scalar.scale, god->scalar.scale);
 				break;
 				
 			case SDL_WINDOWEVENT_FOCUS_GAINED:
-				god->window.focus = 1;
+				god->scalar.focus = 1;
 				break;
 
 			case SDL_WINDOWEVENT_FOCUS_LOST:
-				god->window.focus = 0;
+				god->scalar.focus = 0;
 				break;
 
 			case SDL_WINDOWEVENT_MINIMIZED:
-				god->window.min = 1;
+				god->scalar.min = 1;
 				break;
 
 			case SDL_WINDOWEVENT_MAXIMIZED:
-				god->window.min = 0;
+				god->scalar.min = 0;
 				break;
 			
 			case SDL_WINDOWEVENT_RESTORED:
-				god->window.min = 0;
+				god->scalar.min = 0;
 				break;
 		}
 	}
@@ -139,13 +139,13 @@ int window_event(god_t *god){
 		if( ((currentKeyStates[SDL_SCANCODE_RETURN]) && 
 		((currentKeyStates[SDL_SCANCODE_RALT]) || 
 		(currentKeyStates[SDL_SCANCODE_LALT]))) ){
-			if( god->window.fs ){
+			if( god->scalar.fs ){
 				SDL_SetWindowFullscreen( god->sdl.window, SDL_FALSE );
-				god->window.fs = 0;
+				god->scalar.fs = 0;
 			}else{
 				SDL_SetWindowFullscreen( god->sdl.window, 
 					SDL_WINDOW_FULLSCREEN_DESKTOP );
-				god->window.fs = 1;
+				god->scalar.fs = 1;
 			}
 			
 			rc = 1;
@@ -155,72 +155,72 @@ int window_event(god_t *god){
 	return rc;
 }
 
-void key_event(SDL_Event *e, state_t *state){
+void key_event(god_t *god){
 	
-	if( e->type == SDL_KEYDOWN ){
-		switch(e->key.keysym.sym){
+	if( god->sdl.e.type == SDL_KEYDOWN ){
+		switch(god->sdl.e.key.keysym.sym){
 			case SDLK_ESCAPE:
-				state->k.esc = 1;
+				god->keystate.esc = 1;
 				break;
 			case SDLK_RETURN:
-				state->k.ent = 1;
+				god->keystate.ent = 1;
 				break;
 			case SDLK_UP:
-				state->k.up = 1;
+				god->keystate.up = 1;
 				break;
 			case SDLK_DOWN:
-				state->k.dn = 1;
+				god->keystate.dn = 1;
 				break;
 			case SDLK_LEFT:
-				state->k.lt = 1;
+				god->keystate.lt = 1;
 				break;
 			case SDLK_RIGHT:
-				state->k.rt = 1;
+				god->keystate.rt = 1;
 				break;
 			case SDLK_w:
-				state->k.w = 1;
+				god->keystate.w = 1;
 				break;
 			case SDLK_a:
-				state->k.a = 1;
+				god->keystate.a = 1;
 				break;
 			case SDLK_s:
-				state->k.s = 1;
+				god->keystate.s = 1;
 				break;
 			case SDLK_d:
-				state->k.d = 1;
+				god->keystate.d = 1;
 				break;
 		}
-	} else if ( e->type == SDL_KEYUP) {
-		switch(e->key.keysym.sym){
+	} else if ( god->sdl.e.type == SDL_KEYUP) {
+		switch(god->sdl.e.key.keysym.sym){
 			case SDLK_ESCAPE:
-				state->k.esc = 0;
+				god->keystate.esc = 0;
 				break;
 			case SDLK_RETURN:
-				state->k.ent = 0;
+				god->keystate.ent = 0;
 				break;
 			case SDLK_UP:
-				state->k.up = 0;
+				god->keystate.up = 0;
 				break;
 			case SDLK_DOWN:
-				state->k.dn = 0;
+				god->keystate.dn = 0;
 				break;
 			case SDLK_LEFT:
-				state->k.lt = 0;
+				god->keystate.lt = 0;
 				break;
 			case SDLK_RIGHT:
-				state->k.rt = 0;
+				god->keystate.rt = 0;
 				break;
 			case SDLK_w:
-				state->k.w = 0;
+				god->keystate.w = 0;
 				break;
 			case SDLK_a:
-				state->k.a = 0;
+				god->keystate.a = 0;
 				break;
 			case SDLK_s:
-				state->k.s = 0;
+				god->keystate.s = 0;
 				break;
 			case SDLK_d:
-				state->k.d = 0;
+				god->keystate.d = 0;
 				break;
 		}
 	}
@@ -231,11 +231,11 @@ void parse_event(god_t* god){
 	while( SDL_PollEvent( &(god->sdl.e) )){
 		switch(god->sdl.e.type){
 			case SDL_QUIT:
-				god->window.quit++;
+				god->scalar.quit = 1;
 				break;
 			default:
 				if ( ! window_event(god))
-					key_event( &(god->sdl.e), &god->state);
+					key_event(god);
 				break;
 		}
 	}

@@ -27,14 +27,14 @@ typedef struct{
 	int 			cached_w;
 	int 			cached_h;
 	float			r;
-	unsigned char	scaler;
+	unsigned char	scale;
 	int				p_x;
 	int				p_y;
 	int				focus;
 	int				fs;
 	int				min;
 	int 			quit;
-} window_t;
+} scalar_t;
 
 typedef struct{
 	SDL_Window*		window;
@@ -56,8 +56,6 @@ typedef struct{
 } keystate_t;
 
 typedef struct{
-	keystate_t k;
-	
 	unsigned short frame;
 	unsigned short triplet;
 	unsigned short settings;
@@ -88,8 +86,9 @@ typedef struct{
 } state_t;
 
 typedef struct{
-	window_t window;
+	scalar_t scalar;
 	state_t state;
+	keystate_t keystate;
 	sdl_t sdl;
 } god_t;
 

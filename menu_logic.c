@@ -89,23 +89,23 @@ void menu_logic(god_t *god){
 			select_stop2(god);
 	}
 	
-	if(god->state.k.lt == 1 && god->state.menu_select > 0){
+	if(god->keystate.lt == 1 && god->state.menu_select > 0){
 		god->state.menu_select--;
-		god->state.k.lt = 0;
+		god->keystate.lt = 0;
 	}
-	if(god->state.k.rt == 1 && god->state.menu_select < 2){
+	if(god->keystate.rt == 1 && god->state.menu_select < 2){
 		god->state.menu_select++;
-		god->state.k.rt = 0;
+		god->keystate.rt = 0;
 	}
 	
-	if(god->state.k.ent == 1 ){
+	if(god->keystate.ent == 1 ){
 		if(god->state.menu_select == 0){
 			god->state.menu = 0;
-			god->state.k.ent = 0;
+			god->keystate.ent = 0;
 			god->state.settings = 1;
 			god->state.settings_select = 0;
 		} else if(god->state.menu_select == 1){
-			god->state.k.ent = 0;
+			god->keystate.ent = 0;
 			god->state.menu = 0;
 			god->state.game = 1;
 			god->state.score = 0;
@@ -119,7 +119,7 @@ void menu_logic(god_t *god){
 			god->state.ball_x_speed = 3;
 			god->state.ball_y_speed = 2;
 		} else {
-			god->window.quit = 1;
+			god->scalar.quit = 1;
 		}
 	}
 	

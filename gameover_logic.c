@@ -5,10 +5,10 @@
 void gameover_logic(god_t *god){
 	
 	
-	if(god->state.k.ent == 1 ){
+	if(god->keystate.ent == 1 ){
 		god->state.over = 0;
 		god->state.menu = 1;
-		god->state.k.ent = 0;
+		god->keystate.ent = 0;
 	}
 
 	// HEARTS

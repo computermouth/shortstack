@@ -290,13 +290,13 @@ void game_logic(god_t *god){
 	
 	
 	// PADDLE MOVEMENT
-	if(god->state.k.lt && god->state.paddle_x > 0){
+	if(god->keystate.lt && god->state.paddle_x > 0){
 		god->state.paddle_x -= 20;
-		god->state.k.lt = 0;
+		god->keystate.lt = 0;
 	}
-	if(god->state.k.rt && god->state.paddle_x < 600){
+	if(god->keystate.rt && god->state.paddle_x < 600){
 		god->state.paddle_x += 20;
-		god->state.k.rt = 0;
+		god->keystate.rt = 0;
 	}
 	
 	if(god->state.frame < 4){

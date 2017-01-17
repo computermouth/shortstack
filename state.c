@@ -18,20 +18,30 @@ NP_SH(
 	NP_CO(3, 30, 33, 255)
 );
 
+keystate_t init_keystate(){
+	
+	keystate_t keystate = {
+	
+		.esc = 0,
+		.ent = 0,
+		.w = 0,
+		.a = 0,
+		.s = 0,
+		.d = 0,
+		.up = 0,
+		.dn = 0,
+		.lt = 0,
+		.rt = 0
+		
+	};
+	
+	return keystate;
+	
+}
+
 state_t init_state(){
 	
 	state_t state = {
-	
-		.k.esc = 0,
-		.k.ent = 0,
-		.k.w = 0,
-		.k.a = 0,
-		.k.s = 0,
-		.k.d = 0,
-		.k.up = 0,
-		.k.dn = 0,
-		.k.lt = 0,
-		.k.rt = 0,
 
 		.frame = 0,
 		.settings_select = 0,

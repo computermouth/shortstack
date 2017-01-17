@@ -5,48 +5,48 @@
 void settings_logic(god_t *god){
 	
 		
-	if(god->state.settings_select < 2 && god->state.k.dn){
+	if(god->state.settings_select < 2 && god->keystate.dn){
 		god->state.settings_select++;
-		god->state.k.dn = 0;
+		god->keystate.dn = 0;
 	}
-	if(god->state.settings_select > 0 && god->state.k.up){
+	if(god->state.settings_select > 0 && god->keystate.up){
 		god->state.settings_select--;
-		god->state.k.up = 0;
+		god->keystate.up = 0;
 	}
-	if(god->state.settings_select == 0 && god->state.k.lt && god->window.scaler > 1){
+	if(god->state.settings_select == 0 && god->keystate.lt && god->scalar.scale > 1){
 		
-		if(god->window.scaler == 2) god->window.scaler = 1;
-		else if (god->window.scaler == 4) god->window.scaler = 2;
-		else if (god->window.scaler == 8) god->window.scaler = 4;
-		else if (god->window.scaler == 16) god->window.scaler = 8;
-		else god->window.scaler = 2;
-		god->state.k.lt = 0;
+		if(god->scalar.scale == 2) god->scalar.scale = 1;
+		else if (god->scalar.scale == 4) god->scalar.scale = 2;
+		else if (god->scalar.scale == 8) god->scalar.scale = 4;
+		else if (god->scalar.scale == 16) god->scalar.scale = 8;
+		else god->scalar.scale = 2;
+		god->keystate.lt = 0;
 		set_scaler(god);
 		
 	}
-	if(god->state.settings_select == 0 && god->state.k.rt && god->window.scaler < 16){
+	if(god->state.settings_select == 0 && god->keystate.rt && god->scalar.scale < 16){
 		
-		if(god->window.scaler == 1) god->window.scaler = 2;
-		else if (god->window.scaler == 2) god->window.scaler = 4;
-		else if (god->window.scaler == 4) god->window.scaler = 8;
-		else if (god->window.scaler == 8) god->window.scaler = 16;
-		else god->window.scaler = 2;
-		god->state.k.rt = 0;
+		if(god->scalar.scale == 1) god->scalar.scale = 2;
+		else if (god->scalar.scale == 2) god->scalar.scale = 4;
+		else if (god->scalar.scale == 4) god->scalar.scale = 8;
+		else if (god->scalar.scale == 8) god->scalar.scale = 16;
+		else god->scalar.scale = 2;
+		god->keystate.rt = 0;
 		set_scaler(god);
 		
 	}
-	if(god->state.settings_select == 1 && god->state.k.lt && god->state.settings_volume > 0){
+	if(god->state.settings_select == 1 && god->keystate.lt && god->state.settings_volume > 0){
 		god->state.settings_volume--;
-		god->state.k.lt = 0;
+		god->keystate.lt = 0;
 	}
-	if(god->state.settings_select == 1 && god->state.k.rt && god->state.settings_volume < 10){
+	if(god->state.settings_select == 1 && god->keystate.rt && god->state.settings_volume < 10){
 		god->state.settings_volume++;
-		god->state.k.rt = 0;
+		god->keystate.rt = 0;
 	}
-	if(god->state.settings_select == 2 && god->state.k.ent){
+	if(god->state.settings_select == 2 && god->keystate.ent){
 		god->state.menu = 1;
 		god->state.settings = 0;
-		god->state.k.ent = 0;
+		god->keystate.ent = 0;
 	}
 	
 	
@@ -172,7 +172,7 @@ void settings_logic(god_t *god){
 	}
 	
 	// SCALER CONDITIONAL DRAWS
-	switch (god->window.scaler){
+	switch (god->scalar.scale){
 		case 1:
 			if(god->state.frame < 4){
 				settings_1x_enabled0_0(god);

@@ -5,6 +5,7 @@
 #include "structs.h"
 
 state_t init_state();
+keystate_t init_keystate();
 void logic(god_t *);
 
 #endif

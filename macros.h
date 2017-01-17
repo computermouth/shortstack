@@ -33,19 +33,19 @@
 			.color 		= orig_color                                    \
 			};                                                          \
 		                                                                \
-		if (shape.old_ratio != god->window.r){								\
+		if (shape.old_ratio != god->scalar.r){								\
 			unsigned short i;											\
 			for(i = 0; i < verts; i++){                                 \
-				curr_x[i] = (orig_x[i] * god->window.r) + god->window.p_x;		\
-				curr_y[i] = (orig_y[i] * god->window.r) + god->window.p_y;		\
+				curr_x[i] = (orig_x[i] * god->scalar.r) + god->scalar.p_x;		\
+				curr_y[i] = (orig_y[i] * god->scalar.r) + god->scalar.p_y;		\
 				if (curr_x[i] < 0) curr_x[i] = 0;						\
 				if (curr_y[i] < 0) curr_y[i] = 0;						\
-				if (curr_x[i] > god->window.n_w) curr_x[i] = god->window.n_w;	\
-				if (curr_y[i] > god->window.n_h) curr_y[i] = god->window.n_h;	\
+				if (curr_x[i] > god->scalar.n_w) curr_x[i] = god->scalar.n_w;	\
+				if (curr_y[i] > god->scalar.n_h) curr_y[i] = god->scalar.n_h;	\
 			}                                                           \
 			shape.x = curr_x;											\
 			shape.y = curr_y;											\
-			shape.old_ratio = god->window.r;               	          		\
+			shape.old_ratio = god->scalar.r;               	          		\
 			                                                            \
 			filledPolygonRGBA(                                          \
 				&shape.lines,											\
@@ -148,17 +148,17 @@ void set_color(unsigned short *,unsigned short);
 		unsigned short i;												\
 		for(i = 0; i < verts; i++){                                 	\
 			curr_x[i] = ((orig_x[i] + pad_x) 							\
-				* god->window.r) + god->window.p_x;								\
+				* god->scalar.r) + god->scalar.p_x;								\
 			curr_y[i] = ((orig_y[i] + pad_y) 							\
-				* god->window.r) + god->window.p_y;								\
-			if (curr_x[i] < 0) curr_x[i] = god->window.p_x + pad_x;			\
-			if (curr_y[i] < 0) curr_y[i] = god->window.p_y + pad_y;			\
-			if (curr_x[i] > god->window.n_w) curr_x[i] = god->window.n_w;		\
-			if (curr_y[i] > god->window.n_h) curr_y[i] = god->window.n_h;		\
+				* god->scalar.r) + god->scalar.p_y;								\
+			if (curr_x[i] < 0) curr_x[i] = god->scalar.p_x + pad_x;			\
+			if (curr_y[i] < 0) curr_y[i] = god->scalar.p_y + pad_y;			\
+			if (curr_x[i] > god->scalar.n_w) curr_x[i] = god->scalar.n_w;		\
+			if (curr_y[i] > god->scalar.n_h) curr_y[i] = god->scalar.n_h;		\
 		}                                                           	\
 		shape.x = curr_x;              		                          	\
 		shape.y = curr_y;              		                          	\
-		shape.old_ratio = god->window.r;		                          	\
+		shape.old_ratio = god->scalar.r;		                          	\
 																		\
 		set_color(shape.color, color_code);								\
 																		\

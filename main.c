@@ -12,12 +12,12 @@ int main(int argc, char* argv[]){
 		
 	// INITIALIZE
 	god_t god;
-	god.window = init_window();
+	god.scalar = init_scalar();
 	god.state = init_state();
-	god.window.quit = init_sdl(&god);
+	god.keystate = init_keystate();
+	god.scalar.quit = init_sdl(&god);
 	
-	
-	while( !god.window.quit ){
+	while( !god.scalar.quit ){
 		
 		// INPUT
 		parse_event(&god);

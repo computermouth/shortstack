@@ -7,11 +7,11 @@
 #include "state.h"
 #include "structs.h"
 
-window_t init_window();
+scalar_t init_scalar();
 int init_sdl(god_t *);
 void set_scaler(god_t *);
 int window_event(god_t *);
-void key_event(SDL_Event *, state_t *);
+void key_event(god_t *);
 void parse_event(god_t *);
 
 #endif
