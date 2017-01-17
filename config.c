@@ -5,7 +5,6 @@
 #include <confuse.h>
 
 #include "scalar.h"
-
 #include "config.h"
 
 
@@ -85,7 +84,7 @@ void check_dirs(){
 	}
 }
 
-void load_config(scalar_t* scalar){
+void load_config(god_t* god){
 	check_dirs();
 
 	char *home_dir = getenv("HOME");
@@ -119,7 +118,10 @@ void load_config(scalar_t* scalar){
 		high_score = 0;
 	}
 	
-	//~ window->scaler = video_mode;
+	if (video_mode == 0)
+		video_mode = 2;
+
+	god->scalar.scale = video_mode;
 	//~ window->fs = fullscreen;
 	
 	FILE *fp = fopen(tmp_path, "w");

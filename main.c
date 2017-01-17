@@ -5,17 +5,19 @@
 #include "scalar.h"
 #include "state.h"
 #include "structs.h"
-
-#include "macros.h"
+#include "config.h"
 
 int main(int argc, char* argv[]){
 		
 	// INITIALIZE
 	god_t god;
-	god.scalar = init_scalar();
+	god.scalar = init_scalar(&god);
 	god.state = init_state();
 	god.keystate = init_keystate();
 	god.scalar.quit = init_sdl(&god);
+	
+	load_config(&god);
+	set_scale(&god);
 	
 	while( !god.scalar.quit ){
 		

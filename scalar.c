@@ -2,7 +2,7 @@
 #include "scalar.h"
 #include "config.h"
 
-scalar_t init_scalar(){
+scalar_t init_scalar(god_t* god){
 	
 	scalar_t scalar = {
 	
@@ -22,8 +22,6 @@ scalar_t init_scalar(){
 		.quit 			= 0
 	
 	};
-	
-	load_config(&scalar);
 	
 	return scalar;
 }
@@ -50,11 +48,11 @@ int init_sdl(god_t *god){
 	}else{
 		return 1;
 	}
-	
+		
 	return 0;
 }
 
-void set_scaler(god_t *god){
+void set_scale(god_t *god){
 	
 	god->scalar.n_w = god->scalar.cached_w / god->scalar.scale;
 	god->scalar.n_h = god->scalar.cached_h / god->scalar.scale;

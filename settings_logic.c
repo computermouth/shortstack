@@ -21,7 +21,7 @@ void settings_logic(god_t *god){
 		else if (god->scalar.scale == 16) god->scalar.scale = 8;
 		else god->scalar.scale = 2;
 		god->keystate.lt = 0;
-		set_scaler(god);
+		set_scale(god);
 		
 	}
 	if(god->state.settings_select == 0 && god->keystate.rt && god->scalar.scale < 16){
@@ -32,7 +32,7 @@ void settings_logic(god_t *god){
 		else if (god->scalar.scale == 8) god->scalar.scale = 16;
 		else god->scalar.scale = 2;
 		god->keystate.rt = 0;
-		set_scaler(god);
+		set_scale(god);
 		
 	}
 	if(god->state.settings_select == 1 && god->keystate.lt && god->state.settings_volume > 0){
