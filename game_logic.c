@@ -2,6 +2,8 @@
 #include "game_logic.h"
 #include "game_logic_shapes.c"
 
+#include "config.h"
+
 void game_logic(god_t *god){
 	
 	// HEARTS
@@ -222,6 +224,10 @@ void game_logic(god_t *god){
 		god->state.bounced = 0;
 		god->state.lives--;
 		if (god->state.lives < 0){
+			if(god->state.score > god->state.high_score){
+				god->state.high_score = god->state.score;
+				save_config(god);
+			}
 			god->state.over = 1;
 			god->state.game = 0;
 		}

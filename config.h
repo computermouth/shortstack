@@ -10,6 +10,6 @@ void cat_to_str(char *, char *);
 
 void check_dirs();
 void load_config(god_t*);
-void save_config();
+void save_config(god_t*);
 
 #endif

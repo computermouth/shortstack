@@ -37,6 +37,8 @@ int main(int argc, char* argv[]){
 		
 	}
 	
+	save_config(&god);
+	
 	// CLEANUP SDL
 	SDL_DestroyRenderer(god.sdl.renderer);
 	SDL_DestroyWindow(god.sdl.window);

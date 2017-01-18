@@ -57,10 +57,10 @@ void check_dirs(){
 	
 	if (stat(tmp_path, &st) == -1) {
 		
-		static long int video_mode = 2;
-		static long int audio_level = 7;
-		static long int fullscreen = 0;
-		static long int high_score = 0;
+		long int video_mode = 2;
+		long int audio_level = 7;
+		long int fullscreen = 0;
+		long int high_score = 0;
 
 		cfg_opt_t opts[] = {
 			CFG_SIMPLE_INT("video_mode", &video_mode),
@@ -94,10 +94,10 @@ void load_config(god_t* god){
 	cp_str(tmp_path, home_dir);	
 	cat_to_str(tmp_path, conf_file);
 
-	static long int video_mode;
-	static long int audio_level;
-	static long int fullscreen;
-	static long int high_score;
+	long int video_mode;
+	long int audio_level;
+	long int fullscreen;
+	long int high_score;
 
 	cfg_opt_t opts[] = {
 		CFG_SIMPLE_INT("video_mode", &video_mode),
@@ -122,16 +122,21 @@ void load_config(god_t* god){
 		video_mode = 2;
 
 	god->scalar.scale = video_mode;
-	//~ window->fs = fullscreen;
+	god->state.settings_volume = audio_level;
+	god->state.high_score = high_score;
+	//~ god->scalar.scale = video_mode;
 	
-	FILE *fp = fopen(tmp_path, "w");
-	cfg_print(cfg, fp);
+		FILE *fp = fopen(tmp_path, "w");
+		cfg_print(cfg, fp);
 
-	cfg_free(cfg);
+		fclose(fp);
+
+
+		cfg_free(cfg);
 
 }
 
-void save_config(){
+void save_config(god_t* god){
 	check_dirs();
 
 	char *home_dir = getenv("HOME");
@@ -156,8 +161,12 @@ void save_config(){
 	cfg_t *cfg;
 
 	cfg = cfg_init(opts, 0);
-
-
+	
+	video_mode = god->scalar.scale;
+	audio_level = god->state.settings_volume;
+	fullscreen = god->scalar.fs;
+	high_score = god->state.high_score;
+	
 	FILE *fp = fopen(tmp_path, "w");
 	cfg_print(cfg, fp);
 

@@ -2,6 +2,8 @@
 #include "settings_logic.h"
 #include "settings_logic_shapes.c"
 
+#include "config.h"
+
 void settings_logic(god_t *god){
 	
 		
@@ -23,6 +25,7 @@ void settings_logic(god_t *god){
 		god->keystate.lt = 0;
 		set_scale(god);
 		
+		save_config(god);
 	}
 	if(god->state.settings_select == 0 && god->keystate.rt && god->scalar.scale < 16){
 		
@@ -34,14 +37,19 @@ void settings_logic(god_t *god){
 		god->keystate.rt = 0;
 		set_scale(god);
 		
+		save_config(god);
 	}
 	if(god->state.settings_select == 1 && god->keystate.lt && god->state.settings_volume > 0){
 		god->state.settings_volume--;
 		god->keystate.lt = 0;
+		
+		save_config(god);
 	}
 	if(god->state.settings_select == 1 && god->keystate.rt && god->state.settings_volume < 10){
 		god->state.settings_volume++;
 		god->keystate.rt = 0;
+		
+		save_config(god);
 	}
 	if(god->state.settings_select == 2 && god->keystate.ent){
 		god->state.menu = 1;

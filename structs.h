@@ -65,6 +65,7 @@ typedef struct{
 	unsigned short menu_select;
 	unsigned short game;
 	unsigned short score;
+	unsigned short high_score;
 	short lives;
 	unsigned short ball_color;
 	short ball_x;
