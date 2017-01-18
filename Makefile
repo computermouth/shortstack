@@ -1,5 +1,5 @@
 
-MAIN_SRC = draw.c main.c nano_poly.c scalar.c state.c macros.c config.c\
+MAIN_SRC = draw.c main.c nano_poly.c scalar.c state.c macros.c config.c god.c\
  menu_logic.c settings_logic.c game_logic.c gameover_logic.c
 
 SOURCES := ${MAIN_SRC}

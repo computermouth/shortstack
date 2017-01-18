@@ -2,27 +2,16 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
-#include "scalar.h"
+#include "god.h"
 #include "state.h"
+#include "scalar.h"
 #include "structs.h"
 #include "config.h"
 
 int main(int argc, char* argv[]){
 		
 	// INITIALIZE
-	god_t god;
-	god.scalar = init_scalar(&god);
-	god.state = init_state();
-	god.keystate = init_keystate();
-	god.scalar.quit = init_sdl(&god);
-	
-	load_config(&god);
-	
-	if( god.scalar.fs )
-		SDL_SetWindowFullscreen( god.sdl.window, 
-			SDL_WINDOW_FULLSCREEN_DESKTOP );
-	
-	set_scale(&god);
+	god_t god = init_god();
 	
 	while( !god.scalar.quit ){
 		
