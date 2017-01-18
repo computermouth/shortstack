@@ -17,6 +17,11 @@ int main(int argc, char* argv[]){
 	god.scalar.quit = init_sdl(&god);
 	
 	load_config(&god);
+	
+	if( god.scalar.fs )
+		SDL_SetWindowFullscreen( god.sdl.window, 
+			SDL_WINDOW_FULLSCREEN_DESKTOP );
+	
 	set_scale(&god);
 	
 	while( !god.scalar.quit ){

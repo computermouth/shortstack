@@ -74,6 +74,8 @@ void set_scale(god_t *god){
 			(god->scalar.d_h * god->scalar.r))) / 2;
 	}
 	
+	save_config(god);
+	
 	SDL_RenderSetScale(god->sdl.renderer, god->scalar.scale, god->scalar.scale);
 
 }
@@ -145,6 +147,8 @@ int window_event(god_t *god){
 					SDL_WINDOW_FULLSCREEN_DESKTOP );
 				god->scalar.fs = 1;
 			}
+			
+			save_config(god);
 			
 			rc = 1;
 		}

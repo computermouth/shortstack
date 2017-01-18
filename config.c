@@ -78,8 +78,7 @@ void check_dirs(){
 		cfg_print(cfg, fp);
 
 		fclose(fp);
-
-
+		
 		cfg_free(cfg);
 	}
 }
@@ -124,15 +123,14 @@ void load_config(god_t* god){
 	god->scalar.scale = video_mode;
 	god->state.settings_volume = audio_level;
 	god->state.high_score = high_score;
-	//~ god->scalar.scale = video_mode;
+	god->scalar.fs = fullscreen;
 	
-		FILE *fp = fopen(tmp_path, "w");
-		cfg_print(cfg, fp);
+	FILE *fp = fopen(tmp_path, "w");
+	cfg_print(cfg, fp);
 
-		fclose(fp);
+	fclose(fp);
 
-
-		cfg_free(cfg);
+	cfg_free(cfg);
 
 }
 
@@ -146,10 +144,10 @@ void save_config(god_t* god){
 	cp_str(tmp_path, home_dir);	
 	cat_to_str(tmp_path, conf_file);
 
-	static long int video_mode;
-	static long int audio_level;
-	static long int fullscreen;
-	static long int high_score;
+	long int video_mode;
+	long int audio_level;
+	long int fullscreen;
+	long int high_score;
 
 	cfg_opt_t opts[] = {
 		CFG_SIMPLE_INT("video_mode", &video_mode),
