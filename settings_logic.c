@@ -1,4 +1,6 @@
 
+#include <SDL2/SDL_mixer.h>
+
 #include "settings_logic.h"
 #include "settings_logic_shapes.c"
 
@@ -10,10 +12,12 @@ void settings_logic(god_t *god){
 	if(god->state.settings_select < 2 && god->keystate.dn){
 		god->state.settings_select++;
 		god->keystate.dn = 0;
+		Mix_PlayChannel( -1, god->audio.sound_menu_change, 0 );
 	}
 	if(god->state.settings_select > 0 && god->keystate.up){
 		god->state.settings_select--;
 		god->keystate.up = 0;
+		Mix_PlayChannel( -1, god->audio.sound_menu_change, 0 );
 	}
 	if(god->state.settings_select == 0 && god->keystate.lt && god->scalar.scale > 1){
 		
@@ -24,6 +28,7 @@ void settings_logic(god_t *god){
 		else god->scalar.scale = 2;
 		god->keystate.lt = 0;
 		set_scale(god);
+		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
 	}
 	if(god->state.settings_select == 0 && god->keystate.rt && god->scalar.scale < 16){
 		
@@ -34,23 +39,31 @@ void settings_logic(god_t *god){
 		else god->scalar.scale = 2;
 		god->keystate.rt = 0;
 		set_scale(god);
+		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
 	}
 	if(god->state.settings_select == 1 && god->keystate.lt && god->state.settings_volume > 0){
 		god->state.settings_volume--;
 		god->keystate.lt = 0;
 		
 		save_config(god);
+		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
+		printf("setting_left: %f\n", 128 * ((float)god->state.settings_volume / 10));
+		Mix_Volume(-1, (int)(128 * ((float)god->state.settings_volume / 10)) );
 	}
 	if(god->state.settings_select == 1 && god->keystate.rt && god->state.settings_volume < 10){
 		god->state.settings_volume++;
 		god->keystate.rt = 0;
 		
 		save_config(god);
+		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
+		printf("setting_right: %f\n", 128 * ((float)god->state.settings_volume / 10));
+		Mix_Volume(-1, (int)(128 * ((float)god->state.settings_volume / 10)) );
 	}
 	if(god->state.settings_select == 2 && god->keystate.ent){
 		god->state.menu = 1;
 		god->state.settings = 0;
 		god->keystate.ent = 0;
+		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
 	}
 	
 	

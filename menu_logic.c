@@ -92,10 +92,12 @@ void menu_logic(god_t *god){
 	if(god->keystate.lt == 1 && god->state.menu_select > 0){
 		god->state.menu_select--;
 		god->keystate.lt = 0;
+		Mix_PlayChannel( -1, god->audio.sound_menu_change, 0 );
 	}
 	if(god->keystate.rt == 1 && god->state.menu_select < 2){
 		god->state.menu_select++;
 		god->keystate.rt = 0;
+		Mix_PlayChannel( -1, god->audio.sound_menu_change, 0 );
 	}
 	
 	if(god->keystate.ent == 1 ){
@@ -104,6 +106,7 @@ void menu_logic(god_t *god){
 			god->keystate.ent = 0;
 			god->state.settings = 1;
 			god->state.settings_select = 0;
+			Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
 		} else if(god->state.menu_select == 1){
 			god->keystate.ent = 0;
 			god->state.menu = 0;
@@ -118,8 +121,10 @@ void menu_logic(god_t *god){
 			god->state.paddle_color_delay = 0;
 			god->state.ball_x_speed = 3;
 			god->state.ball_y_speed = 2;
+			Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
 		} else {
 			god->scalar.quit = 1;
+			Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
 		}
 	}
 	

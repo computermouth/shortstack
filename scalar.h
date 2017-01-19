@@ -3,6 +3,7 @@
 #define _WINDOW_H_
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "state.h"
 #include "structs.h"

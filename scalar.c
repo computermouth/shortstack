@@ -41,7 +41,12 @@ int init_sdl(god_t *god){
 				-1, 
 				SDL_RENDERER_ACCELERATED | 
 				SDL_RENDERER_PRESENTVSYNC);
-		SDL_ShowCursor(SDL_DISABLE);
+			
+			SDL_ShowCursor(SDL_DISABLE);
+			
+			if (Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0)
+				return 1;
+			
 		}else{
 			return 1;
 		}

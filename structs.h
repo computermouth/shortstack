@@ -3,6 +3,7 @@
 #define _GFX_STRUCTS_
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 typedef struct{
 	int xa;
@@ -87,10 +88,21 @@ typedef struct{
 } state_t;
 
 typedef struct{
+	Mix_Chunk *sound_ball_death;
+	Mix_Chunk *sound_menu_change;
+	Mix_Chunk *sound_menu_select;
+	Mix_Chunk *sound_paddle_hit;
+	Mix_Chunk *sound_portal;
+	Mix_Chunk *sound_top_hit;
+	Mix_Chunk *sound_wall_hit;
+} audio_t;
+
+typedef struct{
 	scalar_t scalar;
 	state_t state;
 	keystate_t keystate;
 	sdl_t sdl;
+	audio_t audio;
 } god_t;
 
 #endif

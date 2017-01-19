@@ -58,7 +58,7 @@ void check_dirs(){
 	if (stat(tmp_path, &st) == -1) {
 		
 		long int video_mode = 2;
-		long int audio_level = 7;
+		long int audio_level = 5;
 		long int fullscreen = 0;
 		long int high_score = 0;
 
@@ -112,7 +112,7 @@ void load_config(god_t* god){
 
 	if ( rc != 0 ){
 		video_mode = 2;
-		audio_level = 7;
+		audio_level = 5;
 		fullscreen = 0;
 		high_score = 0;
 	}

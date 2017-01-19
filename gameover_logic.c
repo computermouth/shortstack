@@ -1,4 +1,6 @@
 
+#include <SDL2/SDL_mixer.h>
+
 #include "gameover_logic.h"
 #include "gameover_logic_shapes.c"
 
@@ -9,6 +11,7 @@ void gameover_logic(god_t *god){
 		god->state.over = 0;
 		god->state.menu = 1;
 		god->keystate.ent = 0;
+		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );		
 	}
 
 	// HEARTS

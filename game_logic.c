@@ -157,12 +157,18 @@ void game_logic(god_t *god){
 	
 	
 	// BALL MOVEMENT
+	
+	god->state.ball_x += (god->state.ball_x_dir * god->state.ball_x_speed);
+	god->state.ball_y += (god->state.ball_y_dir * god->state.ball_y_speed);
+	
 	if (god->state.ball_x <= 0){
 		god->state.ball_x = 1;
 		god->state.ball_x_dir *= -1;
+		Mix_PlayChannel( -1, god->audio.sound_wall_hit, 0 );
 	} else if (god->state.ball_x >=760){
 		god->state.ball_x = 759;
 		god->state.ball_x_dir *= -1;
+		Mix_PlayChannel( -1, god->audio.sound_wall_hit, 0 );
 	}
 	
 	if (god->state.bounced == 0 && god->state.ball_y > 300){
@@ -177,6 +183,7 @@ void game_logic(god_t *god){
 							if ((god->state.ball_y - k) > 395 && (god->state.ball_y - k) < 405) {
 								
 								god->state.score += 1;
+								Mix_PlayChannel( -1, god->audio.sound_paddle_hit, 0 );
 								god->state.paddle_color = 12;
 								god->state.paddle_color_delay = 8;
 								god->state.ball_y = 395;
@@ -190,8 +197,8 @@ void game_logic(god_t *god){
 											god->state.ball_color -= 2;
 										}
 										
-											god->state.ball_x_speed++;
-											god->state.ball_y_speed++;
+										god->state.ball_x_speed++;
+										god->state.ball_y_speed++;
 									}
 								}
 								if (god->state.score % 10 == 0 && god->state.lives < 3){
@@ -222,6 +229,7 @@ void game_logic(god_t *god){
 	if (god->state.ball_y >= 500){
 		god->state.ball_y = 50;
 		god->state.bounced = 0;
+		Mix_PlayChannel( -1, god->audio.sound_ball_death, 0 );
 		god->state.lives--;
 		if (god->state.lives < 0){
 			if(god->state.score > god->state.high_score){
@@ -242,6 +250,7 @@ void game_logic(god_t *god){
 		god->state.ball_x_dir = god->state.pad0_dir;
 		god->state.pad0_dir *= -1;
 		god->state.hole_open = 1;
+		Mix_PlayChannel( -1, god->audio.sound_top_hit, 0 );
 	} else if ((god->state.ball_x + 21) > 180 && 
 			(god->state.ball_x + 21) < 259 && 
 			god->state.ball_y <= 20){
@@ -251,6 +260,7 @@ void game_logic(god_t *god){
 		god->state.ball_x_dir = god->state.pad1_dir;
 		god->state.pad1_dir *= -1;
 		god->state.hole_open = 1;
+		Mix_PlayChannel( -1, god->audio.sound_top_hit, 0 );
 	} else if ((god->state.ball_x + 21) > 350 && 
 			(god->state.ball_x + 21) < 450 && 
 			god->state.ball_y <= 20 &&
@@ -259,6 +269,7 @@ void game_logic(god_t *god){
 		god->state.ball_y = 499;
 		god->state.bounced = 1;
 		god->state.hole_open = 0;
+		Mix_PlayChannel( -1, god->audio.sound_portal, 0 );
 	} else if ((god->state.ball_x + 21) > 540 && 
 			(god->state.ball_x + 21) < 619 && 
 			god->state.ball_y <= 20){
@@ -267,6 +278,7 @@ void game_logic(god_t *god){
 		god->state.ball_y_dir *= -1;
 		god->state.ball_x_dir = god->state.pad2_dir;
 		god->state.pad2_dir *= -1;
+		Mix_PlayChannel( -1, god->audio.sound_top_hit, 0 );
 	} else if ((god->state.ball_x + 21) > 690 && 
 			(god->state.ball_x + 21) < 769 && 
 			god->state.ball_y <= 20){
@@ -276,15 +288,13 @@ void game_logic(god_t *god){
 		god->state.ball_x_dir = god->state.pad3_dir;
 		god->state.pad3_dir *= -1;
 		god->state.hole_open = 1;
+		Mix_PlayChannel( -1, god->audio.sound_top_hit, 0 );
 	} else if (god->state.ball_y <= 20 ){
 		god->state.ball_y_dir *= -1;
 		god->state.bounced = 0;
 		god->state.hole_open = 1;
+		Mix_PlayChannel( -1, god->audio.sound_top_hit, 0 );
 	}
-
-			
-	god->state.ball_x += (god->state.ball_x_dir * god->state.ball_x_speed);
-	god->state.ball_y += (god->state.ball_y_dir * god->state.ball_y_speed);
 	
 	if(god->state.frame < 4){
 		ball0(god, god->state.ball_x, god->state.ball_y, god->state.ball_color);
