@@ -25,7 +25,6 @@ god_t init_god(){
 	
 	set_scale(&god);
 	
-	printf("init: %f\n", 128 * ((float)god.state.settings_volume / 10));
 	Mix_Volume(-1, (int)(128 * ((float)god.state.settings_volume / 10)) );
 	
 	return god;

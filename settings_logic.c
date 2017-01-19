@@ -47,7 +47,6 @@ void settings_logic(god_t *god){
 		
 		save_config(god);
 		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
-		printf("setting_left: %f\n", 128 * ((float)god->state.settings_volume / 10));
 		Mix_Volume(-1, (int)(128 * ((float)god->state.settings_volume / 10)) );
 	}
 	if(god->state.settings_select == 1 && god->keystate.rt && god->state.settings_volume < 10){
@@ -56,7 +55,6 @@ void settings_logic(god_t *god){
 		
 		save_config(god);
 		Mix_PlayChannel( -1, god->audio.sound_menu_select, 0 );
-		printf("setting_right: %f\n", 128 * ((float)god->state.settings_volume / 10));
 		Mix_Volume(-1, (int)(128 * ((float)god->state.settings_volume / 10)) );
 	}
 	if(god->state.settings_select == 2 && god->keystate.ent){
