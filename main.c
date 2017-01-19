@@ -32,10 +32,12 @@ int main(int argc, char* argv[]){
 	}
 	
 	save_config(&god);
+	destroy_god(&god);
 	
 	// CLEANUP SDL
 	SDL_DestroyRenderer(god.sdl.renderer);
 	SDL_DestroyWindow(god.sdl.window);
+	Mix_Quit();
 	SDL_Quit();
 	
 	return 0;

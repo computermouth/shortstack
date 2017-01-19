@@ -63,3 +63,15 @@ audio_t init_audio(god_t* god){
 	
 	return audio;
 }
+
+void destroy_god(god_t* god){
+	
+	Mix_FreeChunk( god->audio.sound_ball_death );
+	Mix_FreeChunk( god->audio.sound_menu_change );
+	Mix_FreeChunk( god->audio.sound_menu_select );
+	Mix_FreeChunk( god->audio.sound_paddle_hit );
+	Mix_FreeChunk( god->audio.sound_portal );
+	Mix_FreeChunk( god->audio.sound_top_hit );
+	Mix_FreeChunk( god->audio.sound_wall_hit );
+	
+}
