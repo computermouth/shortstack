@@ -9,7 +9,7 @@ SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 MAIN_NAME = shortstack
 
 LIBS = -lSDL2 -lSDL2_mixer -lconfuse
-WIN_LIBS= -static $(shell pkg-config --libs --static sdl2) $(shell pkg-config --libs --static libconfuse)
+WIN_LIBS= -static $(shell pkg-config --libs --static sdl2) $(shell pkg-config --libs --static SDL2_mixer) $(shell pkg-config --libs --static libconfuse)
 
 .PHONY: all clean lint
 
