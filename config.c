@@ -40,17 +40,29 @@ void check_dirs(){
 	cp_str(tmp_path, home_dir);	
 	cat_to_str(tmp_path, local_dir);
 	if (stat(tmp_path, &st) == -1) {
+#ifdef _WIN32
+		mkdir(tmp_path);
+#else
 		mkdir(tmp_path, 0755);
+#endif
 	}
 	
 	cat_to_str(tmp_path, share_dir);
 	if (stat(tmp_path, &st) == -1) {
+#ifdef _WIN32
+		mkdir(tmp_path);
+#else
 		mkdir(tmp_path, 0755);
+#endif
 	}
 	
 	cat_to_str(tmp_path, crunchball_dir);
 	if (stat(tmp_path, &st) == -1) {
+#ifdef _WIN32
+		mkdir(tmp_path);
+#else
 		mkdir(tmp_path, 0755);
+#endif
 	}
 
 	cat_to_str(tmp_path, conf_file);

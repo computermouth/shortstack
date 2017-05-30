@@ -9,7 +9,8 @@ SOURCES_GCH := $(shell find $(SOURCEDIR) -name '*.gch')
 MAIN_NAME = shortstack
 
 LIBS = -lSDL2 -lSDL2_mixer -lconfuse
-WIN_LIBS= -static $(shell pkg-config --libs --static sdl2) $(shell pkg-config --libs --static SDL2_mixer) $(shell pkg-config --libs --static libconfuse)
+WIN_LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lconfuse
+#WIN_LIBS= -static $(shell pkg-config --libs --static sdl2) $(shell pkg-config --libs --static SDL2_mixer) $(shell pkg-config --libs --static libconfuse)
 
 .PHONY: all clean lint
 
@@ -17,7 +18,8 @@ all: $(MAIN)
 	gcc $(MAIN_SRC) -Wall -o $(MAIN_NAME) $(LIBS)
 
 win: $(MAIN)
-	i686-w64-mingw32-gcc $(MAIN_SRC) -std=gnu89 -I/mingw32/include/ -L/mingw32/lib -Wall -Wl,-subsystem,windows -o $(MAIN_NAME) $(WIN_LIBS)
+	gcc $(MAIN_SRC) -Wall -o $(MAIN_NAME) $(WIN_LIBS)
+#	i686-w64-mingw32-gcc $(MAIN_SRC) -std=gnu89 -I/mingw32/include/ -L/mingw32/lib -Wall -Wl,-subsystem,windows -o $(MAIN_NAME) $(WIN_LIBS)
 
 clean:
 	rm $(MAIN_NAME) $(SOURCES_O) $(SOURCES_GCH)
